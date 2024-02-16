@@ -6,6 +6,7 @@ import java.util.List;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -139,10 +140,7 @@ public class Customer {
 	    private String confirm;
 
 	    
-//		1:M
-		@OneToMany(mappedBy="customer", fetch = FetchType.LAZY)
-		private List<BankAccount> customerAccount;
-	    
+ 
 		
 
 	    
@@ -164,7 +162,8 @@ public class Customer {
 		protected void onUpdate() {
 			this.updatedAt = new Date();
 		}
-		// other getters and setters removed for brevity
+		   @OneToMany(mappedBy = "customer")
+		   private List<BankAccount> bankAccounts;
 	
 	
 	

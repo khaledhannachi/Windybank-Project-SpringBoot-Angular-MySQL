@@ -11,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Transient;
@@ -196,7 +197,7 @@ public class Business {
 	private double netPay;
 
 	
-	private List <BankAccount> bankAccounts;
+
 	
 	
     @Transient
@@ -225,8 +226,9 @@ public class Business {
 	protected void onUpdate() {
 		this.updatedAt = new Date();
 	}
-	// other getters and setters removed for brevity
-
+		//	one to many
+	  @OneToMany(mappedBy = "business")
+	  private List<BankAccount> bankAccounts;
 	
 	
 	
