@@ -1,13 +1,18 @@
 package com.dojo.youthbankserver.entities;
 
 import java.util.Date;
+import java.util.List;
+
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Transient;
@@ -25,6 +30,8 @@ import lombok.NoArgsConstructor;
 @Entity
 public class Customer {
 
+	
+	
 	    @NotEmpty(message="Password is required!")
 	    @Size(min=8, max=128, message="Password must be between 8 and 128 characters")
 	    private String password;
@@ -130,6 +137,13 @@ public class Customer {
 	    @NotEmpty(message="Confirm Password is required!")
 	    @Size(min=8, max=128, message="Confirm Password must be between 8 and 128 characters")
 	    private String confirm;
+
+	    
+//		1:M
+		@OneToMany(mappedBy="customer", fetch = FetchType.LAZY)
+		private List<BankAccount> customerAccount;
+	    
+		
 
 	    
 		// This will not allow the createdAt column to be updated after creation
