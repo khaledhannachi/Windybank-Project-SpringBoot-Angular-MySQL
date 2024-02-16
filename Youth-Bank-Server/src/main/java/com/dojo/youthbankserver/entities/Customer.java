@@ -163,7 +163,9 @@ public class Customer {
 			this.updatedAt = new Date();
 		}
 		   
-	
+//		one to many
+		  @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
+		  private List<BankAccount> customerBankAccounts;
 	
 	
 }

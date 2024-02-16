@@ -8,6 +8,7 @@ import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -162,8 +163,8 @@ public class Professional {
 	}
 	
 	//	one to many
-	  @OneToMany(mappedBy = "professional")
-	  private List<BankAccount> bankAccounts;
+	  @OneToMany(mappedBy = "professional", fetch = FetchType.LAZY)
+	  private List<BankAccount> professionalBankAccounts;
 
 
 }
