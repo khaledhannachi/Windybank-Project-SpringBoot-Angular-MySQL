@@ -11,6 +11,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Transient;
@@ -131,7 +132,7 @@ public class Professional {
 	private double netPay;
 
 	
-	private List <BankAccount> bankAccounts;
+	
 	
     @Transient
     @NotEmpty(message="Confirm Password is required!")
@@ -159,7 +160,10 @@ public class Professional {
 	protected void onUpdate() {
 		this.updatedAt = new Date();
 	}
-	// other getters and setters removed for brevity
+	
+	//	one to many
+	  @OneToMany(mappedBy = "professional")
+	  private List<BankAccount> bankAccounts;
 
 
 }

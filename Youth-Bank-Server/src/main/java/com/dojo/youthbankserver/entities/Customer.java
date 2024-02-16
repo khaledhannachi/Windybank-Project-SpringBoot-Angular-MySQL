@@ -1,13 +1,19 @@
 package com.dojo.youthbankserver.entities;
 
 import java.util.Date;
+import java.util.List;
+
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
+
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Transient;
@@ -143,7 +149,8 @@ public class Customer {
 		protected void onUpdate() {
 			this.updatedAt = new Date();
 		}
-		// other getters and setters removed for brevity
+		   @OneToMany(mappedBy = "customer")
+		   private List<BankAccount> bankAccounts;
 	
 	
 	
