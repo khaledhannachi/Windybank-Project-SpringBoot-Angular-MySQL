@@ -96,13 +96,16 @@ public class Customer {
 		@Size(min=1, max=60, message="City must be between 3 and 60 characters.")
 		private String idDeliveryCity;
 		
+
 		@NotBlank(message="Nationality is required!")
 		@Size(min=1, max=60, message="Nationality must be between 3 and 60 characters.")
 		private String nationality;
 		
+		
 		@NotBlank(message="Profession is required!")
 		@Size(min=1, max=60, message="Profession must be between 3 and 60 characters.")
 		private String profession;
+		
 		
 		@NotBlank(message="Professional Status is required!")
 		@Size(min=1, max=60, message="Professional Status must be between 1 and 60 characters.")
@@ -113,18 +116,22 @@ public class Customer {
 		@Size(min=1, max=60, message="Employer Name must be between 1 and 60 characters.")
 		private String employerName;
 
+		
 		@NotBlank(message="Employer Adress is required!")
 		@Size(min=1, max=60, message="Employer Adress must be between 1 and 60 characters.")
 		private String employerAdress;
 
+		
 		@NotEmpty(message="Net Pay is required!")
 		private double netPay;
 
+		
 	    @Transient
 	    @NotEmpty(message="Confirm Password is required!")
 	    @Size(min=8, max=128, message="Confirm Password must be between 8 and 128 characters")
 	    private String confirm;
 
+	    
 		// This will not allow the createdAt column to be updated after creation
 		@Column(updatable = false)
 		@DateTimeFormat(pattern = "yyyy-MM-dd")
