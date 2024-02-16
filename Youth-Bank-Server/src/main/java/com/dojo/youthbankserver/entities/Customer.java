@@ -162,8 +162,7 @@ public class Customer {
 		protected void onUpdate() {
 			this.updatedAt = new Date();
 		}
-		   @OneToMany(mappedBy = "customer")
-		   private List<BankAccount> bankAccounts;
+		   
 	
 	
 	
