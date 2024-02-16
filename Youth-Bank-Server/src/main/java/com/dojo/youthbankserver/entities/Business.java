@@ -41,6 +41,11 @@ public class Business {
 	@Email(message="Please enter a valid email!")
 	private String email;
     
+    
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	private Long id;
+    
     @NotBlank(message="Company Legal Name is required!")
     @Size(min=3, max=30, message="Legal Name must be between 3 and 30 characters.")
     private String companylegalName;
@@ -120,11 +125,8 @@ public class Business {
 
 
     
-    
-    
-	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long id;
+//    Legal Name																																																																			
+
 
 	
 	@NotBlank(message="First Name is required!")
@@ -186,23 +188,11 @@ public class Business {
 	@Size(min=1, max=60, message="Nationality must be between 3 and 60 characters.")
 	private String nationality;
 	
-	@NotBlank(message="Profession is required!")
-	@Size(min=1, max=60, message="Profession must be between 3 and 60 characters.")
-	private String profession;
-	
+
 	@NotBlank(message="Professional Status is required!")
 	@Size(min=1, max=60, message="Professional Status must be between 1 and 60 characters.")
 	private String professionalStatus;
  
-	@NotBlank(message="Employer Name is required!")
-	@Size(min=1, max=60, message="Employer Name must be between 1 and 60 characters.")
-	private String employerName;
- 
-	@NotBlank(message="Employer Adress is required!")
-	@Size(min=1, max=60, message="Employer Adress must be between 1 and 60 characters.")
-	private String employerAdress;
-
-	
 	@NotEmpty(message="Net Pay is required!")
 	private double netPay;
 
