@@ -23,10 +23,10 @@ public class CustomerController {
     public List<CustomerDTO> customers(){
         return customerService.listCustomers();
     }
-    @GetMapping("/customers/search")
-    public List<CustomerDTO> searchCustomers(@RequestParam(name = "keyword",defaultValue = "") String keyword){
-        return customerService.searchCustomers("%"+keyword+"%");
-    }
+//    @GetMapping("/customers/search")
+//    public List<CustomerDTO> searchCustomers(@RequestParam(name = "keyword",defaultValue = "") String keyword){
+//        return customerService.searchCustomers("%"+keyword+"%");
+//    }
     @GetMapping("/customers/{id}")
     public CustomerDTO getCustomer(@PathVariable(name = "id") Long customerId) throws CustomerNotFoundException {
         return customerService.getCustomer(customerId);

@@ -73,11 +73,11 @@ public class ProfessionalService {
     }
   
 
-    public List<ProfessionalDTO> searchProfessionals(String keyword) {
-        List<Professional> professionals=professionalRepository.searchProfessional(keyword);
-        List<ProfessionalDTO> professionalDTOS = professionals.stream().map(cust -> professionalDtoMapper.fromProfessional(cust)).collect(Collectors.toList());
-        return professionalDTOS;
-    }
+//    public List<ProfessionalDTO> searchProfessionals(String keyword) {
+//        List<Professional> professionals=professionalRepository.searchProfessional(keyword);
+//        List<ProfessionalDTO> professionalDTOS = professionals.stream().map(cust -> professionalDtoMapper.fromProfessional(cust)).collect(Collectors.toList());
+//        return professionalDTOS;
+//    }
 	
 	
 }

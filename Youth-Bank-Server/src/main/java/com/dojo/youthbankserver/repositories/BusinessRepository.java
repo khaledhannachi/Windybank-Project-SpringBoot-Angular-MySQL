@@ -12,6 +12,6 @@ import com.dojo.youthbankserver.entities.Business;
 
 public interface BusinessRepository extends JpaRepository<Business, Long> {
 
-	  @Query("select c from Business c where c.name like :kw")
-	    List<Business> searchBusiness(@Param("kw") String keyword);
+//	  @Query("select c from Business c where c.name like :kw")
+//	    List<Business> searchBusiness(@Param("kw") String keyword);
 }

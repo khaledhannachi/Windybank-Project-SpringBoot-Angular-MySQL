@@ -69,11 +69,11 @@ public class CustomerService {
     }
   
 
-    public List<CustomerDTO> searchCustomers(String keyword) {
-        List<Customer> customers=customerRepository.searchCustomer(keyword);
-        List<CustomerDTO> customerDTOS = customers.stream().map(cust -> customerDtoMapper.fromCustomer(cust)).collect(Collectors.toList());
-        return customerDTOS;
-    }
+//    public List<CustomerDTO> searchCustomers(String keyword) {
+//        List<Customer> customers=customerRepository.searchCustomer(keyword);
+//        List<CustomerDTO> customerDTOS = customers.stream().map(cust -> customerDtoMapper.fromCustomer(cust)).collect(Collectors.toList());
+//        return customerDTOS;
+//    }
 	
 	
 }

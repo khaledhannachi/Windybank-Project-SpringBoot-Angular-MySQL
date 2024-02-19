@@ -32,10 +32,10 @@ public class ProfessionalController {
     public List<ProfessionalDTO> professionals(){
         return professionalService.listProfessionals();
     }
-    @GetMapping("/professionals/search")
-    public List<ProfessionalDTO> searchProfessionals(@RequestParam(name = "keyword",defaultValue = "") String keyword){
-        return professionalService.searchProfessionals("%"+keyword+"%");
-    }
+//    @GetMapping("/professionals/search")
+//    public List<ProfessionalDTO> searchProfessionals(@RequestParam(name = "keyword",defaultValue = "") String keyword){
+//        return professionalService.searchProfessionals("%"+keyword+"%");
+//    }
     @GetMapping("/professionals/{id}")
     public ProfessionalDTO getProfessional(@PathVariable(name = "id") Long professionalId) throws ProfessionalNotFoundException {
         return professionalService.getProfessional(professionalId);

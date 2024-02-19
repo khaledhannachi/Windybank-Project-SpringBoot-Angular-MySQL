@@ -64,11 +64,11 @@ public class BusinessService {
         businessRepository.deleteById(businessId);
     }
   
-    public List<BusinessDTO> searchBusinesss(String keyword) {
-        List<Business> businesss=businessRepository.searchBusiness(keyword);
-        List<BusinessDTO> businessDTOS = businesss.stream().map(cust -> businessDtoMapper.fromBusiness(cust)).collect(Collectors.toList());
-        return businessDTOS;
-    }
-	
+//    public List<BusinessDTO> searchBusinesss(String keyword) {
+//        List<Business> businesss=businessRepository.searchBusiness(keyword);
+//        List<BusinessDTO> businessDTOS = businesss.stream().map(cust -> businessDtoMapper.fromBusiness(cust)).collect(Collectors.toList());
+//        return businessDTOS;
+//    }
+//	
 	
 }

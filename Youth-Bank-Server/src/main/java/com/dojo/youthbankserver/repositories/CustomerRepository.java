@@ -12,6 +12,6 @@ import com.dojo.youthbankserver.entities.Customer;
 
 public interface CustomerRepository extends JpaRepository<Customer, Long> {
 
-	  @Query("select c from Customer c where c.name like :kw")
-	    List<Customer> searchCustomer(@Param("kw") String keyword);
+//	  @Query("select c from Customer c where c.name like :kw")
+//	    List<Customer> searchCustomer(@Param("kw") String keyword);
 }

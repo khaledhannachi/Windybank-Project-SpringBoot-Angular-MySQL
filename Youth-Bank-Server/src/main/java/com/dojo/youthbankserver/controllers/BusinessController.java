@@ -24,10 +24,10 @@ public class BusinessController {
     public List<BusinessDTO> businesss(){
         return businessService.listBusinesss();
     }
-    @GetMapping("/businesss/search")
-    public List<BusinessDTO> searchBusinesss(@RequestParam(name = "keyword",defaultValue = "") String keyword){
-        return businessService.searchBusinesss("%"+keyword+"%");
-    }
+//    @GetMapping("/businesss/search")
+//    public List<BusinessDTO> searchBusinesss(@RequestParam(name = "keyword",defaultValue = "") String keyword){
+//        return businessService.searchBusinesss("%"+keyword+"%");
+//    }
     @GetMapping("/businesss/{id}")
     public BusinessDTO getBusiness(@PathVariable(name = "id") Long businessId) throws BusinessNotFoundException {
         return businessService.getBusiness(businessId);
