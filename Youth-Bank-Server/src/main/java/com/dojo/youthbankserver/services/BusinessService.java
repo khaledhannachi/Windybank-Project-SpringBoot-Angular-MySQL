@@ -4,6 +4,7 @@ package com.dojo.youthbankserver.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dojo.youthbankserver.dtos.BusinessDTO;
@@ -13,19 +14,18 @@ import com.dojo.youthbankserver.mappers.BusinessMapper;
 import com.dojo.youthbankserver.repositories.BusinessRepository;
 
 import jakarta.transaction.Transactional;
-import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 @Service
 @Transactional
-@AllArgsConstructor
 @Slf4j
 public class BusinessService {
-
+@Autowired
 	private BusinessRepository businessRepository;
+@Autowired
     private BusinessMapper businessDtoMapper;
 
     public BusinessDTO saveBusiness(BusinessDTO businessDTO) {
-//        log.info("Saving new Business");
+        log.info("Saving new Business");
         Business business=businessDtoMapper.fromBusinessDTO(businessDTO);
         Business savedBusiness = businessRepository.save(business);
         return businessDtoMapper.fromBusiness(savedBusiness);
@@ -54,7 +54,7 @@ public class BusinessService {
     }
 
     public BusinessDTO updateBusiness(BusinessDTO businessDTO) {
-//        log.info("Saving new Business");
+        log.info("Saving new Business");
         Business business=businessDtoMapper.fromBusinessDTO(businessDTO);
         Business savedBusiness = businessRepository.save(business);
         return businessDtoMapper.fromBusiness(savedBusiness);

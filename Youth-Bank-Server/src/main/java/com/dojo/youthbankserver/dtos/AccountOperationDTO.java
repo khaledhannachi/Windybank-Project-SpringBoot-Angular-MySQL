@@ -4,7 +4,6 @@ import java.util.Date;
 
 import com.dojo.youthbankserver.enums.OperationType;
 
-import lombok.Data;
 
 
 public class AccountOperationDTO {

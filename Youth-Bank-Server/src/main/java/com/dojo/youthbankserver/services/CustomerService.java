@@ -3,6 +3,7 @@ package com.dojo.youthbankserver.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dojo.youthbankserver.dtos.CustomerDTO;
@@ -19,16 +20,16 @@ import lombok.extern.slf4j.Slf4j;
 
 @Service
 @Transactional
-@AllArgsConstructor
 @Slf4j
 public class CustomerService {
-
+	@Autowired
 	private CustomerRepository customerRepository;
+	@Autowired
     private CustomerMapper customerDtoMapper;
 
 
     public CustomerDTO saveCustomer(CustomerDTO customerDTO) {
-//        log.info("Saving new Customer");
+        log.info("Saving new Customer");
         Customer customer=customerDtoMapper.fromCustomerDTO(customerDTO);
         Customer savedCustomer = customerRepository.save(customer);
         return customerDtoMapper.fromCustomer(savedCustomer);
@@ -39,6 +40,7 @@ public class CustomerService {
         List<CustomerDTO> customerDTOS = customers.stream()
                 .map(customer -> customerDtoMapper.fromCustomer(customer))
                 .collect(Collectors.toList());
+        
         /*
         List<CustomerDTO> customerDTOS=new ArrayList<>();
         for (Customer customer:customers){
@@ -58,7 +60,7 @@ public class CustomerService {
 
 
     public CustomerDTO updateCustomer(CustomerDTO customerDTO) {
-//        log.info("Saving new Customer");
+        log.info("Saving new Customer");
         Customer customer=customerDtoMapper.fromCustomerDTO(customerDTO);
         Customer savedCustomer = customerRepository.save(customer);
         return customerDtoMapper.fromCustomer(savedCustomer);

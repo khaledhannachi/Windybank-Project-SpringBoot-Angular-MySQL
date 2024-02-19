@@ -54,7 +54,6 @@ public class BankAcountServiceImpl implements BankAccountService{
 	        checkingAccount.setBalance(initialBalance);
 	        checkingAccount.setOverDraft(overDraft);
 	        checkingAccount.setCustomer(customer);
-	       
 	        CheckingAccount savedBankAccount = bankAccountRepository.save(checkingAccount);
 	        return dtoMapper.fromCheckingBankAccount(savedBankAccount);
 	    }

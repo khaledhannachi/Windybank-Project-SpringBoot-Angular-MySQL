@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import com.dojo.youthbankserver.dtos.CustomerDTO;
 import com.dojo.youthbankserver.entities.Customer;
 @Service
-
 public class CustomerMapper {
 
     public CustomerDTO fromCustomer(Customer customer){

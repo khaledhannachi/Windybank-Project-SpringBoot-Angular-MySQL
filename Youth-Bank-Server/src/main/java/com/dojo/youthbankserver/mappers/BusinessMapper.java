@@ -1,10 +1,11 @@
 package com.dojo.youthbankserver.mappers;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
 
 import com.dojo.youthbankserver.dtos.BusinessDTO;
 import com.dojo.youthbankserver.entities.Business;
-
+@Service
 public class BusinessMapper {
 
 	

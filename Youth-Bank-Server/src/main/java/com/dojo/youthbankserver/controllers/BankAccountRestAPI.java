@@ -2,6 +2,7 @@ package com.dojo.youthbankserver.controllers;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -21,12 +22,12 @@ import com.dojo.youthbankserver.exceptions.BalanceNotSufficientException;
 import com.dojo.youthbankserver.exceptions.BankAccountNotFoundException;
 import com.dojo.youthbankserver.services.BankAcountServiceImpl;
 
-import lombok.AllArgsConstructor;
+
 @RestController
 @CrossOrigin("*")
-@AllArgsConstructor
 @RequestMapping("/accounts")
 public class BankAccountRestAPI {
+	@Autowired
 	  private BankAcountServiceImpl bankAccountService;
 
 	    public BankAccountRestAPI(BankAcountServiceImpl bankAccountService) {

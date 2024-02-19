@@ -1,12 +1,13 @@
 package com.dojo.youthbankserver.mappers;
 
 import org.springframework.beans.BeanUtils;
+import org.springframework.stereotype.Service;
 
 import com.dojo.youthbankserver.dtos.ProfessionalDTO;
 import com.dojo.youthbankserver.entities.Professional;
 
 
-
+@Service
 public class ProfessionalMapper {
 
 	

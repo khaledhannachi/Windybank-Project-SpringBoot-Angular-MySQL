@@ -4,14 +4,13 @@ package com.dojo.youthbankserver.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dojo.youthbankserver.dtos.ProfessionalDTO;
 import com.dojo.youthbankserver.entities.Professional;
 import com.dojo.youthbankserver.exceptions.ProfessionalNotFoundException;
 import com.dojo.youthbankserver.mappers.ProfessionalMapper;
-import com.dojo.youthbankserver.repositories.AccountOperationRepository;
-import com.dojo.youthbankserver.repositories.BankAccountRepository;
 import com.dojo.youthbankserver.repositories.ProfessionalRepository;
 
 import jakarta.transaction.Transactional;
@@ -25,13 +24,14 @@ import lombok.extern.slf4j.Slf4j;
 @Data
 @Slf4j
 public class ProfessionalService {
-
+	@Autowired
 	private ProfessionalRepository professionalRepository;
+	@Autowired
     private ProfessionalMapper professionalDtoMapper;
 
 
     public ProfessionalDTO saveProfessional(ProfessionalDTO professionalDTO) {
-//        log.info("Saving new Professional");
+        log.info("Saving new Professional");
         Professional professional=professionalDtoMapper.fromProfessionalDTO(professionalDTO);
         Professional savedProfessional = professionalRepository.save(professional);
         return professionalDtoMapper.fromProfessional(savedProfessional);
@@ -62,7 +62,7 @@ public class ProfessionalService {
 
 
     public ProfessionalDTO updateProfessional(ProfessionalDTO professionalDTO) {
-//        log.info("Saving new Professional");
+        log.info("Saving new Professional");
         Professional professional=professionalDtoMapper.fromProfessionalDTO(professionalDTO);
         Professional savedProfessional = professionalRepository.save(professional);
         return professionalDtoMapper.fromProfessional(savedProfessional);
