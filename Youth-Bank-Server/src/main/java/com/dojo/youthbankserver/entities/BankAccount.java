@@ -24,7 +24,7 @@ import lombok.NoArgsConstructor;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 //@DiscriminatorColumn(name = "TYPE",length = 4).
-@Data @NoArgsConstructor @AllArgsConstructor
+@Data @NoArgsConstructor @AllArgsConstructor 
 
 public abstract class BankAccount {
 
@@ -64,4 +64,9 @@ public abstract class BankAccount {
 		protected void onCreate() {
 			this.createdAt = new Date();
 		}
+
+
+		
+		
+		
 }
