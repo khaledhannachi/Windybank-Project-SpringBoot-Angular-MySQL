@@ -19,14 +19,17 @@ import com.dojo.youthbankserver.dtos.DebitDTO;
 import com.dojo.youthbankserver.dtos.TransferRequestDTO;
 import com.dojo.youthbankserver.exceptions.BalanceNotSufficientException;
 import com.dojo.youthbankserver.exceptions.BankAccountNotFoundException;
-import com.dojo.youthbankserver.services.BankAccountService;
+import com.dojo.youthbankserver.services.BankAcountServiceImpl;
+
+import lombok.AllArgsConstructor;
 @RestController
 @CrossOrigin("*")
+@AllArgsConstructor
 @RequestMapping("/accounts")
 public class BankAccountRestAPI {
-	  private BankAccountService bankAccountService;
+	  private BankAcountServiceImpl bankAccountService;
 
-	    public BankAccountRestAPI(BankAccountService bankAccountService) {
+	    public BankAccountRestAPI(BankAcountServiceImpl bankAccountService) {
 	        this.bankAccountService = bankAccountService;
 	    }
 
@@ -40,7 +43,7 @@ public class BankAccountRestAPI {
 	    }
 	    @GetMapping("/{accountId}/operations")
 	    public List<AccountOperationDTO> getHistory(@PathVariable String accountId){
-	        return bankAccountService.accountHistory(accountId);
+	        return BankAcountServiceImpl.accountHistory(accountId);
 	    }
 
 	    @GetMapping("/{accountId}/pageOperations")

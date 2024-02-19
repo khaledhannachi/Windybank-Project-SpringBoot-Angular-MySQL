@@ -28,7 +28,7 @@ public class CustomerService {
 
 
     public CustomerDTO saveCustomer(CustomerDTO customerDTO) {
-        log.info("Saving new Customer");
+//        log.info("Saving new Customer");
         Customer customer=customerDtoMapper.fromCustomerDTO(customerDTO);
         Customer savedCustomer = customerRepository.save(customer);
         return customerDtoMapper.fromCustomer(savedCustomer);
@@ -50,7 +50,6 @@ public class CustomerService {
         return customerDTOS;
     }
 
-   
     public CustomerDTO getCustomer(Long customerId) throws CustomerNotFoundException {
         Customer customer = customerRepository.findById(customerId)
                 .orElseThrow(() -> new CustomerNotFoundException("Customer Not found"));
@@ -59,7 +58,7 @@ public class CustomerService {
 
 
     public CustomerDTO updateCustomer(CustomerDTO customerDTO) {
-        log.info("Saving new Customer");
+//        log.info("Saving new Customer");
         Customer customer=customerDtoMapper.fromCustomerDTO(customerDTO);
         Customer savedCustomer = customerRepository.save(customer);
         return customerDtoMapper.fromCustomer(savedCustomer);

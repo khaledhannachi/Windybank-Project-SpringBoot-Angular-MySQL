@@ -19,13 +19,12 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 import lombok.NoArgsConstructor;
+
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
 //@DiscriminatorColumn(name = "TYPE",length = 4).
-@Data @NoArgsConstructor @AllArgsConstructor 
-
+@NoArgsConstructor @AllArgsConstructor 
 public abstract class BankAccount {
 
 		@Id
@@ -64,6 +63,89 @@ public abstract class BankAccount {
 		protected void onCreate() {
 			this.createdAt = new Date();
 		}
+		
+	    //----- getter setter ---
+
+		public String getId() {
+			return id;
+		}
+
+
+		public void setId(String id) {
+			this.id = id;
+		}
+
+
+		public double getBalance() {
+			return balance;
+		}
+
+
+		public void setBalance(double balance) {
+			this.balance = balance;
+		}
+
+
+		public Date getCreatedAt() {
+			return createdAt;
+		}
+
+
+		public void setCreatedAt(Date createdAt) {
+			this.createdAt = createdAt;
+		}
+
+
+		public AccountStatus getStatus() {
+			return status;
+		}
+
+
+		public void setStatus(AccountStatus status) {
+			this.status = status;
+		}
+
+
+		public Customer getCustomer() {
+			return customer;
+		}
+
+
+		public void setCustomer(Customer customer) {
+			this.customer = customer;
+		}
+
+
+		public Business getBusiness() {
+			return business;
+		}
+
+
+		public void setBusiness(Business business) {
+			this.business = business;
+		}
+
+
+		public Professional getProfessional() {
+			return professional;
+		}
+
+
+		public void setProfessional(Professional professional) {
+			this.professional = professional;
+		}
+
+
+		public List<AccountOperation> getAccountOperations() {
+			return accountOperations;
+		}
+
+
+		public void setAccountOperations(List<AccountOperation> accountOperations) {
+			this.accountOperations = accountOperations;
+		}
+
+
 
 
 		

@@ -6,7 +6,6 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Service;
-
 import com.dojo.youthbankserver.dtos.BankAccountDTO;
 import com.dojo.youthbankserver.dtos.CheckingBankAccountDTO;
 import com.dojo.youthbankserver.dtos.SavingBankAccountDTO;
@@ -26,22 +25,18 @@ import com.dojo.youthbankserver.repositories.CustomerRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-import lombok.Data;
 
 @Service
 @Transactional
 @AllArgsConstructor
-
 public class BankAcountServiceImpl implements BankAccountService{
 
-	
-	
+
 	    private BankAccountRepository bankAccountRepository;
 	    private CustomerRepository customerRepository;
 	    private AccountOperationRepository accountOperationRepository;
 	    private BankAccountMapperImpl dtoMapper;
 
-	   
 
 	    @Override
 	    public CheckingBankAccountDTO saveCheckingBankAccount(double initialBalance, double overDraft, Long customerId) throws CustomerNotFoundException {

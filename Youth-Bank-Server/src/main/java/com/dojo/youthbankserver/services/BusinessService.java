@@ -27,7 +27,7 @@ public class BusinessService {
     private BusinessMapper businessDtoMapper;
 
     public BusinessDTO saveBusiness(BusinessDTO businessDTO) {
-        log.info("Saving new Business");
+//        log.info("Saving new Business");
         Business business=businessDtoMapper.fromBusinessDTO(businessDTO);
         Business savedBusiness = businessRepository.save(business);
         return businessDtoMapper.fromBusiness(savedBusiness);
@@ -49,16 +49,14 @@ public class BusinessService {
         return businessDTOS;
     }
 
-   
     public BusinessDTO getBusiness(Long businessId) throws BusinessNotFoundException {
         Business business = businessRepository.findById(businessId)
                 .orElseThrow(() -> new BusinessNotFoundException("Business Not found"));
         return businessDtoMapper.fromBusiness(business);
     }
 
-
     public BusinessDTO updateBusiness(BusinessDTO businessDTO) {
-        log.info("Saving new Business");
+//        log.info("Saving new Business");
         Business business=businessDtoMapper.fromBusinessDTO(businessDTO);
         Business savedBusiness = businessRepository.save(business);
         return businessDtoMapper.fromBusiness(savedBusiness);
@@ -68,7 +66,6 @@ public class BusinessService {
         businessRepository.deleteById(businessId);
     }
   
-
     public List<BusinessDTO> searchBusinesss(String keyword) {
         List<Business> businesss=businessRepository.searchBusiness(keyword);
         List<BusinessDTO> businessDTOS = businesss.stream().map(cust -> businessDtoMapper.fromBusiness(cust)).collect(Collectors.toList());
