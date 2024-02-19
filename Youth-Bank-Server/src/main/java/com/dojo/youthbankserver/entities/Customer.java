@@ -1,4 +1,4 @@
-package com.dojo.youthbankserver.entities;
+ package com.dojo.youthbankserver.entities;
 
 import java.util.Date;
 import java.util.List;

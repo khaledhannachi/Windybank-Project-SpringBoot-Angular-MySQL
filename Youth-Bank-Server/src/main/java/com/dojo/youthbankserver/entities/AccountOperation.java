@@ -2,7 +2,6 @@ package com.dojo.youthbankserver.entities;
 
 import java.util.Date;
 
-
 import com.dojo.youthbankserver.enums.OperationType;
 
 import jakarta.persistence.Entity;
@@ -18,7 +17,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 @Entity
-@NoArgsConstructor @AllArgsConstructor
+@NoArgsConstructor @AllArgsConstructor @Data
 public class AccountOperation {
 	 @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
 	    private Long id;
@@ -33,54 +32,7 @@ public class AccountOperation {
 	    @JoinColumn(name="bankAccount_id")
 	    private BankAccount bankAccount;
 
-	    //getter and setter
-		public Long getId() {
-			return id;
-		}
 
-		public void setId(Long id) {
-			this.id = id;
-		}
-
-		public Date getOperationDate() {
-			return operationDate;
-		}
-
-		public void setOperationDate(Date operationDate) {
-			this.operationDate = operationDate;
-		}
-
-		public double getAmount() {
-			return amount;
-		}
-
-		public void setAmount(double amount) {
-			this.amount = amount;
-		}
-
-		public OperationType getType() {
-			return type;
-		}
-
-		public void setType(OperationType type) {
-			this.type = type;
-		}
-
-		public String getDescription() {
-			return description;
-		}
-
-		public void setDescription(String description) {
-			this.description = description;
-		}
-
-		public BankAccount getBankAccount() {
-			return bankAccount;
-		}
-
-		public void setBankAccount(BankAccount bankAccount) {
-			this.bankAccount = bankAccount;
-		}
 	    
 		
 	    
