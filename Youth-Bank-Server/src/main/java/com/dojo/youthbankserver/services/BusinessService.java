@@ -10,8 +10,6 @@ import com.dojo.youthbankserver.dtos.BusinessDTO;
 import com.dojo.youthbankserver.entities.Business;
 import com.dojo.youthbankserver.exceptions.BusinessNotFoundException;
 import com.dojo.youthbankserver.mappers.BusinessMapper;
-import com.dojo.youthbankserver.repositories.AccountOperationRepository;
-import com.dojo.youthbankserver.repositories.BankAccountRepository;
 import com.dojo.youthbankserver.repositories.BusinessRepository;
 
 import jakarta.transaction.Transactional;

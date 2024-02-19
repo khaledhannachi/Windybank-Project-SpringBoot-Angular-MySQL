@@ -2,6 +2,8 @@ package com.dojo.youthbankserver.services;
 
 import java.util.List;
 
+import com.dojo.youthbankserver.dtos.AccountHistoryDTO;
+import com.dojo.youthbankserver.dtos.AccountOperationDTO;
 import com.dojo.youthbankserver.dtos.BankAccountDTO;
 import com.dojo.youthbankserver.dtos.CheckingBankAccountDTO;
 import com.dojo.youthbankserver.dtos.SavingBankAccountDTO;
@@ -26,6 +28,8 @@ public interface BankAccountService {
 
 	    List<BankAccountDTO> bankAccountList();
 
+	    List<AccountOperationDTO> accountHistory(String accountId);
 
+	    AccountHistoryDTO getAccountHistory(String accountId, int page, int size) throws BankAccountNotFoundException;
 	
 }

@@ -43,7 +43,7 @@ public class BankAccountRestAPI {
 	    }
 	    @GetMapping("/{accountId}/operations")
 	    public List<AccountOperationDTO> getHistory(@PathVariable String accountId){
-	        return BankAcountServiceImpl.accountHistory(accountId);
+	        return bankAccountService.accountHistory(accountId);
 	    }
 
 	    @GetMapping("/{accountId}/pageOperations")
