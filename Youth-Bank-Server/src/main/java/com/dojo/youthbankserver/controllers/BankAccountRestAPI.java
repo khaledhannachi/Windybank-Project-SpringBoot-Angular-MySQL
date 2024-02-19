@@ -29,9 +29,7 @@ import lombok.AllArgsConstructor;
 public class BankAccountRestAPI {
 	  private BankAcountServiceImpl bankAccountService;
 
-	    public BankAccountRestAPI(BankAcountServiceImpl bankAccountService) {
-	        this.bankAccountService = bankAccountService;
-	    }
+	   
 
 	    @GetMapping("/{accountId}")
 	    public BankAccountDTO getBankAccount(@PathVariable String accountId) throws BankAccountNotFoundException {
