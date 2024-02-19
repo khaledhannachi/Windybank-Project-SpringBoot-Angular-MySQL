@@ -151,6 +151,7 @@ public class Customer {
 		@DateTimeFormat(pattern = "yyyy-MM-dd")
 		private Date updatedAt;
 
+		
 //		----- methods ---
 
 		@PrePersist

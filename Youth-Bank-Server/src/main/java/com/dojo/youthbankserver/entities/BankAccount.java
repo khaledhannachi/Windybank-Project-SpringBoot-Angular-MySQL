@@ -23,12 +23,11 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 @Entity
 @Inheritance(strategy = InheritanceType.JOINED)
-//@DiscriminatorColumn(name = "TYPE",length = 4)
+//@DiscriminatorColumn(name = "TYPE",length = 4).
 @Data @NoArgsConstructor @AllArgsConstructor
 
 public abstract class BankAccount {
 
-	
 		@Id
 	    private String id;
 	    private double balance;
@@ -52,11 +51,8 @@ public abstract class BankAccount {
 	    @ManyToOne(fetch=FetchType.LAZY)
 	    @JoinColumn(name="professional_id")
 	    private Professional professional;
-	    
-	    
-	    
-	
 
+	    
         //one to many
 	    @OneToMany(mappedBy = "bankAccount",fetch = FetchType.LAZY)
 	    private List<AccountOperation> accountOperations;
