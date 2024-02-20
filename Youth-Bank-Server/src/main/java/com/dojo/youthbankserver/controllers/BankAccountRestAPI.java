@@ -2,7 +2,6 @@ package com.dojo.youthbankserver.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -20,26 +19,31 @@ import com.dojo.youthbankserver.dtos.DebitDTO;
 import com.dojo.youthbankserver.dtos.TransferRequestDTO;
 import com.dojo.youthbankserver.exceptions.BalanceNotSufficientException;
 import com.dojo.youthbankserver.exceptions.BankAccountNotFoundException;
-import com.dojo.youthbankserver.services.BankAcountServiceImpl;
+import com.dojo.youthbankserver.services.BankAccountService;
 
 
 @RestController
 @CrossOrigin("*")
-@RequestMapping("/accounts")
-public class BankAccountRestAPI {
-	@Autowired
-	  private BankAcountServiceImpl bankAccountService;
+@RequestMapping("/api/v1/accounts")
 
-	   
+public class BankAccountRestAPI {
+
+	  private BankAccountService bankAccountService;
+
 
 	    @GetMapping("/{accountId}")
 	    public BankAccountDTO getBankAccount(@PathVariable String accountId) throws BankAccountNotFoundException {
 	        return bankAccountService.getBankAccount(accountId);
 	    }
+	    
+	    
+	    
 	    @GetMapping("")
 	    public List<BankAccountDTO> listAccounts(){
 	        return bankAccountService.bankAccountList();
 	    }
+	    
+	    
 	    @GetMapping("/{accountId}/operations")
 	    public List<AccountOperationDTO> getHistory(@PathVariable String accountId){
 	        return bankAccountService.accountHistory(accountId);

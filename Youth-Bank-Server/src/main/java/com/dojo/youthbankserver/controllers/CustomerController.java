@@ -14,6 +14,8 @@ import java.util.List;
 @RestController
 @Slf4j
 @CrossOrigin("*")
+@RequestMapping("/api/v1")
+
 public class CustomerController {
 	@Autowired
     private CustomerService customerService;
