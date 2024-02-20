@@ -1,74 +1,21 @@
 package com.dojo.youthbankserver.services;
 
-
 import java.util.List;
-import java.util.stream.Collectors;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import com.dojo.youthbankserver.dtos.BusinessDTO;
-import com.dojo.youthbankserver.entities.Business;
 import com.dojo.youthbankserver.exceptions.BusinessNotFoundException;
-import com.dojo.youthbankserver.mappers.BusinessMapper;
-import com.dojo.youthbankserver.repositories.BusinessRepository;
 
-import jakarta.transaction.Transactional;
-import lombok.extern.slf4j.Slf4j;
-@Service
-@Transactional
-@Slf4j
-public class BusinessService {
-@Autowired
-	private BusinessRepository businessRepository;
-@Autowired
-    private BusinessMapper businessDtoMapper;
+public interface BusinessService {
 
-    public BusinessDTO saveBusiness(BusinessDTO businessDTO) {
-        log.info("Saving new Business");
-        Business business=businessDtoMapper.fromBusinessDTO(businessDTO);
-        Business savedBusiness = businessRepository.save(business);
-        return businessDtoMapper.fromBusiness(savedBusiness);
-    }
+	BusinessDTO saveBusiness(BusinessDTO businessDTO);
+  	
+    List<BusinessDTO> listBusinesss();
+ 
+    BusinessDTO getBusiness(Long businessId) throws BusinessNotFoundException;
 
-    public List<BusinessDTO> listBusinesss() {
-        List<Business> businesss = businessRepository.findAll();
-        List<BusinessDTO> businessDTOS = businesss.stream()
-                .map(business -> businessDtoMapper.fromBusiness(business))
-                .collect(Collectors.toList());
-        /*
-        List<BusinessDTO> businessDTOS=new ArrayList<>();
-        for (Business business:businesss){
-            BusinessDTO businessDTO=businessDtoMapper.fromBusiness(business);
-            businessDTOS.add(businessDTO);
-        }
-        *
-         */
-        return businessDTOS;
-    }
+    BusinessDTO updateBusiness(BusinessDTO businessDTO);
 
-    public BusinessDTO getBusiness(Long businessId) throws BusinessNotFoundException {
-        Business business = businessRepository.findById(businessId)
-                .orElseThrow(() -> new BusinessNotFoundException("Business Not found"));
-        return businessDtoMapper.fromBusiness(business);
-    }
+    void deleteBusiness(Long businessId);
 
-    public BusinessDTO updateBusiness(BusinessDTO businessDTO) {
-        log.info("Saving new Business");
-        Business business=businessDtoMapper.fromBusinessDTO(businessDTO);
-        Business savedBusiness = businessRepository.save(business);
-        return businessDtoMapper.fromBusiness(savedBusiness);
-    }
-
-    public void deleteBusiness(Long businessId){
-        businessRepository.deleteById(businessId);
-    }
-  
-//    public List<BusinessDTO> searchBusinesss(String keyword) {
-//        List<Business> businesss=businessRepository.searchBusiness(keyword);
-//        List<BusinessDTO> businessDTOS = businesss.stream().map(cust -> businessDtoMapper.fromBusiness(cust)).collect(Collectors.toList());
-//        return businessDTOS;
-//    }
-//	
-	
+//    List<BusinessDTO> searchBusinesss(String keyword);
 }

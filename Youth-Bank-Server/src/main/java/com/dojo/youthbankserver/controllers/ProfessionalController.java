@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.dojo.youthbankserver.dtos.ProfessionalDTO;
 import com.dojo.youthbankserver.exceptions.ProfessionalNotFoundException;
-import com.dojo.youthbankserver.services.ProfessionalService;
+import com.dojo.youthbankserver.services.ProfessionalServiceImpl;
 
 
 import lombok.extern.slf4j.Slf4j;
@@ -31,10 +31,10 @@ import lombok.extern.slf4j.Slf4j;
 
 public class ProfessionalController {
 	@Autowired
-    private ProfessionalService professionalService;
+    private ProfessionalServiceImpl professionalServiceImpl;
     @GetMapping("/professionals")
     public List<ProfessionalDTO> professionals(){
-        return professionalService.listProfessionals();
+        return professionalServiceImpl.listProfessionals();
     }
 //    @GetMapping("/professionals/search")
 //    public List<ProfessionalDTO> searchProfessionals(@RequestParam(name = "keyword",defaultValue = "") String keyword){
@@ -42,19 +42,19 @@ public class ProfessionalController {
 //    }
     @GetMapping("/professionals/{id}")
     public ProfessionalDTO getProfessional(@PathVariable(name = "id") Long professionalId) throws ProfessionalNotFoundException {
-        return professionalService.getProfessional(professionalId);
+        return professionalServiceImpl.getProfessional(professionalId);
     }
     @PostMapping("/professionals")
     public ProfessionalDTO saveProfessional(@RequestBody ProfessionalDTO professionalDTO){
-        return professionalService.saveProfessional(professionalDTO);
+        return professionalServiceImpl.saveProfessional(professionalDTO);
     }
     @PutMapping("/professionals/{professionalId}")
     public ProfessionalDTO updateProfessional(@PathVariable Long professionalId, @RequestBody ProfessionalDTO professionalDTO){
         professionalDTO.setId(professionalId);
-        return professionalService.updateProfessional(professionalDTO);
+        return professionalServiceImpl.updateProfessional(professionalDTO);
     }
     @DeleteMapping("/professionals/{id}")
     public void deleteProfessional(@PathVariable Long id){
-    	professionalService.deleteProfessional(id);
+    	professionalServiceImpl.deleteProfessional(id);
     }
 }

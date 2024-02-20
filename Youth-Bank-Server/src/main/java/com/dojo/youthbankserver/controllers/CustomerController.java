@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 import com.dojo.youthbankserver.dtos.CustomerDTO;
 import com.dojo.youthbankserver.exceptions.CustomerNotFoundException;
-import com.dojo.youthbankserver.services.CustomerService;
+import com.dojo.youthbankserver.services.CustomerServiceImpl;
 
 import java.util.List;
 
@@ -18,10 +18,10 @@ import java.util.List;
 
 public class CustomerController {
 	@Autowired
-    private CustomerService customerService;
+    private CustomerServiceImpl customerServiceImpl;
     @GetMapping("/customers")
     public List<CustomerDTO> customers(){
-        return customerService.listCustomers();
+        return customerServiceImpl.listCustomers();
     }
 //    @GetMapping("/customers/search")
 //    public List<CustomerDTO> searchCustomers(@RequestParam(name = "keyword",defaultValue = "") String keyword){
@@ -29,19 +29,19 @@ public class CustomerController {
 //    }
     @GetMapping("/customers/{id}")
     public CustomerDTO getCustomer(@PathVariable(name = "id") Long customerId) throws CustomerNotFoundException {
-        return customerService.getCustomer(customerId);
+        return customerServiceImpl.getCustomer(customerId);
     }
     @PostMapping("/customers")
     public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO){
-        return customerService.saveCustomer(customerDTO);
+        return customerServiceImpl.saveCustomer(customerDTO);
     }
     @PutMapping("/customers/{customerId}")
     public CustomerDTO updateCustomer(@PathVariable Long customerId, @RequestBody CustomerDTO customerDTO){
         customerDTO.setId(customerId);
-        return customerService.updateCustomer(customerDTO);
+        return customerServiceImpl.updateCustomer(customerDTO);
     }
     @DeleteMapping("/customers/{id}")
     public void deleteCustomer(@PathVariable Long id){
-    	customerService.deleteCustomer(id);
+    	customerServiceImpl.deleteCustomer(id);
     }
 }
