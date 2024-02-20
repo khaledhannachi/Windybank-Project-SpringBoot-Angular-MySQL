@@ -4,16 +4,11 @@ package com.dojo.youthbankserver.controllers;
 import java.util.List;
 
 import com.dojo.youthbankserver.dtos.*;
+import com.dojo.youthbankserver.exceptions.CustomerNotFoundException;
 import jakarta.validation.Valid;
+import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.dojo.youthbankserver.exceptions.BalanceNotSufficientException;
 import com.dojo.youthbankserver.exceptions.BankAccountNotFoundException;
@@ -23,7 +18,7 @@ import com.dojo.youthbankserver.services.BankAccountService;
 @RestController
 @CrossOrigin("*")
 @RequestMapping("/api/v1/accounts")
-
+@AllArgsConstructor
 public class BankAccountRestAPI {
 
     private BankAccountService bankAccountService;
@@ -40,10 +35,14 @@ public class BankAccountRestAPI {
     public ResponseEntity<List<BankAccountDTO>> listAccounts(){
         return ResponseEntity.ok().body(bankAccountService.bankAccountList());
     }
-    @PostMapping("/saving/customerId")
-    public CheckingBankAccountDTO saveCheckingBankAccountDTO(@Valid @RequestBody @PathVariable String customerId ){
-        return bankAccountService.saveCheckingBankAccount();
+    @PostMapping("/checking/{customerId}")
+    public ResponseEntity<CheckingBankAccountDTO> saveCheckingBankAccountDTO( CheckingBankAccountDTO checkingBankAccountDTO ,@PathVariable Long customerId  ) throws CustomerNotFoundException {
+        double initialBalance=checkingBankAccountDTO.getBalance();
+        double overDraft=checkingBankAccountDTO.getOverDraft();
+        return ResponseEntity.ok().body(bankAccountService.saveCheckingBankAccount(initialBalance,overDraft,customerId));
     }
+
+
 
     @GetMapping("/{accountId}/operations")
     public ResponseEntity<List<AccountOperationDTO>> getHistory(@PathVariable String accountId){

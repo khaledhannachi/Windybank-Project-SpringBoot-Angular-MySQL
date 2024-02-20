@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+import com.dojo.youthbankserver.enums.AccountStatus;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -53,6 +54,7 @@ public class BankAcountServiceImpl implements BankAccountService{
 	        checkingAccount.setCreatedAt(new Date());
 	        checkingAccount.setBalance(initialBalance);
 	        checkingAccount.setOverDraft(overDraft);
+			
 	        checkingAccount.setCustomer(customer);
 	        CheckingAccount savedBankAccount = bankAccountRepository.save(checkingAccount);
 	        return dtoMapper.fromCheckingBankAccount(savedBankAccount);
