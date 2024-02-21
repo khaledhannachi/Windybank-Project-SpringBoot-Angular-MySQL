@@ -19,7 +19,7 @@ import com.dojo.youthbankserver.services.BankAccountService;
 @CrossOrigin("*")
 @RequestMapping("/api/v1/accounts")
 @AllArgsConstructor
-public class BankAccountRestAPI {
+public class BankAccountController {
 
     private BankAccountService bankAccountService;
 
@@ -41,7 +41,12 @@ public class BankAccountRestAPI {
         double overDraft=checkingBankAccountDTO.getOverDraft();
         return ResponseEntity.ok().body(bankAccountService.saveCheckingBankAccount(initialBalance,overDraft,personalId));
     }
-
+    @PostMapping("/saving/{personalId}")
+    public ResponseEntity<SavingBankAccountDTO> saveSavingBankAccountDTO( SavingBankAccountDTO savingBankAccountDTO ,@PathVariable Long personalId  ) throws PersonalNotFoundException {
+        double initialBalance=savingBankAccountDTO.getBalance();
+        double interestRate=savingBankAccountDTO.getInterestRate();
+        return ResponseEntity.ok().body(bankAccountService.saveSavingBankAccount(initialBalance,interestRate,personalId));
+    }
 
 
     @GetMapping("/{accountId}/operations")
