@@ -4,7 +4,9 @@ package com.dojo.youthbankserver.controllers;
 
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,38 +24,40 @@ import com.dojo.youthbankserver.services.ProfessionalServiceImpl;
 
 import lombok.extern.slf4j.Slf4j;
 
-@RestController
+
 
 
 @Slf4j
+@RestController
 @CrossOrigin("*")
-@RequestMapping("/api/v1")
+@AllArgsConstructor
+@RequestMapping("/api/v1/professionals")
 
 public class ProfessionalController {
-	@Autowired
+
     private ProfessionalServiceImpl professionalServiceImpl;
-    @GetMapping("/professionals")
-    public List<ProfessionalDTO> professionals(){
-        return professionalServiceImpl.listProfessionals();
+    @GetMapping("")
+    public ResponseEntity<List<ProfessionalDTO>> professionals(){
+        return ResponseEntity.ok().body(professionalServiceImpl.listProfessionals());
     }
 //    @GetMapping("/professionals/search")
 //    public List<ProfessionalDTO> searchProfessionals(@RequestParam(name = "keyword",defaultValue = "") String keyword){
 //        return professionalService.searchProfessionals("%"+keyword+"%");
 //    }
-    @GetMapping("/professionals/{id}")
-    public ProfessionalDTO getProfessional(@PathVariable(name = "id") Long professionalId) throws ProfessionalNotFoundException {
-        return professionalServiceImpl.getProfessional(professionalId);
+    @GetMapping("/{id}")
+    public ResponseEntity<ProfessionalDTO> getProfessional(@PathVariable(name = "id") Long professionalId) throws ProfessionalNotFoundException {
+        return ResponseEntity.ok().body(professionalServiceImpl.getProfessional(professionalId));
     }
-    @PostMapping("/professionals")
-    public ProfessionalDTO saveProfessional(@RequestBody ProfessionalDTO professionalDTO){
-        return professionalServiceImpl.saveProfessional(professionalDTO);
+    @PostMapping("")
+    public ResponseEntity<ProfessionalDTO> saveProfessional(@RequestBody ProfessionalDTO professionalDTO){
+        return ResponseEntity.ok().body(professionalServiceImpl.saveProfessional(professionalDTO));
     }
-    @PutMapping("/professionals/{professionalId}")
-    public ProfessionalDTO updateProfessional(@PathVariable Long professionalId, @RequestBody ProfessionalDTO professionalDTO){
+    @PutMapping("/{professionalId}")
+    public ResponseEntity<ProfessionalDTO> updateProfessional(@PathVariable Long professionalId, @RequestBody ProfessionalDTO professionalDTO){
         professionalDTO.setId(professionalId);
-        return professionalServiceImpl.updateProfessional(professionalDTO);
+        return ResponseEntity.ok().body(professionalServiceImpl.updateProfessional(professionalDTO));
     }
-    @DeleteMapping("/professionals/{id}")
+    @DeleteMapping("/{id}")
     public void deleteProfessional(@PathVariable Long id){
     	professionalServiceImpl.deleteProfessional(id);
     }

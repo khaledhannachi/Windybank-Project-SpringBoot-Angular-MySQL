@@ -1,8 +1,10 @@
 package com.dojo.youthbankserver.controllers;
 
+import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-import org.springframework.beans.factory.annotation.Autowired;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import com.dojo.youthbankserver.dtos.CustomerDTO;
@@ -15,30 +17,30 @@ import java.util.List;
 @Slf4j
 @CrossOrigin("*")
 @RequestMapping("/api/v1")
-
+@AllArgsConstructor
 public class CustomerController {
-	@Autowired
+
     private CustomerServiceImpl customerServiceImpl;
     @GetMapping("/customers")
-    public List<CustomerDTO> customers(){
-        return customerServiceImpl.listCustomers();
+    public ResponseEntity<List<CustomerDTO>> customers(){
+        return ResponseEntity.ok().body(customerServiceImpl.listCustomers());
     }
 //    @GetMapping("/customers/search")
 //    public List<CustomerDTO> searchCustomers(@RequestParam(name = "keyword",defaultValue = "") String keyword){
 //        return customerService.searchCustomers("%"+keyword+"%");
 //    }
     @GetMapping("/customers/{id}")
-    public CustomerDTO getCustomer(@PathVariable(name = "id") Long customerId) throws CustomerNotFoundException {
-        return customerServiceImpl.getCustomer(customerId);
+    public ResponseEntity<CustomerDTO> getCustomer(@PathVariable(name = "id") Long customerId) throws CustomerNotFoundException {
+        return ResponseEntity.ok().body(customerServiceImpl.getCustomer(customerId));
     }
     @PostMapping("/customers")
-    public CustomerDTO saveCustomer(@RequestBody CustomerDTO customerDTO){
-        return customerServiceImpl.saveCustomer(customerDTO);
+    public ResponseEntity<CustomerDTO> saveCustomer(@RequestBody CustomerDTO customerDTO){
+        return ResponseEntity.ok().body(customerServiceImpl.saveCustomer(customerDTO));
     }
     @PutMapping("/customers/{customerId}")
-    public CustomerDTO updateCustomer(@PathVariable Long customerId, @RequestBody CustomerDTO customerDTO){
+    public ResponseEntity<CustomerDTO> updateCustomer(@PathVariable Long customerId, @RequestBody CustomerDTO customerDTO){
         customerDTO.setId(customerId);
-        return customerServiceImpl.updateCustomer(customerDTO);
+        return ResponseEntity.ok().body(customerServiceImpl.updateCustomer(customerDTO));
     }
     @DeleteMapping("/customers/{id}")
     public void deleteCustomer(@PathVariable Long id){
