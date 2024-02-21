@@ -29,8 +29,6 @@ public class BankAccountRestAPI {
         return ResponseEntity.ok().body(bankAccountService.getBankAccount(accountId));
     }
 
-
-
     @GetMapping("")
     public ResponseEntity<List<BankAccountDTO>> listAccounts(){
         return ResponseEntity.ok().body(bankAccountService.bankAccountList());
@@ -41,8 +39,6 @@ public class BankAccountRestAPI {
         double overDraft=checkingBankAccountDTO.getOverDraft();
         return ResponseEntity.ok().body(bankAccountService.saveCheckingBankAccount(initialBalance,overDraft,customerId));
     }
-
-
 
     @GetMapping("/{accountId}/operations")
     public ResponseEntity<List<AccountOperationDTO>> getHistory(@PathVariable String accountId){
