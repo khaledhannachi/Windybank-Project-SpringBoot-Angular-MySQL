@@ -18,7 +18,6 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
-import jakarta.persistence.Transient;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
@@ -34,7 +33,7 @@ import lombok.NoArgsConstructor;
 @Data 
 @NoArgsConstructor @AllArgsConstructor
 @Entity
-public class Customer {
+public class Personal {
 
 	
 	
@@ -159,8 +158,8 @@ public class Customer {
 		}
 		   
 //		one to many
-		  @OneToMany(mappedBy = "customer", fetch = FetchType.LAZY)
-		  private List<BankAccount> customerBankAccounts;
+		  @OneToMany(mappedBy = "personal", fetch = FetchType.LAZY)
+		  private List<BankAccount> personalBankAccounts;
 
 		  
 //		  //many to one

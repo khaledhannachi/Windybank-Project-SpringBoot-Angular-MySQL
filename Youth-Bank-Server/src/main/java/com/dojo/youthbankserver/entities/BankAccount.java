@@ -40,8 +40,8 @@ public abstract class BankAccount {
 	    
 	    //many to one
 	    @ManyToOne(fetch=FetchType.LAZY)
-	    @JoinColumn(name="customer_id")
-	    private Customer customer;
+	    @JoinColumn(name="personal_id")
+	    private Personal personal;
 	    
 	    //many to one
 	    @ManyToOne(fetch=FetchType.LAZY)
@@ -115,13 +115,13 @@ public abstract class BankAccount {
 //		}
 //
 //
-//		public Customer getCustomer() {
-//			return customer;
+//		public Personal getPersonal() {
+//			return personal;
 //		}
 //
 //
-//		public void setCustomer(Customer customer) {
-//			this.customer = customer;
+//		public void setPersonal(Personal personal) {
+//			this.personal = personal;
 //		}
 //
 //

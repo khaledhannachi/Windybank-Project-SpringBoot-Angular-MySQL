@@ -9,14 +9,14 @@ import com.dojo.youthbankserver.dtos.CheckingBankAccountDTO;
 import com.dojo.youthbankserver.dtos.SavingBankAccountDTO;
 import com.dojo.youthbankserver.exceptions.BalanceNotSufficientException;
 import com.dojo.youthbankserver.exceptions.BankAccountNotFoundException;
-import com.dojo.youthbankserver.exceptions.CustomerNotFoundException;
+import com.dojo.youthbankserver.exceptions.PersonalNotFoundException;
 
 public interface BankAccountService {
 
 	 
-	    CheckingBankAccountDTO saveCheckingBankAccount(double initialBalance, double overDraft, Long customerId) throws CustomerNotFoundException;
+	    CheckingBankAccountDTO saveCheckingBankAccount(double initialBalance, double overDraft, Long customerId) throws PersonalNotFoundException;
 	    
-	    SavingBankAccountDTO saveSavingBankAccount(double initialBalance, double interestRate, Long customerId) throws CustomerNotFoundException;
+	    SavingBankAccountDTO saveSavingBankAccount(double initialBalance, double interestRate, Long customerId) throws PersonalNotFoundException;
 	   
 	    BankAccountDTO getBankAccount(String accountId) throws BankAccountNotFoundException;
 	    
