@@ -4,7 +4,7 @@ package com.dojo.youthbankserver.controllers;
 import java.util.List;
 
 import com.dojo.youthbankserver.dtos.*;
-import com.dojo.youthbankserver.exceptions.CustomerNotFoundException;
+import com.dojo.youthbankserver.exceptions.PersonalNotFoundException;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -35,11 +35,11 @@ public class BankAccountRestAPI {
     public ResponseEntity<List<BankAccountDTO>> listAccounts(){
         return ResponseEntity.ok().body(bankAccountService.bankAccountList());
     }
-    @PostMapping("/checking/{customerId}")
-    public ResponseEntity<CheckingBankAccountDTO> saveCheckingBankAccountDTO( CheckingBankAccountDTO checkingBankAccountDTO ,@PathVariable Long customerId  ) throws CustomerNotFoundException {
+    @PostMapping("/checking/{personalId}")
+    public ResponseEntity<CheckingBankAccountDTO> saveCheckingBankAccountDTO( CheckingBankAccountDTO checkingBankAccountDTO ,@PathVariable Long personalId  ) throws PersonalNotFoundException {
         double initialBalance=checkingBankAccountDTO.getBalance();
         double overDraft=checkingBankAccountDTO.getOverDraft();
-        return ResponseEntity.ok().body(bankAccountService.saveCheckingBankAccount(initialBalance,overDraft,customerId));
+        return ResponseEntity.ok().body(bankAccountService.saveCheckingBankAccount(initialBalance,overDraft,personalId));
     }
 
 

@@ -1,34 +1,34 @@
 package com.dojo.youthbankserver.mappers;
 
+import com.dojo.youthbankserver.dtos.PersonalDTO;
+import com.dojo.youthbankserver.entities.Personal;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import com.dojo.youthbankserver.dtos.AccountOperationDTO;
 import com.dojo.youthbankserver.dtos.CheckingBankAccountDTO;
-import com.dojo.youthbankserver.dtos.CustomerDTO;
 import com.dojo.youthbankserver.dtos.SavingBankAccountDTO;
 import com.dojo.youthbankserver.entities.AccountOperation;
 import com.dojo.youthbankserver.entities.CheckingAccount;
-import com.dojo.youthbankserver.entities.Customer;
 import com.dojo.youthbankserver.entities.SavingAccount;
 
 @Service
 public class BankAccountMapperImpl {
-	public CustomerDTO fromCustomer(Customer customer){
-        CustomerDTO customerDTO=new CustomerDTO();
-        BeanUtils.copyProperties(customer,customerDTO);
-        return  customerDTO;
+	public PersonalDTO fromPersonal(Personal personal){
+        PersonalDTO personalDTO =new PersonalDTO();
+        BeanUtils.copyProperties(personal, personalDTO);
+        return personalDTO;
     }
-    public Customer fromCustomerDTO(CustomerDTO customerDTO){
-        Customer customer=new Customer();
-        BeanUtils.copyProperties(customerDTO,customer);
-        return  customer;
+    public Personal fromPersonalDTO(PersonalDTO personalDTO){
+        Personal personal =new Personal();
+        BeanUtils.copyProperties(personalDTO, personal);
+        return personal;
     }
 
     public SavingBankAccountDTO fromSavingBankAccount(SavingAccount savingAccount){
         SavingBankAccountDTO savingBankAccountDTO=new SavingBankAccountDTO();
         BeanUtils.copyProperties(savingAccount,savingBankAccountDTO);
-        savingBankAccountDTO.setCustomerDTO(fromCustomer(savingAccount.getCustomer()));
+        savingBankAccountDTO.setPersonalDTO(fromPersonal(savingAccount.getPersonal()));
         savingBankAccountDTO.setType(savingAccount.getClass().getSimpleName());
         return savingBankAccountDTO;
     }
@@ -36,14 +36,14 @@ public class BankAccountMapperImpl {
     public SavingAccount fromSavingBankAccountDTO(SavingBankAccountDTO savingBankAccountDTO){
         SavingAccount savingAccount=new SavingAccount();
         BeanUtils.copyProperties(savingBankAccountDTO,savingAccount);
-        savingAccount.setCustomer(fromCustomerDTO(savingBankAccountDTO.getCustomerDTO()));
+        savingAccount.setPersonal(fromPersonalDTO(savingBankAccountDTO.getPersonalDTO()));
         return savingAccount;
     }
 
     public CheckingBankAccountDTO fromCheckingBankAccount(CheckingAccount checkingAccount){
         CheckingBankAccountDTO checkingBankAccountDTO=new CheckingBankAccountDTO();
         BeanUtils.copyProperties(checkingAccount,checkingBankAccountDTO);
-        checkingBankAccountDTO.setCustomerDTO(fromCustomer(checkingAccount.getCustomer()));
+        checkingBankAccountDTO.setPersonalDTO(fromPersonal(checkingAccount.getPersonal()));
         checkingBankAccountDTO.setType(checkingAccount.getClass().getSimpleName());
         return checkingBankAccountDTO;
     }
@@ -51,7 +51,7 @@ public class BankAccountMapperImpl {
     public CheckingAccount fromCheckingBankAccountDTO(CheckingBankAccountDTO checkingBankAccountDTO){
         CheckingAccount checkingAccount=new CheckingAccount();
         BeanUtils.copyProperties(checkingBankAccountDTO,checkingAccount);
-        checkingAccount.setCustomer(fromCustomerDTO(checkingBankAccountDTO.getCustomerDTO()));
+        checkingAccount.setPersonal(fromPersonalDTO(checkingBankAccountDTO.getPersonalDTO()));
         return checkingAccount;
     }
 

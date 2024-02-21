@@ -5,7 +5,8 @@ import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
-import com.dojo.youthbankserver.enums.AccountStatus;
+import com.dojo.youthbankserver.entities.*;
+import com.dojo.youthbankserver.repositories.PersonalRepository;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -15,19 +16,14 @@ import com.dojo.youthbankserver.dtos.AccountOperationDTO;
 import com.dojo.youthbankserver.dtos.BankAccountDTO;
 import com.dojo.youthbankserver.dtos.CheckingBankAccountDTO;
 import com.dojo.youthbankserver.dtos.SavingBankAccountDTO;
-import com.dojo.youthbankserver.entities.AccountOperation;
-import com.dojo.youthbankserver.entities.BankAccount;
-import com.dojo.youthbankserver.entities.CheckingAccount;
-import com.dojo.youthbankserver.entities.Customer;
-import com.dojo.youthbankserver.entities.SavingAccount;
+import com.dojo.youthbankserver.entities.Personal;
 import com.dojo.youthbankserver.enums.OperationType;
 import com.dojo.youthbankserver.exceptions.BalanceNotSufficientException;
 import com.dojo.youthbankserver.exceptions.BankAccountNotFoundException;
-import com.dojo.youthbankserver.exceptions.CustomerNotFoundException;
+import com.dojo.youthbankserver.exceptions.PersonalNotFoundException;
 import com.dojo.youthbankserver.mappers.BankAccountMapperImpl;
 import com.dojo.youthbankserver.repositories.AccountOperationRepository;
 import com.dojo.youthbankserver.repositories.BankAccountRepository;
-import com.dojo.youthbankserver.repositories.CustomerRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -39,39 +35,39 @@ public class BankAcountServiceImpl implements BankAccountService{
 
 
 	    private BankAccountRepository bankAccountRepository;
-	    private CustomerRepository customerRepository;
+	    private PersonalRepository personalRepository;
 	    private AccountOperationRepository accountOperationRepository;
 	    private BankAccountMapperImpl dtoMapper;
 
 
 	    @Override
-	    public CheckingBankAccountDTO saveCheckingBankAccount(double initialBalance, double overDraft, Long customerId) throws CustomerNotFoundException {
-	        Customer customer=customerRepository.findById(customerId).orElse(null);
-	        if(customer==null)
-	            throw new CustomerNotFoundException("Customer not found");
+	    public CheckingBankAccountDTO saveCheckingBankAccount(double initialBalance, double overDraft, Long personalId) throws PersonalNotFoundException {
+	        Personal personal = personalRepository.findById(personalId).orElse(null);
+	        if(personal ==null)
+	            throw new PersonalNotFoundException("Personal not found");
 	        CheckingAccount checkingAccount=new CheckingAccount();
 	        checkingAccount.setId(UUID.randomUUID().toString());
 	        checkingAccount.setCreatedAt(new Date());
 	        checkingAccount.setBalance(initialBalance);
 	        checkingAccount.setOverDraft(overDraft);
 			
-	        checkingAccount.setCustomer(customer);
+	        checkingAccount.setPersonal(personal);
 	        CheckingAccount savedBankAccount = bankAccountRepository.save(checkingAccount);
 	        return dtoMapper.fromCheckingBankAccount(savedBankAccount);
 	    }
 
 	    @Override
-	    public SavingBankAccountDTO saveSavingBankAccount(double initialBalance, double interestRate, Long customerId) throws CustomerNotFoundException {
-	        Customer customer=customerRepository.findById(customerId).orElse(null);
-	        if(customer==null)
+	    public SavingBankAccountDTO saveSavingBankAccount(double initialBalance, double interestRate, Long personalId) throws PersonalNotFoundException {
+	        Personal personal = personalRepository.findById(personalId).orElse(null);
+	        if(personal ==null)
 	        	
-	            throw new CustomerNotFoundException("Customer not found");
+	            throw new PersonalNotFoundException("Personal not found");
 	        SavingAccount savingAccount=new SavingAccount();
 	        savingAccount.setId(UUID.randomUUID().toString());
 	        savingAccount.setCreatedAt(new Date());
 	        savingAccount.setBalance(initialBalance);
 	        savingAccount.setInterestRate(interestRate);
-	        savingAccount.setCustomer(customer);
+	        savingAccount.setPersonal(personal);
 	        
 	        SavingAccount savedBankAccount = bankAccountRepository.save(savingAccount);
 	        return dtoMapper.fromSavingBankAccount(savedBankAccount);

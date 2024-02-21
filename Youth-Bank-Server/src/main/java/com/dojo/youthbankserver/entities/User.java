@@ -65,7 +65,7 @@ public class User {
 	private List<Professional> userProfessionalAccounts;
 //	1:M
 	@OneToMany(mappedBy="userPersonal", fetch = FetchType.LAZY)
-	private List<Customer> userPersonalAccounts;
+	private List<Personal> userPersonalAccounts;
 
 //	----- methods ---
 // other getters and setters removed for brevity
