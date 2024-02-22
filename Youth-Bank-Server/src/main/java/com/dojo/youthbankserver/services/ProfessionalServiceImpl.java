@@ -34,7 +34,11 @@ public class ProfessionalServiceImpl implements ProfessionalService{
 	  @Override
     public ProfessionalDTO saveProfessional(ProfessionalDTO professionalDTO,Long userId) {
         log.info("Saving new Professional");
+<<<<<<< HEAD
         User userProfessional =userRepository.findById(userId).orElse(null);
+=======
+
+>>>>>>> 7a93bc6ad10afc0321ff141483c9da40c315190b
         Professional professional=professionalDtoMapper.fromProfessionalDTO(professionalDTO);
         professional.setUserProfessional(userProfessional);
         Professional savedProfessional = professionalRepository.save(professional);

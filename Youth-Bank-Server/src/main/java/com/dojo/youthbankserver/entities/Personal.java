@@ -38,11 +38,6 @@ public class Personal {
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private Long id;
 
-
-	    
-
-
-		
 		@NotBlank(message="idType is required!")
 		private String idType;
 		
@@ -58,9 +53,6 @@ public class Personal {
 		private String idDeliveryCity;
 		
 
-
-		
-		
 		@NotBlank(message="Profession is required!")
 		@Size(min=1, max=60, message="Profession must be between 3 and 60 characters.")
 		private String profession;
