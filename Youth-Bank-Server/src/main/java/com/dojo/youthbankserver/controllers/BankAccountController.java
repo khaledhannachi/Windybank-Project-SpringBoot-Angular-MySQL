@@ -45,12 +45,7 @@ public class BankAccountController {
         double interestRate=savingBankAccountDTO.getInterestRate();
         return ResponseEntity.ok().body(bankAccountService.saveSavingBankAccount(initialBalance,interestRate,personalId));
     }
-
-<<<<<<< HEAD:Youth-Bank-Server/src/main/java/com/dojo/youthbankserver/controllers/BankAccountRestAPI.java
-=======
-
->>>>>>> e5ffc088f15e3d2b775cb8a606b4e706530aff0e:Youth-Bank-Server/src/main/java/com/dojo/youthbankserver/controllers/BankAccountController.java
-    @GetMapping("/{accountId}/operations")
+  @GetMapping("/{accountId}/operations")
     public ResponseEntity<List<AccountOperationDTO>> getHistory(@PathVariable String accountId){
         return ResponseEntity.ok().body(bankAccountService.accountHistory(accountId));
     }

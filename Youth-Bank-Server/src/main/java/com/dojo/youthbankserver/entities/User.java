@@ -2,6 +2,10 @@ package com.dojo.youthbankserver.entities;
 import java.util.Date;
 import java.util.List;
 
+import jakarta.validation.constraints.*;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
@@ -15,14 +19,12 @@ import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 
 @Entity
 @AllArgsConstructor
-@Table(name="users")
+@NoArgsConstructor
+@Data
 public class User {
 
     @Id
@@ -36,6 +38,41 @@ public class User {
     @NotEmpty(message="Last name is required!")
     @Size(min=3, max=30, message="Last name  must be between 3 and 30 characters")
     private String lastName;
+
+
+    @Past
+    @DateTimeFormat(pattern="yyyy-MM-dd")
+    private Date birthDay;
+
+
+    @NotBlank(message="Country Of Birth is required!")
+    @Size(min=3, max=60, message="Country Of Birth must be between 3 and 60 characters.")
+    private String countryOfBirth;
+
+
+    @NotBlank(message="Street is required!")
+    @Size(min=2, max=60, message="Street must be between 2 and 60 characters.")
+    private String street;
+
+
+    @NotBlank(message="City is required!")
+    @Size(min=1, max=60, message="Street must be between 3 and 60 characters.")
+    private String city;
+
+    @Range(min = 4, max= 4, message = "Postal Code should be exact 4 characters." )
+    private int zipCode;
+
+    @NotBlank(message="Country of Residence is required!")
+    @Size(min=1, max=60, message="Country of Residence must be between 3 and 60 characters.")
+    private String countryOfResidence;
+
+    @Pattern(regexp = "(\\+216|0216)[0-9]{8}")
+    private String telephone;
+
+    @NotBlank(message="Nationality is required!")
+    @Size(min=1, max=60, message="Nationality must be between 3 and 60 characters.")
+    private String nationality;
+
 
     @NotEmpty(message="Email is required!")
     @Email(message="Please enter a valid email!")

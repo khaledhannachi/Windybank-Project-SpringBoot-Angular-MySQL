@@ -51,10 +51,7 @@ public class Professional {
 	@NotBlank(message="Profession is required!")
 	@Size(min=1, max=60, message="Profession must be between 3 and 60 characters.")
 	private String profession;
-	
-	@NotBlank(message="Professional Status is required!")
-	@Size(min=1, max=60, message="Professional Status must be between 1 and 60 characters.")
-	private String professionalStatus;
+
  
 	@NotBlank(message="company Name is required!")
 	@Size(min=1, max=60, message="company Name must be between 1 and 60 characters.")
@@ -64,13 +61,11 @@ public class Professional {
 	@Size(min=1, max=60, message="company Adress must be between 1 and 60 characters.")
 	private String companyAdress;
 
-	@NotEmpty(message="Net Pay is required!")
-	private double netPay;
+	@NotBlank
+	@NotEmpty(message="CNSS Number is required!")
+	@Size(min=3, max=30, message="CNSS Number must be between 3 and 30 characters.")
+	private String cnssNumber;
 
-
-    
-    
-    
 	// This will not allow the createdAt column to be updated after creation
 	@Column(updatable = false)
 	@DateTimeFormat(pattern = "yyyy-MM-dd")

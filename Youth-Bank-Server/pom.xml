@@ -36,12 +36,17 @@
 			<artifactId>spring-boot-starter-tomcat</artifactId>
 			<scope>provided</scope>
 		</dependency>
+<!--		Oauth spring security -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-test</artifactId>
 			<scope>test</scope>
 		</dependency>
 
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-oauth2-resource-server</artifactId>
+		</dependency>
 		<!-- DEPENDENCIES FOR INTEGRATING SQL DATABASE AND USING JPA -->
 		<!-- Note: Project will not run until a schema has been created and the 
             proper settings in application properties are present for 
