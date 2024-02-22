@@ -6,7 +6,8 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 import com.dojo.youthbankserver.entities.*;
-import com.dojo.youthbankserver.repositories.PersonalRepository;
+import com.dojo.youthbankserver.exceptions.*;
+import com.dojo.youthbankserver.repositories.*;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
@@ -18,12 +19,7 @@ import com.dojo.youthbankserver.dtos.CheckingBankAccountDTO;
 import com.dojo.youthbankserver.dtos.SavingBankAccountDTO;
 import com.dojo.youthbankserver.entities.Personal;
 import com.dojo.youthbankserver.enums.OperationType;
-import com.dojo.youthbankserver.exceptions.BalanceNotSufficientException;
-import com.dojo.youthbankserver.exceptions.BankAccountNotFoundException;
-import com.dojo.youthbankserver.exceptions.PersonalNotFoundException;
 import com.dojo.youthbankserver.mappers.BankAccountMapperImpl;
-import com.dojo.youthbankserver.repositories.AccountOperationRepository;
-import com.dojo.youthbankserver.repositories.BankAccountRepository;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
@@ -31,17 +27,19 @@ import lombok.AllArgsConstructor;
 @Service
 @Transactional
 @AllArgsConstructor
-public class BankAcountServiceImpl implements BankAccountService{
+public class BankAccountServiceImpl implements BankAccountService{
 
 
 	    private BankAccountRepository bankAccountRepository;
 	    private PersonalRepository personalRepository;
+		private ProfessionalRepository professionalRepository;
+		private BusinessRepository businessRepository;
 	    private AccountOperationRepository accountOperationRepository;
 	    private BankAccountMapperImpl dtoMapper;
 
-
+//Checking Accounts
 	    @Override
-	    public CheckingBankAccountDTO saveCheckingBankAccount(double initialBalance, double overDraft, Long personalId) throws PersonalNotFoundException {
+	    public CheckingBankAccountDTO saveCheckingPersonalBankAccount(double initialBalance, double overDraft, Long personalId) throws PersonalNotFoundException {
 	        Personal personal = personalRepository.findById(personalId).orElse(null);
 	        if(personal ==null)
 	            throw new PersonalNotFoundException("Personal not found");
@@ -56,8 +54,40 @@ public class BankAcountServiceImpl implements BankAccountService{
 	        return dtoMapper.fromCheckingBankAccount(savedBankAccount);
 	    }
 
+	@Override
+	public CheckingBankAccountDTO saveCheckingProfessionalBankAccount(double initialBalance, double overDraft, Long professionalId) throws ProfessionalNotFoundException {
+		Professional professional = professionalRepository.findById(professionalId).orElse(null);
+		if(professional ==null)
+			throw new ProfessionalNotFoundException("Professional not found");
+		CheckingAccount checkingAccount=new CheckingAccount();
+		checkingAccount.setId(UUID.randomUUID().toString());
+		checkingAccount.setCreatedAt(new Date());
+		checkingAccount.setBalance(initialBalance);
+		checkingAccount.setOverDraft(overDraft);
+
+		checkingAccount.setProfessional(professional);
+		CheckingAccount savedBankAccount = bankAccountRepository.save(checkingAccount);
+		return dtoMapper.fromCheckingBankAccount(savedBankAccount);
+	}
+	@Override
+	public CheckingBankAccountDTO saveCheckingBusinessBankAccount(double initialBalance, double overDraft, Long businessId) throws BusinessNotFoundException {
+		Business business = businessRepository.findById(businessId).orElse(null);
+		if(business ==null)
+			throw new BusinessNotFoundException("Personal not found");
+		CheckingAccount checkingAccount=new CheckingAccount();
+		checkingAccount.setId(UUID.randomUUID().toString());
+		checkingAccount.setCreatedAt(new Date());
+		checkingAccount.setBalance(initialBalance);
+		checkingAccount.setOverDraft(overDraft);
+
+		checkingAccount.setBusiness(business);
+		CheckingAccount savedBankAccount = bankAccountRepository.save(checkingAccount);
+		return dtoMapper.fromCheckingBankAccount(savedBankAccount);
+	}
+
+	//Saving Accounts
 	    @Override
-	    public SavingBankAccountDTO saveSavingBankAccount(double initialBalance, double interestRate, Long personalId) throws PersonalNotFoundException {
+	    public SavingBankAccountDTO saveSavingPersonalBankAccount(double initialBalance, double interestRate, Long personalId) throws PersonalNotFoundException {
 	        Personal personal = personalRepository.findById(personalId).orElse(null);
 	        if(personal ==null)
 	        	
@@ -72,6 +102,38 @@ public class BankAcountServiceImpl implements BankAccountService{
 	        SavingAccount savedBankAccount = bankAccountRepository.save(savingAccount);
 	        return dtoMapper.fromSavingBankAccount(savedBankAccount);
 	    }
+	@Override
+	public SavingBankAccountDTO saveSavingBusinessBankAccount(double initialBalance, double interestRate, Long businessId) throws BusinessNotFoundException {
+		Business business = businessRepository .findById(businessId).orElse(null);
+		if(business ==null)
+
+			throw new BusinessNotFoundException("Business not found");
+		SavingAccount savingAccount=new SavingAccount();
+		savingAccount.setId(UUID.randomUUID().toString());
+		savingAccount.setCreatedAt(new Date());
+		savingAccount.setBalance(initialBalance);
+		savingAccount.setInterestRate(interestRate);
+		savingAccount.setBusiness(business);
+
+		SavingAccount savedBankAccount = bankAccountRepository.save(savingAccount);
+		return dtoMapper.fromSavingBankAccount(savedBankAccount);
+	}
+	@Override
+	public SavingBankAccountDTO saveSavingProfessionalBankAccount(double initialBalance, double interestRate, Long professionalId) throws ProfessionalNotFoundException {
+		Professional professional = professionalRepository.findById(professionalId).orElse(null);
+		if(professional ==null)
+
+			throw new ProfessionalNotFoundException("Professional not found");
+		SavingAccount savingAccount=new SavingAccount();
+		savingAccount.setId(UUID.randomUUID().toString());
+		savingAccount.setCreatedAt(new Date());
+		savingAccount.setBalance(initialBalance);
+		savingAccount.setInterestRate(interestRate);
+		savingAccount.setProfessional(professional);
+
+		SavingAccount savedBankAccount = bankAccountRepository.save(savingAccount);
+		return dtoMapper.fromSavingBankAccount(savedBankAccount);
+	}
 
 
 	    @Override

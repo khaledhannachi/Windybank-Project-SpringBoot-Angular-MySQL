@@ -7,18 +7,29 @@ import com.dojo.youthbankserver.dtos.AccountOperationDTO;
 import com.dojo.youthbankserver.dtos.BankAccountDTO;
 import com.dojo.youthbankserver.dtos.CheckingBankAccountDTO;
 import com.dojo.youthbankserver.dtos.SavingBankAccountDTO;
-import com.dojo.youthbankserver.exceptions.BalanceNotSufficientException;
-import com.dojo.youthbankserver.exceptions.BankAccountNotFoundException;
-import com.dojo.youthbankserver.exceptions.PersonalNotFoundException;
+import com.dojo.youthbankserver.exceptions.*;
 
 public interface BankAccountService {
 
 	 
-	    CheckingBankAccountDTO saveCheckingBankAccount(double initialBalance, double overDraft, Long customerId) throws PersonalNotFoundException;
-	    
-	    SavingBankAccountDTO saveSavingBankAccount(double initialBalance, double interestRate, Long customerId) throws PersonalNotFoundException;
-	   
-	    BankAccountDTO getBankAccount(String accountId) throws BankAccountNotFoundException;
+
+
+	//
+	CheckingBankAccountDTO saveCheckingPersonalBankAccount(double initialBalance, double overDraft, Long personalId) throws PersonalNotFoundException;
+
+	CheckingBankAccountDTO saveCheckingProfessionalBankAccount(double initialBalance, double overDraft, Long personalId) throws PersonalNotFoundException, ProfessionalNotFoundException;
+
+	CheckingBankAccountDTO saveCheckingBusinessBankAccount(double initialBalance, double overDraft, Long businessId) throws BusinessNotFoundException;
+
+	//Saving Accounts
+	SavingBankAccountDTO saveSavingPersonalBankAccount(double initialBalance, double interestRate, Long personalId) throws PersonalNotFoundException;
+
+
+	SavingBankAccountDTO saveSavingBusinessBankAccount(double initialBalance, double interestRate, Long businessId) throws BusinessNotFoundException;
+
+	SavingBankAccountDTO saveSavingProfessionalBankAccount(double initialBalance, double interestRate, Long professionalId) throws ProfessionalNotFoundException;
+
+	BankAccountDTO getBankAccount(String accountId) throws BankAccountNotFoundException;
 	    
 	    void debit(String accountId, double amount, String description) throws BankAccountNotFoundException, BalanceNotSufficientException;
 	    

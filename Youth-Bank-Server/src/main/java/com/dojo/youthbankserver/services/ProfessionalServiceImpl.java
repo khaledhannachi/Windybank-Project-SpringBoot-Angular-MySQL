@@ -4,6 +4,8 @@ package com.dojo.youthbankserver.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.dojo.youthbankserver.entities.User;
+import com.dojo.youthbankserver.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,13 +28,15 @@ import lombok.extern.slf4j.Slf4j;
 public class ProfessionalServiceImpl implements ProfessionalService{
 
 	private ProfessionalRepository professionalRepository;
-
+    private UserRepository userRepository;
     private ProfessionalMapper professionalDtoMapper;
 
 	  @Override
-    public ProfessionalDTO saveProfessional(ProfessionalDTO professionalDTO) {
+    public ProfessionalDTO saveProfessional(ProfessionalDTO professionalDTO,Long userId) {
         log.info("Saving new Professional");
+        User userProfessional =userRepository.findById(userId).orElse(null);
         Professional professional=professionalDtoMapper.fromProfessionalDTO(professionalDTO);
+        professional.setUserProfessional(userProfessional);
         Professional savedProfessional = professionalRepository.save(professional);
         return professionalDtoMapper.fromProfessional(savedProfessional);
     }
@@ -61,9 +65,11 @@ public class ProfessionalServiceImpl implements ProfessionalService{
     }
 
 	  @Override
-    public ProfessionalDTO updateProfessional(ProfessionalDTO professionalDTO) {
-        log.info("Saving new Professional");
+    public ProfessionalDTO updateProfessional(ProfessionalDTO professionalDTO,Long userId) {
+        log.info("Update new Professional");
+        User userProfessional =userRepository.findById(userId).orElse(null);
         Professional professional=professionalDtoMapper.fromProfessionalDTO(professionalDTO);
+        professional.setUserProfessional(userProfessional);
         Professional savedProfessional = professionalRepository.save(professional);
         return professionalDtoMapper.fromProfessional(savedProfessional);
     }

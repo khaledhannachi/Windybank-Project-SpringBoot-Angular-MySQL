@@ -33,14 +33,14 @@ public class PersonalController {
     public ResponseEntity<PersonalDTO> getPersonal(@PathVariable(name = "id") Long personalId) throws PersonalNotFoundException {
         return ResponseEntity.ok().body(personalServiceImpl.getPersonal(personalId));
     }
-    @PostMapping("")
-    public ResponseEntity<PersonalDTO> savePersonal(@RequestBody PersonalDTO personalDTO){
-        return ResponseEntity.ok().body(personalServiceImpl.savePersonal(personalDTO));
+    @PostMapping("/newpersonal/{userId}")
+    public ResponseEntity<PersonalDTO> savePersonal(@RequestBody PersonalDTO personalDTO,@PathVariable Long userId){
+        return ResponseEntity.ok().body(personalServiceImpl.savePersonal(personalDTO,userId));
     }
-    @PutMapping("/{personalId}")
-    public ResponseEntity<PersonalDTO> updatePersonal(@PathVariable Long personalId, @RequestBody PersonalDTO personalDTO){
+    @PutMapping("/{personalId}/{userId}/editpersonal")
+    public ResponseEntity<PersonalDTO> updatePersonal(@PathVariable Long personalId, @RequestBody PersonalDTO personalDTO,@PathVariable Long userId){
         personalDTO.setId(personalId);
-        return ResponseEntity.ok().body(personalServiceImpl.updatePersonal(personalDTO));
+        return ResponseEntity.ok().body(personalServiceImpl.updatePersonal(personalDTO,userId));
     }
     @DeleteMapping("/{id}")
     public void deletePersonal(@PathVariable Long id){

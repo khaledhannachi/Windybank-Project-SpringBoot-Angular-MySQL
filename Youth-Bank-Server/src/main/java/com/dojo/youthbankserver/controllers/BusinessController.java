@@ -30,14 +30,14 @@ public class BusinessController {
     public ResponseEntity<BusinessDTO> getBusiness(@PathVariable(name = "id") Long businessId) throws BusinessNotFoundException {
         return ResponseEntity.ok().body(businessServiceImpl.getBusiness(businessId));
     }
-    @PostMapping("")
-    public ResponseEntity<BusinessDTO> saveBusiness(@RequestBody BusinessDTO businessDTO){
-        return ResponseEntity.ok().body(businessServiceImpl.saveBusiness(businessDTO));
+    @PostMapping("newbusiness/{userId}")
+    public ResponseEntity<BusinessDTO> saveBusiness(@RequestBody BusinessDTO businessDTO,@PathVariable Long userId){
+        return ResponseEntity.ok().body(businessServiceImpl.saveBusiness(businessDTO, userId));
     }
-    @PutMapping("/{businessId}")
-    public ResponseEntity<BusinessDTO> updateBusiness(@PathVariable Long businessId, @RequestBody BusinessDTO businessDTO){
+    @PutMapping("/{businessId}/{userId}/editbusiness")
+    public ResponseEntity<BusinessDTO> updateBusiness(@PathVariable Long businessId, @RequestBody BusinessDTO businessDTO, @PathVariable Long userId){
         businessDTO.setId(businessId);
-        return ResponseEntity.ok().body(businessServiceImpl.updateBusiness(businessDTO));
+        return ResponseEntity.ok().body(businessServiceImpl.updateBusiness(businessDTO, userId));
     }
     @DeleteMapping("/{id}")
     public void deleteBusiness(@PathVariable Long id){

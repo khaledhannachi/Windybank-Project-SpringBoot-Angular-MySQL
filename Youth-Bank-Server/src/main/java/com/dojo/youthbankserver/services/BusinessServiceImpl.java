@@ -4,6 +4,8 @@ package com.dojo.youthbankserver.services;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.dojo.youthbankserver.entities.User;
+import com.dojo.youthbankserver.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import com.dojo.youthbankserver.dtos.BusinessDTO;
@@ -21,12 +23,15 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public class BusinessServiceImpl implements BusinessService{
 	private BusinessRepository businessRepository;
+    private UserRepository userRepository;
     private BusinessMapper businessDtoMapper;
     
 	  @Override
-    public BusinessDTO saveBusiness(BusinessDTO businessDTO) {
+    public BusinessDTO saveBusiness(BusinessDTO businessDTO, Long userId) {
         log.info("Saving new Business");
+          User legalResponsible =userRepository.findById(userId).orElse(null);
         Business business=businessDtoMapper.fromBusinessDTO(businessDTO);
+          business.setBusinessLegalResponsible(legalResponsible);
         Business savedBusiness = businessRepository.save(business);
         return businessDtoMapper.fromBusiness(savedBusiness);
     }
@@ -53,9 +58,11 @@ public class BusinessServiceImpl implements BusinessService{
         return businessDtoMapper.fromBusiness(business);
     }
 	  @Override
-    public BusinessDTO updateBusiness(BusinessDTO businessDTO) {
-        log.info("Saving new Business");
+    public BusinessDTO updateBusiness(BusinessDTO businessDTO,Long userId) {
+        log.info("update new Business");
+          User legalResponsible =userRepository.findById(userId).orElse(null);
         Business business=businessDtoMapper.fromBusinessDTO(businessDTO);
+          business.setBusinessLegalResponsible(legalResponsible);
         Business savedBusiness = businessRepository.save(business);
         return businessDtoMapper.fromBusiness(savedBusiness);
     }
