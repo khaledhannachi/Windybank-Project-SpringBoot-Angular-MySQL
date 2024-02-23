@@ -17,7 +17,6 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
-import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import lombok.AllArgsConstructor;
 
@@ -58,8 +57,7 @@ public class User {
     @NotBlank(message="City is required!")
     @Size(min=1, max=60, message="Street must be between 3 and 60 characters.")
     private String city;
-
-    @Range(min = 4, max= 4, message = "Postal Code should be exact 4 characters." )
+    
     private int zipCode;
 
     @NotBlank(message="Country of Residence is required!")

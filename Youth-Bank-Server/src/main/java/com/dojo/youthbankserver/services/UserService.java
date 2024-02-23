@@ -1,6 +1,4 @@
 package com.dojo.youthbankserver.services;
-
-
 import com.dojo.youthbankserver.entities.LoginUser;
 import com.dojo.youthbankserver.entities.User;
 import com.dojo.youthbankserver.repositories.UserRepository;
@@ -13,19 +11,16 @@ import org.springframework.validation.BindingResult;
 import java.util.Optional;
 
 @AllArgsConstructor
-@NoArgsConstructor
 @Service
-public class UserService {                                                                                                  
- 
+public class UserService {
 
     private UserRepository userRepo;
-    
     // TO-DO: Write register and login methods!
     public User register(User newUser, BindingResult result) {
         // Reject if email is taken (present in the DB)
     	Optional<User> potentialUser = userRepo.findByEmail(newUser.getEmail());
-    	if(potentialUser.isPresent()) {
-    		result.rejectValue("email", "registerError", "Email is Taken !");
+  	if(potentialUser.isPresent()) {
+   		result.rejectValue("email", "registerError", "Email is Taken !");
     	}
     	if (!newUser.getPassword().equals(newUser.getConfirm())) {
     		result.rejectValue("password", "registerError", "password does not match !");
@@ -40,6 +35,10 @@ public class UserService {
     		return userRepo.save(newUser);
     	}
     }
+
+
+
+
     public User login(LoginUser newLoginObject, BindingResult result) {
         // Find if the user is in the DB
     	Optional<User>potientialUser = userRepo.findByEmail(newLoginObject.getEmail());
@@ -71,9 +70,9 @@ public class UserService {
 }
 
 
-    
 
 
 
-   
+
+
 

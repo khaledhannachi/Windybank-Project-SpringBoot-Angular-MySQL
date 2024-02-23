@@ -18,11 +18,9 @@ import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.PrePersist;
 import jakarta.persistence.PreUpdate;
-import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Past;
-import jakarta.validation.constraints.Pattern;
 import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -109,7 +107,7 @@ public class Personal {
 //		  //many to one
 		    @ManyToOne(fetch=FetchType.LAZY)
 		    @JoinColumn(name="user_id")
-		    private User userPersonal;		  
+		    private User userPersonal;
 	
 	
 		  
