@@ -23,7 +23,6 @@ public class BankAccountController {
 
     private BankAccountService bankAccountService;
 
-
     @GetMapping("/{accountId}")
     public ResponseEntity<BankAccountDTO> getBankAccount(@PathVariable String accountId) throws BankAccountNotFoundException {
         return ResponseEntity.ok().body(bankAccountService.getBankAccount(accountId));
