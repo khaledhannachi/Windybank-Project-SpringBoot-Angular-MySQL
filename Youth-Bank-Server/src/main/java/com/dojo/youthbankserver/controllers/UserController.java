@@ -41,7 +41,7 @@ public class UserController {
 		}
 
 		String token = generateToken(registeredUser);
-		return ResponseEntity.ok().body(token);
+		return ResponseEntity.ok().header("Authorization", token).build();
 	}
 
 	@PostMapping("/login")
@@ -56,7 +56,7 @@ public class UserController {
 		}
 
 		String token = generateToken(user);
-		return ResponseEntity.ok().body(token);
+		return ResponseEntity.ok().header("Authorization", token).build();
 	}
 
 	// In a JWT-based system, there's no need for explicit logout on the server side.
