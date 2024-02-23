@@ -2,6 +2,7 @@ package com.dojo.youthbankserver.mappers;
 
 import com.dojo.youthbankserver.dtos.PersonalDTO;
 import com.dojo.youthbankserver.entities.Personal;
+import lombok.AllArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
@@ -13,47 +14,116 @@ import com.dojo.youthbankserver.entities.CheckingAccount;
 import com.dojo.youthbankserver.entities.SavingAccount;
 
 @Service
+@AllArgsConstructor
 public class BankAccountMapperImpl {
-	public PersonalDTO fromPersonal(Personal personal){
-        PersonalDTO personalDTO =new PersonalDTO();
-        BeanUtils.copyProperties(personal, personalDTO);
-        return personalDTO;
-    }
-    public Personal fromPersonalDTO(PersonalDTO personalDTO){
-        Personal personal =new Personal();
-        BeanUtils.copyProperties(personalDTO, personal);
-        return personal;
-    }
+    public PersonalMapper personalMapper;
+    public BusinessMapper businessMapper;
 
-    public SavingBankAccountDTO fromSavingBankAccount(SavingAccount savingAccount){
+    public ProfessionalMapper professionalMapper;
+
+//    Personal
+    public SavingBankAccountDTO fromSavingPersonalBankAccount(SavingAccount savingAccount){
         SavingBankAccountDTO savingBankAccountDTO=new SavingBankAccountDTO();
         BeanUtils.copyProperties(savingAccount,savingBankAccountDTO);
-        savingBankAccountDTO.setPersonalDTO(fromPersonal(savingAccount.getPersonal()));
+        savingBankAccountDTO.setPersonalDTO(personalMapper.fromPersonal(savingAccount.getPersonal()));
         savingBankAccountDTO.setType(savingAccount.getClass().getSimpleName());
         return savingBankAccountDTO;
     }
 
-    public SavingAccount fromSavingBankAccountDTO(SavingBankAccountDTO savingBankAccountDTO){
+    public SavingAccount fromSavingPersonalBankAccountDTO(SavingBankAccountDTO savingBankAccountDTO){
         SavingAccount savingAccount=new SavingAccount();
         BeanUtils.copyProperties(savingBankAccountDTO,savingAccount);
-        savingAccount.setPersonal(fromPersonalDTO(savingBankAccountDTO.getPersonalDTO()));
+        savingAccount.setPersonal(personalMapper.fromPersonalDTO(savingBankAccountDTO.getPersonalDTO()));
         return savingAccount;
     }
 
-    public CheckingBankAccountDTO fromCheckingBankAccount(CheckingAccount checkingAccount){
+    public CheckingBankAccountDTO fromCheckingPersonalBankAccount(CheckingAccount checkingAccount){
         CheckingBankAccountDTO checkingBankAccountDTO=new CheckingBankAccountDTO();
         BeanUtils.copyProperties(checkingAccount,checkingBankAccountDTO);
-        checkingBankAccountDTO.setPersonalDTO(fromPersonal(checkingAccount.getPersonal()));
+        checkingBankAccountDTO.setPersonalDTO(personalMapper.fromPersonal(checkingAccount.getPersonal()));
         checkingBankAccountDTO.setType(checkingAccount.getClass().getSimpleName());
         return checkingBankAccountDTO;
     }
 
-    public CheckingAccount fromCheckingBankAccountDTO(CheckingBankAccountDTO checkingBankAccountDTO){
+    public CheckingAccount fromCheckingPersonalBankAccountDTO(CheckingBankAccountDTO checkingBankAccountDTO){
         CheckingAccount checkingAccount=new CheckingAccount();
         BeanUtils.copyProperties(checkingBankAccountDTO,checkingAccount);
-        checkingAccount.setPersonal(fromPersonalDTO(checkingBankAccountDTO.getPersonalDTO()));
+        checkingAccount.setPersonal(personalMapper.fromPersonalDTO(checkingBankAccountDTO.getPersonalDTO()));
         return checkingAccount;
     }
+//Business
+
+    public SavingBankAccountDTO fromSavingBusinessBankAccount(SavingAccount savingAccount){
+        SavingBankAccountDTO savingBankAccountDTO=new SavingBankAccountDTO();
+        BeanUtils.copyProperties(savingAccount,savingBankAccountDTO);
+        savingBankAccountDTO.setBusinessDTO(businessMapper.fromBusiness(savingAccount.getBusiness()));
+        savingBankAccountDTO.setType(savingAccount.getClass().getSimpleName());
+        return savingBankAccountDTO;
+    }
+
+    public SavingAccount fromSavingBusinessBankAccountDTO(SavingBankAccountDTO savingBankAccountDTO){
+        SavingAccount savingAccount=new SavingAccount();
+        BeanUtils.copyProperties(savingBankAccountDTO,savingAccount);
+        savingAccount.setBusiness(businessMapper.fromBusinessDTO(savingBankAccountDTO.getBusinessDTO()));
+        return savingAccount;
+    }
+
+    public CheckingBankAccountDTO fromCheckingBusinessBankAccount(CheckingAccount checkingAccount){
+        CheckingBankAccountDTO checkingBankAccountDTO=new CheckingBankAccountDTO();
+        BeanUtils.copyProperties(checkingAccount,checkingBankAccountDTO);
+        checkingBankAccountDTO.setBusinessDTO(businessMapper.fromBusiness(checkingAccount.getBusiness()));
+        checkingBankAccountDTO.setType(checkingAccount.getClass().getSimpleName());
+        return checkingBankAccountDTO;
+    }
+
+    public CheckingAccount fromCheckingBusinessBankAccountDTO(CheckingBankAccountDTO checkingBankAccountDTO){
+        CheckingAccount checkingAccount=new CheckingAccount();
+        BeanUtils.copyProperties(checkingBankAccountDTO,checkingAccount);
+        checkingAccount.setBusiness(businessMapper.fromBusinessDTO(checkingBankAccountDTO.getBusinessDTO()));
+        return checkingAccount;
+    }
+
+
+//Professional
+
+    public SavingBankAccountDTO fromSavingProfessionalBankAccount(SavingAccount savingAccount){
+        SavingBankAccountDTO savingBankAccountDTO=new SavingBankAccountDTO();
+        BeanUtils.copyProperties(savingAccount,savingBankAccountDTO);
+        savingBankAccountDTO.setProfessionalDTO(professionalMapper.fromProfessional(savingAccount.getProfessional()));
+        savingBankAccountDTO.setType(savingAccount.getClass().getSimpleName());
+        return savingBankAccountDTO;
+    }
+
+    public SavingAccount fromSavingProfessionalBankAccountDTO(SavingBankAccountDTO savingBankAccountDTO){
+        SavingAccount savingAccount=new SavingAccount();
+        BeanUtils.copyProperties(savingBankAccountDTO,savingAccount);
+        savingAccount.setProfessional(professionalMapper.fromProfessionalDTO(savingBankAccountDTO.getProfessionalDTO()));
+        return savingAccount;
+    }
+
+    public CheckingBankAccountDTO fromCheckingProfessionalBankAccount(CheckingAccount checkingAccount){
+        CheckingBankAccountDTO checkingBankAccountDTO=new CheckingBankAccountDTO();
+        BeanUtils.copyProperties(checkingAccount,checkingBankAccountDTO);
+        checkingBankAccountDTO.setProfessionalDTO(professionalMapper.fromProfessional(checkingAccount.getProfessional()));
+        checkingBankAccountDTO.setType(checkingAccount.getClass().getSimpleName());
+        return checkingBankAccountDTO;
+    }
+
+    public CheckingAccount fromCheckingProfessionalBankAccountDTO(CheckingBankAccountDTO checkingBankAccountDTO){
+        CheckingAccount checkingAccount=new CheckingAccount();
+        BeanUtils.copyProperties(checkingBankAccountDTO,checkingAccount);
+        checkingAccount.setProfessional(professionalMapper.fromProfessionalDTO(checkingBankAccountDTO.getProfessionalDTO()));
+        return checkingAccount;
+    }
+
+
+
+
+
+
+
+
+
 
     public AccountOperationDTO fromAccountOperation(AccountOperation accountOperation){
         AccountOperationDTO accountOperationDTO=new AccountOperationDTO();

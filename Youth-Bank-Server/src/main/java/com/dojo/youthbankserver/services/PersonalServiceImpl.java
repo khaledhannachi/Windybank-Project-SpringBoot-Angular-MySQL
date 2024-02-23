@@ -4,6 +4,8 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.dojo.youthbankserver.dtos.PersonalDTO;
+import com.dojo.youthbankserver.entities.User;
+import com.dojo.youthbankserver.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import com.dojo.youthbankserver.entities.Personal;
@@ -21,12 +23,15 @@ import lombok.extern.slf4j.Slf4j;
 @AllArgsConstructor
 public class PersonalServiceImpl implements PersonalService {
 	private PersonalRepository personalRepository;
+    private UserRepository userRepository;
     private PersonalMapper personalDtoMapper;
 
 	  @Override
-    public PersonalDTO savePersonal(PersonalDTO personalDTO) {
+    public PersonalDTO savePersonal(PersonalDTO personalDTO, Long userId) {
         log.info("Saving new Personal");
+        User personalUser =userRepository.findById(userId).orElse(null);
         Personal personal =personalDtoMapper.fromPersonalDTO(personalDTO);
+        personal.setUserPersonal(personalUser);
         Personal savedPersonal = personalRepository.save(personal);
         return personalDtoMapper.fromPersonal(savedPersonal);
     }
@@ -55,9 +60,11 @@ public class PersonalServiceImpl implements PersonalService {
     }
 
 	  @Override
-    public PersonalDTO updatePersonal(PersonalDTO personalDTO) {
-        log.info("Saving new Personal");
+    public PersonalDTO updatePersonal(PersonalDTO personalDTO ,Long userId) {
+        log.info("update new Personal");
+        User personalUser =userRepository.findById(userId).orElse(null);
         Personal personal =personalDtoMapper.fromPersonalDTO(personalDTO);
+        personal.setUserPersonal(personalUser);
         Personal savedPersonal = personalRepository.save(personal);
         return personalDtoMapper.fromPersonal(savedPersonal);
     }

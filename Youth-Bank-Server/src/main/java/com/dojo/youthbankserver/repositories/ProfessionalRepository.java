@@ -13,7 +13,5 @@ import com.dojo.youthbankserver.entities.Professional;
 
 public interface ProfessionalRepository extends JpaRepository<Professional, Long> {
 
-//
-//	  @Query("select c from Professional c where c.name like :kw")
-//	    List<Professional> searchProfessional(@Param("kw") String keyword);
+
 }

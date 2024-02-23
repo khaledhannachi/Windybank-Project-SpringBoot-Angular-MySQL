@@ -1,5 +1,6 @@
 package com.dojo.youthbankserver.controllers;
 
+import com.dojo.youthbankserver.dtos.BusinessDTO;
 import com.dojo.youthbankserver.entities.LoginUser;
 import com.dojo.youthbankserver.entities.User;
 
@@ -12,13 +13,13 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @CrossOrigin("*")
+@RequestMapping("/api/v1/users")
 public class UserController {
 	@Autowired
 	private UserService userService;
@@ -26,8 +27,15 @@ public class UserController {
 	@Value("${jwt.secret}")
 	private String secretKey;
 
+	@GetMapping("")
+	public ResponseEntity<List<User>> users(){
+		return ResponseEntity.ok().body(userService.allUsers());
+	}
 
-
+//	    @GetMapping("/search")
+//    public List<User> searchUser(@RequestParam(name = "keyword",defaultValue = "") String keyword){
+//        return userService.searchUser("%"+keyword+"%");
+//    }
 	@PostMapping("/register")
 	public ResponseEntity<String> register(@Valid @RequestBody User newUser, BindingResult result) {
 		if (result.hasErrors()) {

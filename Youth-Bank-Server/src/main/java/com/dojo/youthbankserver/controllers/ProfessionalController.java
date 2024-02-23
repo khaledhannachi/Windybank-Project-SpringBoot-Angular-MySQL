@@ -44,18 +44,18 @@ public class ProfessionalController {
 //    public List<ProfessionalDTO> searchProfessionals(@RequestParam(name = "keyword",defaultValue = "") String keyword){
 //        return professionalService.searchProfessionals("%"+keyword+"%");
 //    }
-    @GetMapping("/{id}")
+    @GetMapping("professional/{id}")
     public ResponseEntity<ProfessionalDTO> getProfessional(@PathVariable(name = "id") Long professionalId) throws ProfessionalNotFoundException {
         return ResponseEntity.ok().body(professionalServiceImpl.getProfessional(professionalId));
     }
-    @PostMapping("")
-    public ResponseEntity<ProfessionalDTO> saveProfessional(@RequestBody ProfessionalDTO professionalDTO){
-        return ResponseEntity.ok().body(professionalServiceImpl.saveProfessional(professionalDTO));
+    @PostMapping("/newprofessional/{userId}")
+    public ResponseEntity<ProfessionalDTO> saveProfessional(@RequestBody ProfessionalDTO professionalDTO,@PathVariable Long userId){
+        return ResponseEntity.ok().body(professionalServiceImpl.saveProfessional(professionalDTO,userId));
     }
-    @PutMapping("/{professionalId}")
-    public ResponseEntity<ProfessionalDTO> updateProfessional(@PathVariable Long professionalId, @RequestBody ProfessionalDTO professionalDTO){
+    @PutMapping("/{professionalId}/{userId}/editprofessional")
+    public ResponseEntity<ProfessionalDTO> updateProfessional(@PathVariable Long professionalId, @RequestBody ProfessionalDTO professionalDTO,@PathVariable Long userId){
         professionalDTO.setId(professionalId);
-        return ResponseEntity.ok().body(professionalServiceImpl.updateProfessional(professionalDTO));
+        return ResponseEntity.ok().body(professionalServiceImpl.updateProfessional(professionalDTO,userId));
     }
     @DeleteMapping("/{id}")
     public void deleteProfessional(@PathVariable Long id){

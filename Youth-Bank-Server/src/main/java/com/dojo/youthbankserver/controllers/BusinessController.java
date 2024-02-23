@@ -1,6 +1,7 @@
 package com.dojo.youthbankserver.controllers;
 
 
+import com.dojo.youthbankserver.services.BusinessService;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
@@ -14,30 +15,30 @@ import java.util.List;
 @Slf4j
 @CrossOrigin("*")
 @AllArgsConstructor
-@RequestMapping("/api/v1/businesss")
+@RequestMapping("/api/v1/businesses")
 public class BusinessController {
 
-    private BusinessServiceImpl businessServiceImpl;
+    private BusinessService businessServiceImpl;
     @GetMapping("")
     public ResponseEntity<List<BusinessDTO>> businesss(){
         return ResponseEntity.ok().body(businessServiceImpl.listBusinesss());
     }
 //    @GetMapping("/businesss/search")
 //    public List<BusinessDTO> searchBusinesss(@RequestParam(name = "keyword",defaultValue = "") String keyword){
-//        return businessService.searchBusinesss("%"+keyword+"%");
+//        return businessServiceImpl.searchBusinesss("%"+keyword+"%");
 //    }
-    @GetMapping("/{id}")
+    @GetMapping("business/{id}")
     public ResponseEntity<BusinessDTO> getBusiness(@PathVariable(name = "id") Long businessId) throws BusinessNotFoundException {
         return ResponseEntity.ok().body(businessServiceImpl.getBusiness(businessId));
     }
-    @PostMapping("")
-    public ResponseEntity<BusinessDTO> saveBusiness(@RequestBody BusinessDTO businessDTO){
-        return ResponseEntity.ok().body(businessServiceImpl.saveBusiness(businessDTO));
+    @PostMapping("newbusiness/{userId}")
+    public ResponseEntity<BusinessDTO> saveBusiness(@RequestBody BusinessDTO businessDTO,@PathVariable Long userId){
+        return ResponseEntity.ok().body(businessServiceImpl.saveBusiness(businessDTO, userId));
     }
-    @PutMapping("/{businessId}")
-    public ResponseEntity<BusinessDTO> updateBusiness(@PathVariable Long businessId, @RequestBody BusinessDTO businessDTO){
+    @PutMapping("/{businessId}/{userId}/editbusiness")
+    public ResponseEntity<BusinessDTO> updateBusiness(@PathVariable Long businessId, @RequestBody BusinessDTO businessDTO, @PathVariable Long userId){
         businessDTO.setId(businessId);
-        return ResponseEntity.ok().body(businessServiceImpl.updateBusiness(businessDTO));
+        return ResponseEntity.ok().body(businessServiceImpl.updateBusiness(businessDTO, userId));
     }
     @DeleteMapping("/{id}")
     public void deleteBusiness(@PathVariable Long id){

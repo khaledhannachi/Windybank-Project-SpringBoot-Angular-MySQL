@@ -1,4 +1,6 @@
 package com.dojo.youthbankserver.services;
+import com.dojo.youthbankserver.dtos.BusinessDTO;
+import com.dojo.youthbankserver.entities.Business;
 import com.dojo.youthbankserver.entities.LoginUser;
 import com.dojo.youthbankserver.entities.User;
 import com.dojo.youthbankserver.repositories.UserRepository;
@@ -8,7 +10,9 @@ import org.mindrot.jbcrypt.BCrypt;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.BindingResult;
 
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @AllArgsConstructor
 @Service
@@ -16,6 +20,11 @@ public class UserService {
 
     private UserRepository userRepo;
     // TO-DO: Write register and login methods!
+		// READ ALL
+		public List<User> allUsers(){
+			return userRepo.findAll();
+		}
+
     public User register(User newUser, BindingResult result) {
         // Reject if email is taken (present in the DB)
     	Optional<User> potentialUser = userRepo.findByEmail(newUser.getEmail());
@@ -67,6 +76,14 @@ public class UserService {
     		return null;
     	}
     }
+
+//	  public List<User> searchUser(String keyword) {
+//        List<User> usersList=userRepo.searchUser(keyword);
+//        return usersList;
+//    }
+
+
+
 }
 
 

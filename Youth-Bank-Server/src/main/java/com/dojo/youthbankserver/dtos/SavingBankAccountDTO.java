@@ -15,6 +15,8 @@ public class SavingBankAccountDTO extends BankAccountDTO {
 	    private Date createdAt;
 	    private AccountStatus status;
 	    private PersonalDTO personalDTO;
+	private BusinessDTO businessDTO;
+	private ProfessionalDTO professionalDTO;
 	    private double interestRate=6.0;
 	
 	    
