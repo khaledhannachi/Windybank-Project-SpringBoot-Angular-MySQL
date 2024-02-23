@@ -3,6 +3,7 @@ package com.dojo.youthbankserver.entities;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import jakarta.persistence.Column;
@@ -84,7 +85,8 @@ public class Professional {
 	  @OneToMany(mappedBy = "professional", fetch = FetchType.LAZY)
 	  private List<BankAccount> professionalBankAccounts;
 
-	  
+
+
 //	  //many to one
 	    @ManyToOne(fetch=FetchType.LAZY)
 	    @JoinColumn(name="user_id")

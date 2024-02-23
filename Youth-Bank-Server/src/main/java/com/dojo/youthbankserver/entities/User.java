@@ -2,6 +2,7 @@ package com.dojo.youthbankserver.entities;
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.validation.constraints.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -99,7 +100,8 @@ public class User {
 	@OneToMany(mappedBy="userProfessional", fetch = FetchType.LAZY)
 	private List<Professional> userProfessionalAccounts;
 //	1:M
-	@OneToMany(mappedBy="userPersonal", fetch = FetchType.LAZY)
+
+@OneToMany(mappedBy="userPersonal", fetch = FetchType.LAZY)
 	private List<Personal> userPersonalAccounts;
 
 //	----- methods ---

@@ -29,7 +29,7 @@ public class PersonalController {
 //    public List<PersonalDTO> searchPersonals(@RequestParam(name = "keyword",defaultValue = "") String keyword){
 //        return personalService.searchPersonals("%"+keyword+"%");
 //    }
-    @GetMapping("personal/{id}")
+    @GetMapping("/personal/{id}")
     public ResponseEntity<PersonalDTO> getPersonal(@PathVariable(name = "id") Long personalId) throws PersonalNotFoundException {
         return ResponseEntity.ok().body(personalServiceImpl.getPersonal(personalId));
     }

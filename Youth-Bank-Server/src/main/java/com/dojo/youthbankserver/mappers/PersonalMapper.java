@@ -16,6 +16,7 @@ public class PersonalMapper {
     }
     public Personal fromPersonalDTO(PersonalDTO personalDTO){
         Personal personal =new Personal();
+
         BeanUtils.copyProperties(personalDTO, personal);
         return personal;
     }

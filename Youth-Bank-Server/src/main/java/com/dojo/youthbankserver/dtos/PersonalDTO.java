@@ -12,7 +12,7 @@ import lombok.NoArgsConstructor;
 public class PersonalDTO {
 	   	private Long id;
 		private double netPay;
-		private User userPersonal;
+		private UserDTO userPersonalDTO;
 
 	    
    

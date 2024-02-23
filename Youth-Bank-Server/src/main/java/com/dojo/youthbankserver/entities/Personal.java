@@ -3,6 +3,7 @@
 import java.util.Date;
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import org.hibernate.validator.constraints.Range;
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -38,36 +39,36 @@ public class Personal {
 		@GeneratedValue(strategy = GenerationType.IDENTITY)
 		private Long id;
 
-		@NotBlank(message="idType is required!")
+//		@NotBlank(message="idType is required!")
 		private String idType;
 		
-		@Range(min = 10, max= 10, message = "Id number should be exact 10 characters." )
+//		@Range(min = 10, max= 10, message = "Id number should be exact 10 characters." )
 		private int idNumber;
 
-		@Past
-		@DateTimeFormat(pattern="yyyy-MM-dd")
+//		@Past
+//		@DateTimeFormat(pattern="yyyy-MM-dd")
 		private Date idDeliveryDate;
 		
-		@NotBlank(message="City is required!")
-		@Size(min=1, max=60, message="City must be between 3 and 60 characters.")
+//		@NotBlank(message="City is required!")
+//		@Size(min=1, max=60, message="City must be between 3 and 60 characters.")
 		private String idDeliveryCity;
 		
 
-		@NotBlank(message="Profession is required!")
-		@Size(min=1, max=60, message="Profession must be between 3 and 60 characters.")
+//		@NotBlank(message="Profession is required!")
+//		@Size(min=1, max=60, message="Profession must be between 3 and 60 characters.")
 		private String profession;
 
-		@NotBlank(message="Employer Name is required!")
-		@Size(min=1, max=60, message="Employer Name must be between 1 and 60 characters.")
+//		@NotBlank(message="Employer Name is required!")
+//		@Size(min=1, max=60, message="Employer Name must be between 1 and 60 characters.")
 		private String employerName;
 
 		
-		@NotBlank(message="Employer Adress is required!")
-		@Size(min=1, max=60, message="Employer Adress must be between 1 and 60 characters.")
+//		@NotBlank(message="Employer Adress is required!")
+//		@Size(min=1, max=60, message="Employer Adress must be between 1 and 60 characters.")
 		private String employerAdress;
 
 		
-		@NotEmpty(message="Net Pay is required!")
+//		@NotEmpty(message="Net Pay is required!")
 		private double netPay;
 
 
@@ -90,14 +91,16 @@ public class Personal {
 		protected void onUpdate() {
 			this.updatedAt = new Date();
 		}
-		   
+
 //		one to many
 		  @OneToMany(mappedBy = "personal", fetch = FetchType.LAZY)
 		  private List<BankAccount> personalBankAccounts;
 
 		  
 //		  //many to one
-		    @ManyToOne(fetch=FetchType.LAZY)
+
+
+@ManyToOne(fetch=FetchType.LAZY)
 		    @JoinColumn(name="user_id")
 		    private User userPersonal;
 	
