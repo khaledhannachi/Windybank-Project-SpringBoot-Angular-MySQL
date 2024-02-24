@@ -12,7 +12,6 @@ export class LoginComponent {
   password: string = "";
 
   constructor(private router: Router, private http: HttpClient) {}
-
   login() {
     const bodyData = {
       email: this.email,
@@ -32,5 +31,6 @@ export class LoginComponent {
         alert("An error occurred during login.");
       }
     );
+    
   }
 }
