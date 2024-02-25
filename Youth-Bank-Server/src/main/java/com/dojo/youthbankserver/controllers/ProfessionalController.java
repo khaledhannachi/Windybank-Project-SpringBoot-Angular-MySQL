@@ -49,7 +49,7 @@ public class ProfessionalController {
         return ResponseEntity.ok().body(professionalServiceImpl.getProfessional(professionalId));
     }
     @PostMapping("/newprofessional/{userId}")
-    public ResponseEntity<ProfessionalDTO> saveProfessional(@RequestBody ProfessionalDTO professionalDTO,@PathVariable Long userId){
+    public ResponseEntity<ProfessionalDTO> saveProfessional(@RequestBody ProfessionalDTO professionalDTO,@PathVariable Long userId) throws ProfessionalNotFoundException {
         return ResponseEntity.ok().body(professionalServiceImpl.saveProfessional(professionalDTO,userId));
     }
     @PutMapping("/{professionalId}/{userId}/editprofessional")

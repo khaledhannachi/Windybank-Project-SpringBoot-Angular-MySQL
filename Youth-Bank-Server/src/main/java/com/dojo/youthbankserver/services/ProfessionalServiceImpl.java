@@ -2,16 +2,18 @@ package com.dojo.youthbankserver.services;
 
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import com.dojo.youthbankserver.entities.User;
+
+import com.dojo.youthbankserver.exceptions.ProfessionalNotFoundException;
 import com.dojo.youthbankserver.repositories.UserRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.dojo.youthbankserver.dtos.ProfessionalDTO;
 import com.dojo.youthbankserver.entities.Professional;
-import com.dojo.youthbankserver.exceptions.ProfessionalNotFoundException;
+
 import com.dojo.youthbankserver.mappers.ProfessionalMapper;
 import com.dojo.youthbankserver.repositories.ProfessionalRepository;
 
@@ -31,18 +33,23 @@ public class ProfessionalServiceImpl implements ProfessionalService{
     private UserRepository userRepository;
     private ProfessionalMapper professionalDtoMapper;
 
-	  @Override
-    public ProfessionalDTO saveProfessional(ProfessionalDTO professionalDTO,Long userId) {
+    @Override
+    public ProfessionalDTO saveProfessional(ProfessionalDTO professionalDTO, Long userId) throws ProfessionalNotFoundException {
         log.info("Saving new Professional");
-
-        User userProfessional =userRepository.findById(userId).orElse(null);
-
-        Professional professional=professionalDtoMapper.fromProfessionalDTO(professionalDTO);
+        Optional<User> userOptional = userRepository.findById(userId);
+        if (userOptional.isEmpty()) {
+            log.error("User not found for userId: {}", userId);
+            throw new ProfessionalNotFoundException("User not found for userId: " + userId);
+        }
+        User userProfessional = userOptional.get();
+        Professional professional = professionalDtoMapper.fromProfessionalDTO(professionalDTO);
         professional.setUserProfessional(userProfessional);
         Professional savedProfessional = professionalRepository.save(professional);
         return professionalDtoMapper.fromProfessional(savedProfessional);
     }
-	  @Override
+
+
+    @Override
     public List<ProfessionalDTO> listProfessionals() {
         List<Professional> professionals = professionalRepository.findAll();
         List<ProfessionalDTO> professionalDTOS = professionals.stream()

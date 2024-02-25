@@ -7,7 +7,7 @@ import com.dojo.youthbankserver.exceptions.ProfessionalNotFoundException;
 
 public interface ProfessionalService {
 	
-	ProfessionalDTO saveProfessional(ProfessionalDTO professionalDTO,Long userId);
+	ProfessionalDTO saveProfessional(ProfessionalDTO professionalDTO,Long userId) throws ProfessionalNotFoundException;
   	
     List<ProfessionalDTO> listProfessionals();
  
