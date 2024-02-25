@@ -6,25 +6,23 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import com.dojo.youthbankserver.dtos.*;
 import com.dojo.youthbankserver.entities.*;
+import com.dojo.youthbankserver.enums.AccountStatus;
 import com.dojo.youthbankserver.exceptions.*;
 import com.dojo.youthbankserver.repositories.*;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import com.dojo.youthbankserver.dtos.AccountHistoryDTO;
-import com.dojo.youthbankserver.dtos.AccountOperationDTO;
-import com.dojo.youthbankserver.dtos.BankAccountDTO;
-import com.dojo.youthbankserver.dtos.CheckingBankAccountDTO;
-import com.dojo.youthbankserver.dtos.SavingBankAccountDTO;
 import com.dojo.youthbankserver.entities.Personal;
 import com.dojo.youthbankserver.enums.OperationType;
 import com.dojo.youthbankserver.mappers.BankAccountMapperImpl;
 
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
-
+@Slf4j
 @Service
 @Transactional
 @AllArgsConstructor
@@ -39,6 +37,9 @@ public class BankAccountServiceImpl implements BankAccountService{
 	    private BankAccountMapperImpl dtoMapper;
 
 //Checking Accounts
+
+
+
 	    @Override
 	    public CheckingBankAccountDTO saveCheckingPersonalBankAccount(double initialBalance, double overDraft, Long personalId) throws PersonalNotFoundException {
 	        Personal personal = personalRepository.findById(personalId).orElse(null);
@@ -51,6 +52,7 @@ public class BankAccountServiceImpl implements BankAccountService{
 	        checkingAccount.setOverDraft(overDraft);
 			
 	        checkingAccount.setPersonal(personal);
+			checkingAccount.setStatus(AccountStatus.CREATED);
 	        CheckingAccount savedBankAccount = bankAccountRepository.save(checkingAccount);
 	        return dtoMapper.fromCheckingPersonalBankAccount(savedBankAccount);
 	    }
@@ -67,6 +69,7 @@ public class BankAccountServiceImpl implements BankAccountService{
 		checkingAccount.setOverDraft(overDraft);
 
 		checkingAccount.setProfessional(professional);
+		checkingAccount.setStatus(AccountStatus.CREATED);
 		CheckingAccount savedBankAccount = bankAccountRepository.save(checkingAccount);
 		return dtoMapper.fromCheckingProfessionalBankAccount(savedBankAccount);
 	}
@@ -81,6 +84,7 @@ public class BankAccountServiceImpl implements BankAccountService{
 		checkingAccount.setBalance(initialBalance);
 		checkingAccount.setOverDraft(overDraft);
 		checkingAccount.setBusiness(business);
+		checkingAccount.setStatus(AccountStatus.CREATED);
 		CheckingAccount savedBankAccount = bankAccountRepository.save(checkingAccount);
 		return dtoMapper.fromCheckingBusinessBankAccount(savedBankAccount);
 	}
@@ -98,7 +102,7 @@ public class BankAccountServiceImpl implements BankAccountService{
 	        savingAccount.setBalance(initialBalance);
 	        savingAccount.setInterestRate(interestRate);
 	        savingAccount.setPersonal(personal);
-	        
+			savingAccount.setStatus(AccountStatus.CREATED);
 	        SavingAccount savedBankAccount = bankAccountRepository.save(savingAccount);
 	        return dtoMapper.fromSavingPersonalBankAccount(savedBankAccount);
 	    }
@@ -114,8 +118,9 @@ public class BankAccountServiceImpl implements BankAccountService{
 		savingAccount.setBalance(initialBalance);
 		savingAccount.setInterestRate(interestRate);
 		savingAccount.setBusiness(business);
-
+		savingAccount.setStatus(AccountStatus.CREATED);
 		SavingAccount savedBankAccount = bankAccountRepository.save(savingAccount);
+
 		// Log the savedBankAccount object to check if it's null
 		System.out.println("Saved Bank Account: " + savedBankAccount);
 
@@ -134,7 +139,7 @@ public class BankAccountServiceImpl implements BankAccountService{
 		savingAccount.setBalance(initialBalance);
 		savingAccount.setInterestRate(interestRate);
 		savingAccount.setProfessional(professional);
-
+		savingAccount.setStatus(AccountStatus.CREATED);
 		SavingAccount savedBankAccount = bankAccountRepository.save(savingAccount);
 		return dtoMapper.fromSavingProfessionalBankAccount(savedBankAccount);
 	}

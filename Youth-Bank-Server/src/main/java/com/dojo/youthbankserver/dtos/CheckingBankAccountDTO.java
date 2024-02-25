@@ -17,13 +17,5 @@ public class CheckingBankAccountDTO extends BankAccountDTO {
 	private ProfessionalDTO professionalDTO;
 	    private double overDraft=0.00;
 		
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
 
 }
