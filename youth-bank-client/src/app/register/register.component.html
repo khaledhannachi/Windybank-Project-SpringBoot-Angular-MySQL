@@ -1,0 +1,176 @@
+<div class="bg-gradient-to-br from-blue-400 to-purple-600 min-h-screen flex justify-center items-center">
+    <div class="container max-w-lg w-full bg-white p-8 rounded-lg shadow-md">
+        <div class="title text-2xl font-semibold mb-4 relative">Registration
+            <div class="absolute bottom-0 left-0 h-1 w-20 bg-gradient-to-r from-blue-400 to-purple-600 rounded"></div>
+        </div>
+        <div class="content">
+            <form (ngSubmit)="save()" method="post">
+            <div class="user-details ">
+                <div data-te-input-wrapper-init class="input-box">
+                    <span class="details">First Name:</span>
+                    <input
+                    type="text"
+                    id="firstName"
+                    name="firstName"
+                    placeholder="Entre First Name"
+                    [(ngModel)]="formData.firstName"
+                    [ngModelOptions]="{ standalone: true }"
+                    required
+                    />
+                </div>
+                <div data-te-input-wrapper-init class="input-box">
+                    <span class="details">Last Name</span>
+                    <input
+                    type="text"
+                    placeholder="Entre Last Name"
+                    id="lastName"
+                    name="lastName"
+                    [(ngModel)]="formData.lastName"
+                    [ngModelOptions]="{ standalone: true }"
+                    required
+                    />
+                </div>
+                <div data-te-input-wrapper-init class="input-box">
+                    <span class="details">Email</span>
+                    <input
+                    type="Entre email"
+                    id="email"
+                    name="email"
+                    placeholder="Email"
+                    [(ngModel)]="formData.email"
+                    [ngModelOptions]="{ standalone: true }"
+                    required
+                    />
+                </div>
+                <div data-te-input-wrapper-init class="input-box">
+                    <span class="details">Phone Number</span>
+                    <input
+                    type="text"
+                    id="telephone"
+                    placeholder="Enter your number"
+                    name="telephone"
+                    [(ngModel)]="formData.telephone"
+                    [ngModelOptions]="{ standalone: true }"
+                    required
+    
+                    />
+                </div>
+                <div data-te-input-wrapper-init class="input-box">
+                    <span class="details">Password</span>
+                    <input
+                    type="password"
+                    placeholder="Entre your Password"
+                    id="password"
+                    name="password"
+                    [(ngModel)]="formData.password"
+                    [ngModelOptions]="{ standalone: true }"
+                    require
+                    />
+                </div>
+                <div data-te-input-wrapper-init class="input-box">
+                    <span class="details">Confirm Password</span>
+                    <input
+                    type="password"
+                    placeholder="Confirm Your Password"
+                    id="confirm"
+                    name="confirm"
+                    [(ngModel)]="formData.confirm"
+                    [ngModelOptions]="{ standalone: true }"
+                    required
+                    />
+                </div>
+            
+            <div class="input-box">
+                <span class="details">Date of Birth:</span>
+                <input
+                type="date"
+                id="birthDay"
+                name="birthDay"
+                [(ngModel)]="formData.birthDay"
+                [ngModelOptions]="{ standalone: true }"
+                required
+                />
+            </div>
+            <div data-te-input-wrapper-init class="input-box">
+                <span class="details">Country of Birth:</span>
+                <input
+                type="text"
+                id="countryOfBirth"
+                placeholder="Entre your Country of Birth:"
+                name="countryOfBirth"
+                [(ngModel)]="formData.countryOfBirth"
+                [ngModelOptions]="{ standalone: true }"
+                required
+                />
+            </div>
+            <div data-te-input-wrapper-init class="input-box">
+                <span class="details">Street:</span>
+                <input
+                type="text"
+                id="street"
+                placeholder="Entre your Street:"
+                name="street"
+                [(ngModel)]="formData.street"
+                [ngModelOptions]="{ standalone: true }"
+                required
+                />
+            </div>
+            <div data-te-input-wrapper-init class="input-box">
+                <span class="details">City:</span>
+                <input
+                type="text"
+                id="city"
+                placeholder="Entre your City"
+                name="city"
+                [(ngModel)]="formData.city"
+                [ngModelOptions]="{ standalone: true }"
+                required
+                />
+            </div>
+            <div data-te-input-wrapper-init class="input-box">
+                <span class="details">Zip Code:</span>
+                <input
+                type="number"
+                id="zipCode"
+                placeholder="Entre yourZip Code"
+                name="zipCode"
+                [(ngModel)]="formData.zipCode"
+                [ngModelOptions]="{ standalone: true }"
+                required
+                />
+            </div>
+            <div data-te-input-wrapper-init class="input-box">
+                <span class="details">Country of Residence:</span>
+                <input
+                type="text"
+                placeholder="Entre your Country of Residence:"
+                id="countryOfResidence"
+                name="countryOfResidence"
+                [(ngModel)]="formData.countryOfResidence"
+                [ngModelOptions]="{ standalone: true }"
+                required
+                />
+            </div>
+            
+            <div data-te-input-wrapper-init class="input-box">
+                <span class="details">Nationality:</span>
+                <input
+                type="text"
+                id="nationality"
+                placeholder="Entre yourEntre your Nationality"
+                name="nationality"
+                [(ngModel)]="formData.nationality"
+                [ngModelOptions]="{ standalone: true }"
+                required
+                />
+            </div>
+            
+        </div>
+        <div class="button w-100">
+            <input type="submit" value="Sign Up" class="w-full h-10 rounded bg-gradient-to-r from-blue-400 to-purple-600 text-white font-semibold cursor-pointer transition duration-300 hover:from-purple-600">
+        </div>
+            </form>
+        </div>
+        </div>
+    
+</div>
