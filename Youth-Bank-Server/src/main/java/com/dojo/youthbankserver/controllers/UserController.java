@@ -1,6 +1,7 @@
 package com.dojo.youthbankserver.controllers;
 
 import com.dojo.youthbankserver.dtos.BusinessDTO;
+import com.dojo.youthbankserver.dtos.UserDTO;
 import com.dojo.youthbankserver.entities.LoginUser;
 import com.dojo.youthbankserver.entities.User;
 
@@ -28,7 +29,7 @@ public class UserController {
 	private String secretKey;
 
 	@GetMapping("")
-	public ResponseEntity<List<User>> users(){
+	public ResponseEntity<List<UserDTO>> users(){
 		return ResponseEntity.ok().body(userService.allUsers());
 	}
 

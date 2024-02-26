@@ -10,23 +10,13 @@ import lombok.Data;
 public class SavingBankAccountDTO extends BankAccountDTO {
 
 	
-	  private String id;
+	  	private String id;
 	    private double balance=0.00;
 	    private Date createdAt;
 	    private AccountStatus status;
 	    private PersonalDTO personalDTO;
-	private BusinessDTO businessDTO;
-	private ProfessionalDTO professionalDTO;
+		private BusinessDTO businessDTO;
+		private ProfessionalDTO professionalDTO;
 	    private double interestRate=6.0;
-	
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
-	    
+
 }

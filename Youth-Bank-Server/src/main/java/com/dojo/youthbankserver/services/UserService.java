@@ -1,8 +1,11 @@
 package com.dojo.youthbankserver.services;
 import com.dojo.youthbankserver.dtos.BusinessDTO;
+import com.dojo.youthbankserver.dtos.UserDTO;
 import com.dojo.youthbankserver.entities.Business;
 import com.dojo.youthbankserver.entities.LoginUser;
+import com.dojo.youthbankserver.entities.SavingAccount;
 import com.dojo.youthbankserver.entities.User;
+import com.dojo.youthbankserver.mappers.UserMapper;
 import com.dojo.youthbankserver.repositories.UserRepository;
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
@@ -13,16 +16,25 @@ import org.springframework.validation.BindingResult;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 @AllArgsConstructor
 @Service
 public class UserService {
 
     private UserRepository userRepo;
+	private UserMapper userMapper;
     // TO-DO: Write register and login methods!
 		// READ ALL
-		public List<User> allUsers(){
-			return userRepo.findAll();
+		public List<UserDTO> allUsers(){
+
+			List<User> users=userRepo.findAll();
+			List<UserDTO> userDTOs= users .stream()
+					.map(user -> userMapper.fromUser(user))
+					.collect(Collectors.toList());
+			return userDTOs;
+
+
 		}
 
     public User register(User newUser, BindingResult result) {

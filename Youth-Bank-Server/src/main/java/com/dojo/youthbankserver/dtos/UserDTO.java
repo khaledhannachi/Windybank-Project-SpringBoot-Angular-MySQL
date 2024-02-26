@@ -18,14 +18,18 @@ import java.util.List;
 @Data
 public class UserDTO {
 
-
     private Long id;
     private String firstName;
     private String lastName;
-//	private List<Business> userBuisnessAccounts;
-//	private List<Professional> userProfessionalAccounts;
-//	private List<PersonalDTO> userPersonalAccounts;
-
+    private Date birthDay;
+    private String countryOfBirth;
+    private String street;
+    private String city;
+    private int zipCode;
+    private String countryOfResidence;
+    private String telephone;
+    private String nationality;
+    private String email;
 
 
 }

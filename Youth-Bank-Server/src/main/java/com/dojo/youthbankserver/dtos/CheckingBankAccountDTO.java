@@ -13,8 +13,8 @@ public class CheckingBankAccountDTO extends BankAccountDTO {
 	    private Date createdAt;
 	    private AccountStatus status;
 	    private PersonalDTO personalDTO;
-	private BusinessDTO businessDTO;
-	private ProfessionalDTO professionalDTO;
+		private BusinessDTO businessDTO;
+		private ProfessionalDTO professionalDTO;
 	    private double overDraft=0.00;
 		
 
