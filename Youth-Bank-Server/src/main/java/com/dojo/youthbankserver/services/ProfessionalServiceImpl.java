@@ -1,18 +1,24 @@
 package com.dojo.youthbankserver.services;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
-import com.dojo.youthbankserver.entities.User;
+import com.dojo.youthbankserver.dtos.BankAccountDTO;
+import com.dojo.youthbankserver.dtos.PersonalDTO;
+import com.dojo.youthbankserver.entities.*;
 
+import com.dojo.youthbankserver.exceptions.PersonalNotFoundException;
 import com.dojo.youthbankserver.exceptions.ProfessionalNotFoundException;
+import com.dojo.youthbankserver.mappers.BankAccountMapperImpl;
+import com.dojo.youthbankserver.mappers.UserMapper;
 import com.dojo.youthbankserver.repositories.UserRepository;
 import org.springframework.stereotype.Service;
 
 import com.dojo.youthbankserver.dtos.ProfessionalDTO;
-import com.dojo.youthbankserver.entities.Professional;
 
 import com.dojo.youthbankserver.mappers.ProfessionalMapper;
 import com.dojo.youthbankserver.repositories.ProfessionalRepository;
@@ -32,47 +38,88 @@ public class ProfessionalServiceImpl implements ProfessionalService{
 	private ProfessionalRepository professionalRepository;
     private UserRepository userRepository;
     private ProfessionalMapper professionalDtoMapper;
+    private UserMapper userMapper;
+    private BankAccountMapperImpl dtoMapper;
+
 
     @Override
-    public ProfessionalDTO saveProfessional(ProfessionalDTO professionalDTO, Long userId) throws ProfessionalNotFoundException {
+    public ProfessionalDTO saveProfessional(ProfessionalDTO professionalDTO, Long userId) {
         log.info("Saving new Professional");
-        Optional<User> userOptional = userRepository.findById(userId);
-        if (userOptional.isEmpty()) {
-            log.error("User not found for userId: {}", userId);
-            throw new ProfessionalNotFoundException("User not found for userId: " + userId);
+
+        // Retrieve the User entity
+        User professionalUser = userRepository.findById(userId).orElse(null);
+
+        // Check for null and handle it appropriately
+        if (professionalUser == null) {
+            // Handle the case where the user is not found
+            // You might want to throw an exception or return an error response
+            // depending on your use case
+            log.error("User not found with id: {}", userId);
+            // Handle the error appropriately
         }
-        User userProfessional = userOptional.get();
+
+        // Set the user information in the DTO
+        professionalDTO.setUserProfessionalDTO(userMapper.fromUser(professionalUser));
+
+        // Map from PersonalDTO to Personal entity
         Professional professional = professionalDtoMapper.fromProfessionalDTO(professionalDTO);
-        professional.setUserProfessional(userProfessional);
-        Professional savedProfessional = professionalRepository.save(professional);
-        return professionalDtoMapper.fromProfessional(savedProfessional);
+
+        // Set the user information in the Personal entity
+        professional.setUserProfessional(userMapper.fromUserDTO(professionalDTO.getUserProfessionalDTO()));
+
+        // Save the Personal entity
+            Professional savedProfessional  = professionalRepository.save(professional);
+
+        // Map from Personal entity to PersonalDTO and return
+        ProfessionalDTO dto=professionalDtoMapper.fromProfessional(savedProfessional);
+        dto.setUserProfessionalDTO(userMapper.fromUser(savedProfessional.getUserProfessional()));
+        return dto;
     }
+
 
 
     @Override
     public List<ProfessionalDTO> listProfessionals() {
         List<Professional> professionals = professionalRepository.findAll();
-        List<ProfessionalDTO> professionalDTOS = professionals.stream()
-                .map(professional -> professionalDtoMapper.fromProfessional(professional))
-                .collect(Collectors.toList());
-        /*
+//        List<PersonalDTO> personalDTOS = personals.stream()
+//                .map(personal -> personalDtoMapper.fromPersonal(personal))
+//                .collect(Collectors.toList());
+
         List<ProfessionalDTO> professionalDTOS=new ArrayList<>();
         for (Professional professional:professionals){
             ProfessionalDTO professionalDTO=professionalDtoMapper.fromProfessional(professional);
+            professionalDTO.setUserProfessionalDTO(userMapper.fromUser(professional.getUserProfessional()));
+            List<BankAccount> bankAccounts =professional.getProfessionalBankAccounts();
+            List<BankAccountDTO> bankAccountDTOS = bankAccounts.stream().flatMap(bankAccount -> {
+                if (bankAccount instanceof SavingAccount) {
+                    SavingAccount savingAccount = (SavingAccount) bankAccount;
+                    return Stream.of(
+                            dtoMapper.fromSavingPersonalBankAccount(savingAccount)
+
+                    );
+                } else{
+                    CheckingAccount checkingAccount = (CheckingAccount) bankAccount;
+                    return Stream.of(
+                            dtoMapper.fromCheckingPersonalBankAccount(checkingAccount)
+
+                    );
+                }
+
+            }).collect(Collectors.toList());
+            professionalDTO.setProfessionalBankAccounts(bankAccountDTOS);
             professionalDTOS.add(professionalDTO);
         }
-        *
-         */
         return professionalDTOS;
     }
 
-	  @Override
+    @Override
     public ProfessionalDTO getProfessional(Long professionalId) throws ProfessionalNotFoundException {
         Professional professional = professionalRepository.findById(professionalId)
                 .orElseThrow(() -> new ProfessionalNotFoundException("Professional Not found"));
-        return professionalDtoMapper.fromProfessional(professional);
+        ProfessionalDTO dto=professionalDtoMapper.fromProfessional(professional);
+        dto.setUserProfessionalDTO(userMapper.fromUser(professional.getUserProfessional()));
+        return dto;
     }
-
 	  @Override
     public ProfessionalDTO updateProfessional(ProfessionalDTO professionalDTO,Long userId) {
         log.info("Update new Professional");

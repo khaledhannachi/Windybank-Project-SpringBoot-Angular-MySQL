@@ -1,7 +1,10 @@
 package com.dojo.youthbankserver.dtos;
 
+import com.dojo.youthbankserver.entities.BankAccount;
 import com.dojo.youthbankserver.entities.User;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class ProfessionalDTO {
@@ -13,7 +16,8 @@ public class ProfessionalDTO {
     private String companyName;
     private String companyAdress;
     private String cnssNumber;
-    private User userProfessional;
+    private UserDTO userProfessionalDTO;
+    private List<BankAccountDTO> professionalBankAccounts;
 	
 	
 	

@@ -1,6 +1,7 @@
 package com.dojo.youthbankserver.controllers;
 
 import com.dojo.youthbankserver.dtos.PersonalDTO;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
@@ -25,20 +26,17 @@ public class PersonalController {
     public ResponseEntity<List<PersonalDTO>> personals(){
         return ResponseEntity.ok().body(personalServiceImpl.listPersonals());
     }
-//    @GetMapping("/search")
-//    public List<PersonalDTO> searchPersonals(@RequestParam(name = "keyword",defaultValue = "") String keyword){
-//        return personalService.searchPersonals("%"+keyword+"%");
-//    }
+
     @GetMapping("/personal/{id}")
     public ResponseEntity<PersonalDTO> getPersonal(@PathVariable(name = "id") Long personalId) throws PersonalNotFoundException {
         return ResponseEntity.ok().body(personalServiceImpl.getPersonal(personalId));
     }
     @PostMapping("/newpersonal/{userId}")
-    public ResponseEntity<PersonalDTO> savePersonal(@RequestBody PersonalDTO personalDTO,@PathVariable Long userId){
+    public ResponseEntity<PersonalDTO> savePersonal(@Valid  @RequestBody PersonalDTO personalDTO, @PathVariable Long userId){
         return ResponseEntity.ok().body(personalServiceImpl.savePersonal(personalDTO,userId));
     }
     @PutMapping("/{personalId}/{userId}/editpersonal")
-    public ResponseEntity<PersonalDTO> updatePersonal(@PathVariable Long personalId, @RequestBody PersonalDTO personalDTO,@PathVariable Long userId){
+    public ResponseEntity<PersonalDTO> updatePersonal(@Valid @PathVariable Long personalId, @RequestBody PersonalDTO personalDTO,@PathVariable Long userId){
         personalDTO.setId(personalId);
         return ResponseEntity.ok().body(personalServiceImpl.updatePersonal(personalDTO,userId));
     }

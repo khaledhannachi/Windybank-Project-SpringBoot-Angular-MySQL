@@ -2,6 +2,9 @@ package com.dojo.youthbankserver.dtos;
 
 import com.dojo.youthbankserver.entities.User;
 import lombok.Data;
+
+import java.util.List;
+
 @Data
 public class BusinessDTO {
 	private Long id;
@@ -12,5 +15,6 @@ public class BusinessDTO {
     private String cnssNumber;
     private String companyPhone;
     private String companyEmail;
-    private User businessLegalResponsible;
+    private UserDTO businessLegalResponsibleDTO;
+    private List<BankAccountDTO> businessBankAccountsDTO;
 }

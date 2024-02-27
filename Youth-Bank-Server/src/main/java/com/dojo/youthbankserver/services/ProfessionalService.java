@@ -3,6 +3,7 @@ package com.dojo.youthbankserver.services;
 import java.util.List;
 
 import com.dojo.youthbankserver.dtos.ProfessionalDTO;
+import com.dojo.youthbankserver.exceptions.PersonalNotFoundException;
 import com.dojo.youthbankserver.exceptions.ProfessionalNotFoundException;
 
 public interface ProfessionalService {
@@ -11,7 +12,7 @@ public interface ProfessionalService {
   	
     List<ProfessionalDTO> listProfessionals();
  
-    ProfessionalDTO getProfessional(Long professionalId) throws ProfessionalNotFoundException;
+    ProfessionalDTO getProfessional(Long professionalId) throws ProfessionalNotFoundException, PersonalNotFoundException;
 
     ProfessionalDTO updateProfessional(ProfessionalDTO professionalDTO,Long userId);
 

@@ -21,7 +21,6 @@ import java.util.stream.Stream;
 @AllArgsConstructor
 @Service
 public class UserService {
-
     private UserRepository userRepo;
 	private UserMapper userMapper;
     // TO-DO: Write register and login methods!
@@ -33,10 +32,7 @@ public class UserService {
 					.map(user -> userMapper.fromUser(user))
 					.collect(Collectors.toList());
 			return userDTOs;
-
-
 		}
-
     public User register(User newUser, BindingResult result) {
         // Reject if email is taken (present in the DB)
     	Optional<User> potentialUser = userRepo.findByEmail(newUser.getEmail());
@@ -56,9 +52,6 @@ public class UserService {
     		return userRepo.save(newUser);
     	}
     }
-
-
-
 
     public User login(LoginUser newLoginObject, BindingResult result) {
         // Find if the user is in the DB

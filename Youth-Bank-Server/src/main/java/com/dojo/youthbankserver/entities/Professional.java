@@ -33,40 +33,40 @@ public class Professional {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
     
-    @NotBlank
-    @NotEmpty(message="Tax Identification Number is required!")
-    @Size(min=3, max=30, message="Tax Identification Number must be between 3 and 30 characters.")
+//    @NotBlank
+//    @NotEmpty(message="Tax Identification Number is required!")
+//    @Size(min=3, max=30, message="Tax Identification Number must be between 3 and 30 characters.")
     private String taxIdentificationNumber;
 
-    @NotBlank
-    @NotEmpty(message="Business registration Number is required!")
-    @Size(min=3, max=30, message="Business registration Number must be between 3 and 30 characters.")
+//    @NotBlank
+//    @NotEmpty(message="Business registration Number is required!")
+//    @Size(min=3, max=30, message="Business registration Number must be between 3 and 30 characters.")
     private String businessRegistration;
 
 
-	@NotBlank(message="Profession is required!")
-	@Size(min=1, max=60, message="Profession must be between 3 and 60 characters.")
+//	@NotBlank(message="Profession is required!")
+//	@Size(min=1, max=60, message="Profession must be between 3 and 60 characters.")
 	private String profession;
 
  
-	@NotBlank(message="company Name is required!")
-	@Size(min=1, max=60, message="company Name must be between 1 and 60 characters.")
+//	@NotBlank(message="company Name is required!")
+//	@Size(min=1, max=60, message="company Name must be between 1 and 60 characters.")
 	private String companyName;
  
-	@NotBlank(message="company Adress is required!")
-	@Size(min=1, max=60, message="company Adress must be between 1 and 60 characters.")
+//	@NotBlank(message="company Adress is required!")
+//	@Size(min=1, max=60, message="company Adress must be between 1 and 60 characters.")
 	private String companyAdress;
 
-	@NotBlank
-	@NotEmpty(message="CNSS Number is required!")
-	@Size(min=3, max=30, message="CNSS Number must be between 3 and 30 characters.")
+//	@NotBlank
+//	@NotEmpty(message="CNSS Number is required!")
+//	@Size(min=3, max=30, message="CNSS Number must be between 3 and 30 characters.")
 	private String cnssNumber;
 
 	// This will not allow the createdAt column to be updated after creation
-	@Column(updatable = false)
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+//	@Column(updatable = false)
+//	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date createdAt;
-	@DateTimeFormat(pattern = "yyyy-MM-dd")
+//	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updatedAt;
 
 //	----- methods ---

@@ -12,7 +12,7 @@ public interface BusinessService {
 
 	BusinessDTO saveBusiness(BusinessDTO businessDTO, Long userId);
   	
-    List<BusinessDTO> listBusinesss();
+    List<BusinessDTO> listBusinesses();
  
     BusinessDTO getBusiness(Long businessId) throws BusinessNotFoundException;
 
@@ -22,5 +22,5 @@ public interface BusinessService {
 
     void deleteBusiness(Long businessId);
 
-//    List<BusinessDTO> searchBusinesss(String keyword);
+
 }

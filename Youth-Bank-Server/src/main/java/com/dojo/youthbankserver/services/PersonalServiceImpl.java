@@ -1,21 +1,19 @@
 package com.dojo.youthbankserver.services;
-
+import java.util.ArrayList;
 import java.util.List;
-
 import java.util.stream.Collectors;
-
+import java.util.stream.Stream;
+import com.dojo.youthbankserver.dtos.BankAccountDTO;
 import com.dojo.youthbankserver.dtos.PersonalDTO;
 import com.dojo.youthbankserver.dtos.UserDTO;
-import com.dojo.youthbankserver.entities.User;
+import com.dojo.youthbankserver.entities.*;
+import com.dojo.youthbankserver.mappers.BankAccountMapperImpl;
 import com.dojo.youthbankserver.mappers.UserMapper;
 import com.dojo.youthbankserver.repositories.UserRepository;
 import org.springframework.stereotype.Service;
-
-import com.dojo.youthbankserver.entities.Personal;
 import com.dojo.youthbankserver.exceptions.PersonalNotFoundException;
 import com.dojo.youthbankserver.mappers.PersonalMapper;
 import com.dojo.youthbankserver.repositories.PersonalRepository;
-
 import jakarta.transaction.Transactional;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,6 +27,7 @@ public class PersonalServiceImpl implements PersonalService {
     private UserRepository userRepository;
     private PersonalMapper personalDtoMapper;
     private UserMapper userMapper;
+    private BankAccountMapperImpl dtoMapper;
 	  @Override
       public PersonalDTO savePersonal(PersonalDTO personalDTO, Long userId) {
           log.info("Saving new Personal");
@@ -62,22 +61,37 @@ public class PersonalServiceImpl implements PersonalService {
           dto.setUserPersonalDTO(userMapper.fromUser(savedPersonal.getUserPersonal()));
           return dto;
       }
-
     @Override
     public List<PersonalDTO> listPersonals() {
         List<Personal> personals = personalRepository.findAll();
-        List<PersonalDTO> personalDTOS = personals.stream()
-                .map(personal -> personalDtoMapper.fromPersonal(personal))
-                .collect(Collectors.toList());
-        
-        /*
+//        List<PersonalDTO> personalDTOS = personals.stream()
+//                .map(personal -> personalDtoMapper.fromPersonal(personal))
+//                .collect(Collectors.toList());
+
         List<PersonalDTO> personalDTOS=new ArrayList<>();
         for (Personal personal:personals){
-            PersonalDTO personalDTO=personalrDtoMapper.fromPersonal(personal);
+            PersonalDTO personalDTO=personalDtoMapper.fromPersonal(personal);
+            personalDTO.setUserPersonalDTO(userMapper.fromUser(personal.getUserPersonal()));
+          List<BankAccount> bankAccounts =personal.getPersonalBankAccounts();
+            List<BankAccountDTO> bankAccountDTOS = bankAccounts.stream().flatMap(bankAccount -> {
+                if (bankAccount instanceof SavingAccount) {
+                    SavingAccount savingAccount = (SavingAccount) bankAccount;
+                    return Stream.of(
+                            dtoMapper.fromSavingPersonalBankAccount(savingAccount)
+
+                    );
+                } else{
+                    CheckingAccount checkingAccount = (CheckingAccount) bankAccount;
+                    return Stream.of(
+                            dtoMapper.fromCheckingPersonalBankAccount(checkingAccount)
+
+                    );
+                }
+
+            }).collect(Collectors.toList());
+            personalDTO.setPersonalBankAccounts(bankAccountDTOS);
             personalDTOS.add(personalDTO);
         }
-        *
-         */
         return personalDTOS;
     }
 	  @Override

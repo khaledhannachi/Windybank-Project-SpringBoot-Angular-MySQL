@@ -4,6 +4,8 @@ package com.dojo.youthbankserver.controllers;
 
 import java.util.List;
 
+import com.dojo.youthbankserver.exceptions.PersonalNotFoundException;
+import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
@@ -49,11 +51,11 @@ public class ProfessionalController {
         return ResponseEntity.ok().body(professionalServiceImpl.getProfessional(professionalId));
     }
     @PostMapping("/newprofessional/{userId}")
-    public ResponseEntity<ProfessionalDTO> saveProfessional(@RequestBody ProfessionalDTO professionalDTO,@PathVariable Long userId) throws ProfessionalNotFoundException {
+    public ResponseEntity<ProfessionalDTO> saveProfessional(@Valid @RequestBody ProfessionalDTO professionalDTO, @PathVariable Long userId) throws ProfessionalNotFoundException {
         return ResponseEntity.ok().body(professionalServiceImpl.saveProfessional(professionalDTO,userId));
     }
     @PutMapping("/{professionalId}/{userId}/editprofessional")
-    public ResponseEntity<ProfessionalDTO> updateProfessional(@PathVariable Long professionalId, @RequestBody ProfessionalDTO professionalDTO,@PathVariable Long userId){
+    public ResponseEntity<ProfessionalDTO> updateProfessional( @Valid @PathVariable Long professionalId, @RequestBody ProfessionalDTO professionalDTO,@PathVariable Long userId){
         professionalDTO.setId(professionalId);
         return ResponseEntity.ok().body(professionalServiceImpl.updateProfessional(professionalDTO,userId));
     }
