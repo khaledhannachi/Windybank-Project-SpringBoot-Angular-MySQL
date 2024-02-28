@@ -42,11 +42,7 @@ public class BusinessController {
         businessDTO.setId(businessId);
         return ResponseEntity.ok().body(businessServiceImpl.updateBusiness(businessDTO, userId));
     }
-    @PutMapping("/{businessId}/{userId}/activate")
-    public ResponseEntity<BusinessDTO> activateBusiness(@PathVariable Long businessId, @RequestBody BusinessDTO businessDTO, BankAccount bankAccount, @PathVariable Long userId) throws BankAccountNotFoundException, UserNotFoundException {
-        businessDTO.setId(businessId);
-        return ResponseEntity.ok().body(businessServiceImpl.activateBusiness(businessDTO, userId,bankAccount ));
-    }
+
 
     @DeleteMapping("/{id}")
     public void deleteBusiness(@PathVariable Long id){

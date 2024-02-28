@@ -241,7 +241,6 @@ public class BankAccountServiceImpl implements BankAccountService{
 		return bankAccountDTOS;
 	}
 
-
 	@Override
 	    public List<AccountOperationDTO> accountHistory(String accountId){
 	        List<AccountOperation> accountOperations = accountOperationRepository.findByBankAccountId(accountId);
@@ -263,5 +262,47 @@ public class BankAccountServiceImpl implements BankAccountService{
 	        accountHistoryDTO.setTotalPages(accountOperations.getTotalPages());
 	        return accountHistoryDTO;
 	    }
+	@Override
+	public BankAccountDTO activate(String BankAccountId)   {
+		log.info("activate Business");
 
+		BankAccount bankAccount=bankAccountRepository.findById(BankAccountId).orElseThrow(null);
+		// Set the status of the provided bank account to ACTIVATED
+		bankAccount.setStatus(AccountStatus.ACTIVATED);
+		if(bankAccount instanceof SavingAccount){
+			SavingAccount savingAccount= (SavingAccount) bankAccount;
+			return dtoMapper.fromSavingProfessionalBankAccount(savingAccount);
+		} else {
+			CheckingAccount checkingAccount= (CheckingAccount) bankAccount;
+			return dtoMapper.fromCheckingProfessionalBankAccount(checkingAccount);
+		}
+	}
+	@Override
+	public BankAccountDTO suspend( String BankAccountId )   {
+		log.info("suspend Business");
+		BankAccount bankAccount=bankAccountRepository.findById(BankAccountId).orElseThrow(null);
+		// Set the status of the provided bank account to SUSPENDED
+		bankAccount.setStatus(AccountStatus.SUSPENDED);
+		if(bankAccount instanceof SavingAccount){
+			SavingAccount savingAccount= (SavingAccount) bankAccount;
+			return dtoMapper.fromSavingProfessionalBankAccount(savingAccount);
+		} else {
+			CheckingAccount checkingAccount= (CheckingAccount) bankAccount;
+			return dtoMapper.fromCheckingProfessionalBankAccount(checkingAccount);
+		}
+	}
+	@Override
+	public BankAccountDTO delete(String BankAccountId)   {
+		log.info("delete Business");
+		BankAccount bankAccount=bankAccountRepository.findById(BankAccountId).orElseThrow(null);
+		// Set the status of the provided bank account to DELETED
+		bankAccount.setStatus(AccountStatus.DELETED);
+		if(bankAccount instanceof SavingAccount){
+			SavingAccount savingAccount= (SavingAccount) bankAccount;
+			return dtoMapper.fromSavingProfessionalBankAccount(savingAccount);
+		} else {
+			CheckingAccount checkingAccount= (CheckingAccount) bankAccount;
+			return dtoMapper.fromCheckingProfessionalBankAccount(checkingAccount);
+		}
+	}
 }

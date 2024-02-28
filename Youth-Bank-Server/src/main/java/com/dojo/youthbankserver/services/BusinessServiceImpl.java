@@ -114,31 +114,6 @@ public class BusinessServiceImpl implements BusinessService{
         Business savedBusiness = businessRepository.save(business);
         return businessDtoMapper.fromBusiness(savedBusiness);
     }
-    @Override
-    public BusinessDTO activateBusiness(BusinessDTO businessDTO, Long userId, BankAccount bankAccount) throws BankAccountNotFoundException, UserNotFoundException  {
-        log.info("activate Business");
-
-        // Retrieve the user who is the legal responsible for the business
-        User legalResponsible = userRepository.findById(userId).orElse(null);
-        if (legalResponsible == null) {
-            throw new UserNotFoundException("User not found with id: " + userId);
-        }
-        // Retrieve the business associated with the user
-        Business business = businessDtoMapper.fromBusinessDTO(businessDTO);
-
-        // Ensure that the provided bank account belongs to the specified business
-        if (!business.getBusinessBankAccounts().contains(bankAccount)) {
-            throw new BankAccountNotFoundException("Bank account not associated with the provided business.");
-        }
-        // Set the status of the provided bank account to ACTIVATED
-        bankAccount.setStatus(AccountStatus.ACTIVATED);
-        // Set the legal responsible user for the business
-        business.setBusinessLegalResponsible(legalResponsible);
-        // Save the updated business entity
-        Business savedBusiness = businessRepository.save(business);
-        // Convert the saved business entity back to DTO and return
-        return businessDtoMapper.fromBusiness(savedBusiness);
-    }
 
     @Override
     public void deleteBusiness(Long businessId){
