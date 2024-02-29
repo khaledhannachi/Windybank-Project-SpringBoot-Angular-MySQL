@@ -7,6 +7,8 @@
 //import org.springframework.security.authentication.AuthenticationManager;
 //import org.springframework.security.authentication.ProviderManager;
 //import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
+//import org.springframework.security.config.Customizer;
+//
 //import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 //import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 //import org.springframework.security.config.http.SessionCreationPolicy;
@@ -21,7 +23,6 @@
 //import org.springframework.security.oauth2.jwt.NimbusJwtEncoder;
 //import org.springframework.security.provisioning.InMemoryUserDetailsManager;
 //import org.springframework.security.web.SecurityFilterChain;
-//
 //import javax.crypto.spec.SecretKeySpec;
 //
 //@Configuration
@@ -29,6 +30,7 @@
 //public class SecurityConfig {
 //    @Value("${jwt.secret}")
 //    private String secretkey;
+//
 //
 //    @Bean
 //    public InMemoryUserDetailsManager inMemoryUserDetailsManager() {

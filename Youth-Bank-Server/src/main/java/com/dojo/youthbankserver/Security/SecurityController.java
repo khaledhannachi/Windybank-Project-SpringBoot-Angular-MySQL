@@ -35,7 +35,6 @@
 //    public Map<String, String> login(@RequestParam String username, @RequestParam String password) {
 //        // Authenticate user
 //        Authentication authentication = authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
-//
 //        // Retrieve user authorities
 //        Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
 //

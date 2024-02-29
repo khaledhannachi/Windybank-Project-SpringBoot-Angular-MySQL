@@ -50,7 +50,6 @@ public class BankAccountServiceImpl implements BankAccountService{
 	        checkingAccount.setCreatedAt(new Date());
 	        checkingAccount.setBalance(initialBalance);
 	        checkingAccount.setOverDraft(overDraft);
-			
 	        checkingAccount.setPersonal(personal);
 			checkingAccount.setStatus(AccountStatus.CREATED);
 	        CheckingAccount savedBankAccount = bankAccountRepository.save(checkingAccount);

@@ -1,26 +1,28 @@
 package com.dojo.youthbankserver.controllers;
-
-import com.dojo.youthbankserver.dtos.BusinessDTO;
 import com.dojo.youthbankserver.dtos.UserDTO;
 import com.dojo.youthbankserver.entities.LoginUser;
 import com.dojo.youthbankserver.entities.User;
-
 import com.dojo.youthbankserver.services.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @RestController
-@CrossOrigin("*")
-@RequestMapping("/api/v1/users")
+
+@RequestMapping("/api/v1")
+@CrossOrigin(origins = "*")
 public class UserController {
 	@Autowired
 	private UserService userService;
@@ -28,7 +30,7 @@ public class UserController {
 	@Value("${jwt.secret}")
 	private String secretKey;
 
-	@GetMapping("")
+	@GetMapping("/users")
 	public ResponseEntity<List<UserDTO>> users(){
 		return ResponseEntity.ok().body(userService.allUsers());
 	}
@@ -37,43 +39,37 @@ public class UserController {
 //    public List<User> searchUser(@RequestParam(name = "keyword",defaultValue = "") String keyword){
 //        return userService.searchUser("%"+keyword+"%");
 //    }
-	@PostMapping("/register")
-	public ResponseEntity<String> register(@Valid @RequestBody User newUser, BindingResult result) {
-		if (result.hasErrors()) {
-			return ResponseEntity.badRequest().body("Validation errors: " + result.getAllErrors());
-		}
-//		if (!isAuthenticated()) {
-//			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized access");
-//		}
-		User registeredUser = userService.register(newUser, result);
-		if (registeredUser == null) {
-			return ResponseEntity.badRequest().body("User registration failed.");
-		}
-
-		String token = generateToken(registeredUser);
-		return ResponseEntity.ok().body(token);
+@PostMapping("/register")
+public ResponseEntity<Object> register(@Valid @RequestBody User newUser, BindingResult result) {
+	if (result.hasErrors()) {
+		// Construct a response entity with detailed error messages
+		return ResponseEntity.badRequest().body("Validation errors: " + result.getAllErrors());
 	}
 
+	User registeredUser = userService.register(newUser, result);
+	if (registeredUser == null) {
+		return ResponseEntity.badRequest().body("User registration failed.");
+	}
+
+	String token = generateToken(registeredUser);
+	HttpHeaders headers = new HttpHeaders();
+	headers.add("Authorization", token);
+	return ResponseEntity.ok().headers(headers).body("Registration successful.");
+}
 	@PostMapping("/login")
-	public ResponseEntity<String> login(@Valid @RequestBody LoginUser newLogin, BindingResult result) {
+	public ResponseEntity<Object> login(@Valid @RequestBody LoginUser newLogin, BindingResult result) {
 		if (result.hasErrors()) {
 			return ResponseEntity.badRequest().body("Validation errors: " + result.getAllErrors());
 		}
-//		if (!isAuthenticated()) {
-//			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Unauthorized access");
-//		}
 		User user = userService.login(newLogin, result);
 		if (user == null) {
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Login failed. Invalid credentials.");
 		}
 		String token = generateToken(user);
-		return ResponseEntity.ok().body(token);
+		HttpHeaders headers = new HttpHeaders();
+		headers.add("Authorization", token);
+		return ResponseEntity.ok().headers(headers).body("login successful.");
 	}
-
-
-	// In a JWT-based system, there's no need for explicit logout on the server side.
-	// The client can simply discard the token to "logout".
-	// However, you can still keep this endpoint for consistency or other future purposes.
 	@PostMapping("/logout")
 	public ResponseEntity<Void> logout() {
 		return ResponseEntity.noContent().build();
