@@ -22,4 +22,5 @@ public interface BusinessService {
     void deleteBusiness(Long businessId);
 
 
+    BusinessDTO getBusinessByUserId(Long userId) throws UserNotFoundException;
 }

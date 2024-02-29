@@ -20,23 +20,25 @@ import com.dojo.youthbankserver.services.BankAccountService;
 public class BankAccountController {
     private BankAccountService bankAccountService;
 
-//    @GetMapping("/business/{accountId}")
-//    public ResponseEntity<BankAccountDTO> getBankAccount(@PathVariable String accountId) throws BankAccountNotFoundException {
-//        return ResponseEntity.ok().body(bankAccountService.getBankAccount(accountId));
-//    }
-//    @GetMapping("/personal/{accountId}")
-//    public ResponseEntity<BankAccountDTO> getBankAccount(@PathVariable String accountId) throws BankAccountNotFoundException {
-//        return ResponseEntity.ok().body(bankAccountService.getBankAccount(accountId));
-//    }
-//    @GetMapping("/professional/{accountId}")
-//    public ResponseEntity<BankAccountDTO> getBankAccount(@PathVariable String accountId) throws BankAccountNotFoundException {
-//        return ResponseEntity.ok().body(bankAccountService.getBankAccount(accountId));
-//    }
+    @GetMapping("/business/{accountId}")
+    public ResponseEntity<BankAccountDTO> getBusinessBankAccount(@PathVariable String accountId) throws BankAccountNotFoundException {
+        return ResponseEntity.ok().body(bankAccountService.getBusinessBankAccount(accountId));
+    }
+    @GetMapping("/personal/{accountId}")
+    public ResponseEntity<BankAccountDTO> getPersonalBankAccount(@PathVariable String accountId) throws BankAccountNotFoundException {
+        return ResponseEntity.ok().body(bankAccountService.getPersonalBankAccount(accountId));
+    }
+    @GetMapping("/professional/{accountId}")
+    public ResponseEntity<BankAccountDTO> getProfessionalBankAccount(@PathVariable String accountId) throws BankAccountNotFoundException {
+        return ResponseEntity.ok().body(bankAccountService.getProfessionalBankAccount(accountId));
+    }
     @GetMapping("")
     public ResponseEntity<List<BankAccountDTO>> listAccounts(){
         return ResponseEntity.ok().body(bankAccountService.bankAccountList());
     }
-//    Checking Accounts
+
+
+    //    Checking Accounts
     @PostMapping("/checking/personal/{personalId}")
     public ResponseEntity<CheckingBankAccountDTO> saveCheckingPersonalBankAccountDTO( CheckingBankAccountDTO checkingBankAccountDTO ,@PathVariable Long personalId  ) throws PersonalNotFoundException {
         double initialBalance=checkingBankAccountDTO.getBalance();

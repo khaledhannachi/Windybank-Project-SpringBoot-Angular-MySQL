@@ -6,11 +6,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import com.dojo.youthbankserver.dtos.BankAccountDTO;
-import com.dojo.youthbankserver.dtos.PersonalDTO;
 import com.dojo.youthbankserver.entities.*;
-import com.dojo.youthbankserver.enums.AccountStatus;
-import com.dojo.youthbankserver.exceptions.BankAccountNotFoundException;
-import com.dojo.youthbankserver.exceptions.PersonalNotFoundException;
 import com.dojo.youthbankserver.exceptions.UserNotFoundException;
 import com.dojo.youthbankserver.mappers.BankAccountMapperImpl;
 import com.dojo.youthbankserver.mappers.UserMapper;
@@ -119,6 +115,16 @@ public class BusinessServiceImpl implements BusinessService{
     public void deleteBusiness(Long businessId){
         businessRepository.deleteById(businessId);
     }
-  
+
+
+
+
+    @Override
+    public BusinessDTO getBusinessByUserId(Long userId) {
+       List <Business> business = businessRepository.findBusinessesByUserId(userId);
+        BusinessDTO dto=businessDtoMapper.fromBusiness(business.get(0));
+        dto.setBusinessLegalResponsibleDTO(userMapper.fromUser(business.get(0).getBusinessLegalResponsible()));
+        return dto;
+    }
 
 }

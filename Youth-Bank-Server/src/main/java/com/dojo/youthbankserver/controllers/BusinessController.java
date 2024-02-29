@@ -29,7 +29,7 @@ public class BusinessController {
     }
 
 
-    @GetMapping("business/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<BusinessDTO> getBusiness(@PathVariable(name = "id") Long businessId) throws BusinessNotFoundException {
         return ResponseEntity.ok().body(businessServiceImpl.getBusiness(businessId));
     }
@@ -37,15 +37,21 @@ public class BusinessController {
     public ResponseEntity<BusinessDTO> saveBusiness(@Valid @RequestBody BusinessDTO businessDTO, @PathVariable Long userId){
         return ResponseEntity.ok().body(businessServiceImpl.saveBusiness(businessDTO, userId));
     }
-    @PutMapping("/{businessId}/{userId}/editbusiness")
+    @PutMapping("/{businessId}/editbusiness")
     public ResponseEntity<BusinessDTO> updateBusiness(@Valid @PathVariable Long businessId, @RequestBody BusinessDTO businessDTO, @PathVariable Long userId){
         businessDTO.setId(businessId);
         return ResponseEntity.ok().body(businessServiceImpl.updateBusiness(businessDTO, userId));
     }
 
-
     @DeleteMapping("/{id}")
     public void deleteBusiness(@PathVariable Long id){
     	businessServiceImpl.deleteBusiness(id);
     }
+
+    @GetMapping("/user/{id}")
+    public ResponseEntity<BusinessDTO> getBusinessByUserId(@PathVariable(name = "id") Long id) throws UserNotFoundException {
+        return ResponseEntity.ok().body(businessServiceImpl.getBusinessByUserId(id));
+    }
+
+
 }

@@ -1,7 +1,10 @@
 package com.dojo.youthbankserver.controllers;
+import com.dojo.youthbankserver.dtos.BusinessDTO;
 import com.dojo.youthbankserver.dtos.UserDTO;
 import com.dojo.youthbankserver.entities.LoginUser;
 import com.dojo.youthbankserver.entities.User;
+import com.dojo.youthbankserver.exceptions.BusinessNotFoundException;
+import com.dojo.youthbankserver.exceptions.UserNotFoundException;
 import com.dojo.youthbankserver.services.UserService;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
@@ -41,6 +44,10 @@ public class UserController {
 	public ResponseEntity<List<UserDTO>> users(){
 		return ResponseEntity.ok().body(userService.allUsers());
 	}
+//	@GetMapping("users/{id}")
+//	public ResponseEntity<UserDTO> getUser(@PathVariable(name = "id") Long userId) throws UserNotFoundException {
+//		return ResponseEntity.ok().body(userService.getUser(userId));
+//	}
 
 //	    @GetMapping("/search")
 //    public List<User> searchUser(@RequestParam(name = "keyword",defaultValue = "") String keyword){

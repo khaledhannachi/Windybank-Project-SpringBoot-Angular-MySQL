@@ -5,6 +5,8 @@ import com.dojo.youthbankserver.entities.Business;
 import com.dojo.youthbankserver.entities.LoginUser;
 import com.dojo.youthbankserver.entities.SavingAccount;
 import com.dojo.youthbankserver.entities.User;
+import com.dojo.youthbankserver.exceptions.BusinessNotFoundException;
+import com.dojo.youthbankserver.exceptions.UserNotFoundException;
 import com.dojo.youthbankserver.mappers.UserMapper;
 import com.dojo.youthbankserver.repositories.UserRepository;
 import lombok.AllArgsConstructor;
@@ -81,6 +83,7 @@ public class UserService {
     		return null;
     	}
     }
+
 
 //	  public List<User> searchUser(String keyword) {
 //        List<User> usersList=userRepo.searchUser(keyword);
