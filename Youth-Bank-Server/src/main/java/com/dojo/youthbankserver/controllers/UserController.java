@@ -8,11 +8,11 @@ import io.jsonwebtoken.SignatureAlgorithm;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-<<<<<<< HEAD
+
 import org.springframework.http.HttpHeaders;
-=======
+
 import org.springframework.context.annotation.Bean;
->>>>>>> 2d09802459fb47be75f6882761c9408a34bfb2ac
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -47,25 +47,25 @@ public class UserController {
 //        return userService.searchUser("%"+keyword+"%");
 //    }
 
-@PostMapping("/register")
-public ResponseEntity<String> register(@Valid @RequestBody User newUser, BindingResult result) {
-	// Validate the incoming User object using @Valid and BindingResult
-	if (result.hasErrors()) {
-		// If validation errors are present, return a bad request response with error details
-		return ResponseEntity.badRequest().body("Validation errors: " + result.getAllErrors());
-	}
-	// Attempt to register the new user using the userService
-	User registeredUser = userService.register(newUser, result);
-	// Check if user registration was unsuccessful
-	if (registeredUser == null) {
-		return ResponseEntity.badRequest().body("User registration failed.");
-	}
-	String token = generateToken(registeredUser);
-	HttpHeaders headers = new HttpHeaders();
-	headers.add("Authorization", token);
-	return ResponseEntity.ok().headers(headers).body("Registration successful.");
-}
+	@PostMapping("/register")
+	public ResponseEntity<Object> register(@Valid @RequestBody User newUser, BindingResult result) {
+		// Validate the incoming User object using @Valid and BindingResult
+		if (result.hasErrors()) {
+			// If validation errors are present, return a bad request response with error details
+			return ResponseEntity.badRequest().body("Validation errors: " + result.getAllErrors());
+		}
 
+		// Attempt to register the new user using the userService
+		User registeredUser = userService.register(newUser, result);
+		// Check if user registration was unsuccessful
+		if (registeredUser == null) {
+			return ResponseEntity.badRequest().body("User registration failed.");
+		}
+		String token = generateToken(registeredUser );
+		Map<String, String> response = new HashMap<>();
+		response.put("token", token); // Token is added as a key-value pair
+		return ResponseEntity.ok().body(response); // Return the token as a JSON object
+	}
 
 	@PostMapping("/login")
 	public ResponseEntity<Object> login(@Valid @RequestBody LoginUser newLogin, BindingResult result) {
@@ -77,10 +77,12 @@ public ResponseEntity<String> register(@Valid @RequestBody User newUser, Binding
 			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).body("Login failed. Invalid credentials.");
 		}
 		String token = generateToken(user);
-		HttpHeaders headers = new HttpHeaders();
-		headers.add("Authorization", token);
-		return ResponseEntity.ok().headers(headers).body("login successful.");
+		Map<String, String> response = new HashMap<>();
+		response.put("token", token); // Token is added as a key-value pair
+		return ResponseEntity.ok().body(response); // Return the token as a JSON object
 	}
+
+
 	@PostMapping("/logout")
 	public ResponseEntity<Void> logout() {
 		return ResponseEntity.noContent().build();

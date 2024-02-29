@@ -2,6 +2,7 @@ package com.dojo.youthbankserver.services;
 
 import java.util.Date;
 import java.util.List;
+import java.util.Random;
 import java.util.UUID;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -89,22 +90,29 @@ public class BankAccountServiceImpl implements BankAccountService{
 	}
 
 	//Saving Accounts
-	    @Override
-	    public SavingBankAccountDTO saveSavingPersonalBankAccount(double initialBalance, double interestRate, Long personalId) throws PersonalNotFoundException {
-	        Personal personal = personalRepository.findById(personalId).orElse(null);
-	        if(personal ==null)
-	        	
-	            throw new PersonalNotFoundException("Personal not found");
-	        SavingAccount savingAccount=new SavingAccount();
-	        savingAccount.setId(UUID.randomUUID().toString());
-	        savingAccount.setCreatedAt(new Date());
-	        savingAccount.setBalance(initialBalance);
-	        savingAccount.setInterestRate(interestRate);
-	        savingAccount.setPersonal(personal);
-			savingAccount.setStatus(AccountStatus.CREATED);
-	        SavingAccount savedBankAccount = bankAccountRepository.save(savingAccount);
-	        return dtoMapper.fromSavingPersonalBankAccount(savedBankAccount);
-	    }
+
+	@Override
+	public SavingBankAccountDTO saveSavingPersonalBankAccount(double initialBalance, double interestRate, Long personalId) throws PersonalNotFoundException {
+		Personal personal = personalRepository.findById(personalId).orElse(null);
+		if(personal == null)
+			throw new PersonalNotFoundException("Personal not found");
+
+		SavingAccount savingAccount = new SavingAccount();
+
+		int randomNumber = new Random().nextInt(90000000) + 10000000;
+		String randomId = String.valueOf(randomNumber);
+
+		savingAccount.setId(randomId);
+		savingAccount.setCreatedAt(new Date());
+		savingAccount.setBalance(initialBalance);
+		savingAccount.setInterestRate(interestRate);
+		savingAccount.setPersonal(personal);
+		savingAccount.setStatus(AccountStatus.CREATED);
+
+		SavingAccount savedBankAccount = bankAccountRepository.save(savingAccount);
+
+		return dtoMapper.fromSavingPersonalBankAccount(savedBankAccount);
+	}
 	@Override
 	public SavingBankAccountDTO saveSavingBusinessBankAccount(double initialBalance, double interestRate, Long businessId) throws BusinessNotFoundException {
 		Business business = businessRepository .findById(businessId).orElse(null);
