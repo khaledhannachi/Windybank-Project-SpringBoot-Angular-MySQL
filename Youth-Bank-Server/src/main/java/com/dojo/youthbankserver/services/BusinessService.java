@@ -18,7 +18,6 @@ public interface BusinessService {
 
     BusinessDTO updateBusiness(BusinessDTO businessDTO, Long userId);
 
-    BusinessDTO activateBusiness(BusinessDTO businessDTO, Long userId, BankAccount bankAccount) throws BankAccountNotFoundException, UserNotFoundException;
 
     void deleteBusiness(Long businessId);
 

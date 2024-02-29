@@ -4,6 +4,7 @@ package com.dojo.youthbankserver.controllers;
 import java.util.List;
 
 import com.dojo.youthbankserver.dtos.*;
+import com.dojo.youthbankserver.entities.BankAccount;
 import com.dojo.youthbankserver.exceptions.*;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -105,6 +106,24 @@ public class BankAccountController {
                 transferRequestDTO.getAccountSource(),
                 transferRequestDTO.getAccountDestination(),
                 transferRequestDTO.getAmount());
+    }
+
+    @PutMapping("/{bankAccountId}/activate")
+    public ResponseEntity<BankAccountDTO> activate(@PathVariable String bankAccountId) {
+
+        return ResponseEntity.ok().body(bankAccountService.activate(bankAccountId));
+    }
+    @PutMapping("/{bankAccountId}/suspend")
+    public ResponseEntity<BankAccountDTO> suspend(@PathVariable String bankAccountId) {
+
+        return ResponseEntity.ok().body(bankAccountService.suspend(bankAccountId));
+    }
+
+
+    @PutMapping("/{bankAccountId}/delete")
+    public ResponseEntity<BankAccountDTO> delete(@PathVariable String bankAccountId) {
+
+        return ResponseEntity.ok().body(bankAccountService.delete(bankAccountId));
     }
 }
 

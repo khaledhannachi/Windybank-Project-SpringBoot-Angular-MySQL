@@ -25,7 +25,7 @@ public class BankAccountMapperImpl {
     public SavingBankAccountDTO fromSavingPersonalBankAccount(SavingAccount savingAccount){
         SavingBankAccountDTO savingBankAccountDTO=new SavingBankAccountDTO();
         BeanUtils.copyProperties(savingAccount,savingBankAccountDTO);
-        savingBankAccountDTO.setPersonalDTO(personalMapper.fromPersonal(savingAccount.getPersonal()));
+//        savingBankAccountDTO.setPersonalDTO(personalMapper.fromPersonal(savingAccount.getPersonal()));
         savingBankAccountDTO.setType(savingAccount.getClass().getSimpleName());
         return savingBankAccountDTO;
     }
@@ -33,14 +33,14 @@ public class BankAccountMapperImpl {
     public SavingAccount fromSavingPersonalBankAccountDTO(SavingBankAccountDTO savingBankAccountDTO){
         SavingAccount savingAccount=new SavingAccount();
         BeanUtils.copyProperties(savingBankAccountDTO,savingAccount);
-        savingAccount.setPersonal(personalMapper.fromPersonalDTO(savingBankAccountDTO.getPersonalDTO()));
+//        savingAccount.setPersonal(personalMapper.fromPersonalDTO(savingBankAccountDTO.getPersonalDTO()));
         return savingAccount;
     }
 
     public CheckingBankAccountDTO fromCheckingPersonalBankAccount(CheckingAccount checkingAccount){
         CheckingBankAccountDTO checkingBankAccountDTO=new CheckingBankAccountDTO();
         BeanUtils.copyProperties(checkingAccount,checkingBankAccountDTO);
-        checkingBankAccountDTO.setPersonalDTO(personalMapper.fromPersonal(checkingAccount.getPersonal()));
+//        checkingBankAccountDTO.setPersonalDTO(personalMapper.fromPersonal(checkingAccount.getPersonal()));
         checkingBankAccountDTO.setType(checkingAccount.getClass().getSimpleName());
         return checkingBankAccountDTO;
     }
@@ -48,7 +48,7 @@ public class BankAccountMapperImpl {
     public CheckingAccount fromCheckingPersonalBankAccountDTO(CheckingBankAccountDTO checkingBankAccountDTO){
         CheckingAccount checkingAccount=new CheckingAccount();
         BeanUtils.copyProperties(checkingBankAccountDTO,checkingAccount);
-        checkingAccount.setPersonal(personalMapper.fromPersonalDTO(checkingBankAccountDTO.getPersonalDTO()));
+//        checkingAccount.setPersonal(personalMapper.fromPersonalDTO(checkingBankAccountDTO.getPersonalDTO()));
         return checkingAccount;
     }
 //Business
@@ -56,7 +56,7 @@ public class BankAccountMapperImpl {
     public SavingBankAccountDTO fromSavingBusinessBankAccount(SavingAccount savingAccount){
         SavingBankAccountDTO savingBankAccountDTO=new SavingBankAccountDTO();
         BeanUtils.copyProperties(savingAccount,savingBankAccountDTO);
-        savingBankAccountDTO.setBusinessDTO(businessMapper.fromBusiness(savingAccount.getBusiness()));
+//        savingBankAccountDTO.setBusinessDTO(businessMapper.fromBusiness(savingAccount.getBusiness()));
         savingBankAccountDTO.setType(savingAccount.getClass().getSimpleName());
         return savingBankAccountDTO;
     }
@@ -64,14 +64,14 @@ public class BankAccountMapperImpl {
     public SavingAccount fromSavingBusinessBankAccountDTO(SavingBankAccountDTO savingBankAccountDTO){
         SavingAccount savingAccount=new SavingAccount();
         BeanUtils.copyProperties(savingBankAccountDTO,savingAccount);
-        savingAccount.setBusiness(businessMapper.fromBusinessDTO(savingBankAccountDTO.getBusinessDTO()));
+//        savingAccount.setBusiness(businessMapper.fromBusinessDTO(savingBankAccountDTO.getBusinessDTO()));
         return savingAccount;
     }
 
     public CheckingBankAccountDTO fromCheckingBusinessBankAccount(CheckingAccount checkingAccount){
         CheckingBankAccountDTO checkingBankAccountDTO=new CheckingBankAccountDTO();
         BeanUtils.copyProperties(checkingAccount,checkingBankAccountDTO);
-        checkingBankAccountDTO.setBusinessDTO(businessMapper.fromBusiness(checkingAccount.getBusiness()));
+//        checkingBankAccountDTO.setBusinessDTO(businessMapper.fromBusiness(checkingAccount.getBusiness()));
         checkingBankAccountDTO.setType(checkingAccount.getClass().getSimpleName());
         return checkingBankAccountDTO;
     }
@@ -79,7 +79,7 @@ public class BankAccountMapperImpl {
     public CheckingAccount fromCheckingBusinessBankAccountDTO(CheckingBankAccountDTO checkingBankAccountDTO){
         CheckingAccount checkingAccount=new CheckingAccount();
         BeanUtils.copyProperties(checkingBankAccountDTO,checkingAccount);
-        checkingAccount.setBusiness(businessMapper.fromBusinessDTO(checkingBankAccountDTO.getBusinessDTO()));
+//        checkingAccount.setBusiness(businessMapper.fromBusinessDTO(checkingBankAccountDTO.getBusinessDTO()));
         return checkingAccount;
     }
 
@@ -89,7 +89,7 @@ public class BankAccountMapperImpl {
     public SavingBankAccountDTO fromSavingProfessionalBankAccount(SavingAccount savingAccount){
         SavingBankAccountDTO savingBankAccountDTO=new SavingBankAccountDTO();
         BeanUtils.copyProperties(savingAccount,savingBankAccountDTO);
-        savingBankAccountDTO.setProfessionalDTO(professionalMapper.fromProfessional(savingAccount.getProfessional()));
+//        savingBankAccountDTO.setProfessionalDTO(professionalMapper.fromProfessional(savingAccount.getProfessional()));
         savingBankAccountDTO.setType(savingAccount.getClass().getSimpleName());
         return savingBankAccountDTO;
     }
@@ -97,14 +97,14 @@ public class BankAccountMapperImpl {
     public SavingAccount fromSavingProfessionalBankAccountDTO(SavingBankAccountDTO savingBankAccountDTO){
         SavingAccount savingAccount=new SavingAccount();
         BeanUtils.copyProperties(savingBankAccountDTO,savingAccount);
-        savingAccount.setProfessional(professionalMapper.fromProfessionalDTO(savingBankAccountDTO.getProfessionalDTO()));
+//        savingAccount.setProfessional(professionalMapper.fromProfessionalDTO(savingBankAccountDTO.getProfessionalDTO()));
         return savingAccount;
     }
 
     public CheckingBankAccountDTO fromCheckingProfessionalBankAccount(CheckingAccount checkingAccount){
         CheckingBankAccountDTO checkingBankAccountDTO=new CheckingBankAccountDTO();
         BeanUtils.copyProperties(checkingAccount,checkingBankAccountDTO);
-        checkingBankAccountDTO.setProfessionalDTO(professionalMapper.fromProfessional(checkingAccount.getProfessional()));
+//        checkingBankAccountDTO.setProfessionalDTO(professionalMapper.fromProfessional(checkingAccount.getProfessional()));
         checkingBankAccountDTO.setType(checkingAccount.getClass().getSimpleName());
         return checkingBankAccountDTO;
     }
@@ -112,7 +112,7 @@ public class BankAccountMapperImpl {
     public CheckingAccount fromCheckingProfessionalBankAccountDTO(CheckingBankAccountDTO checkingBankAccountDTO){
         CheckingAccount checkingAccount=new CheckingAccount();
         BeanUtils.copyProperties(checkingBankAccountDTO,checkingAccount);
-        checkingAccount.setProfessional(professionalMapper.fromProfessionalDTO(checkingBankAccountDTO.getProfessionalDTO()));
+//        checkingAccount.setProfessional(professionalMapper.fromProfessionalDTO(checkingBankAccountDTO.getProfessionalDTO()));
         return checkingAccount;
     }
 
