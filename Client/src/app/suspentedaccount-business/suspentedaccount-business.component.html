@@ -1,0 +1,146 @@
+
+
+
+
+<div class="flex gap-6 overflow-x-hidden overflow-y-hidden">
+
+  <app-sidebar></app-sidebar>
+
+  <div class="-my-2 py-2  sm:-mx-6 sm:px-6 lg:-mx-8 pr-10 lg:px-8 mt-10 ml-1">
+    <div>
+      <button routerLink="/business" class="px-5 py-2 border-blue-300 border text-blue-500 rounded transition duration-300 hover:bg-blue-500 hover:text-white focus:outline-none">Pending Accounts</button>
+      <button routerLink="/activedAccountBusiness" class="px-5 py-2 border-green-500 border text-green-500 rounded transition duration-300 hover:bg-green-700 hover:text-white focus:outline-none ml-3">Actived Accounts</button>
+      <button routerLink="/suspentedAccountBusiness" class="px-5 py-2 border-yellow-500 border text-yellow-600 rounded transition duration-300 hover:bg-yellow-300 hover:text-white focus:outline-none ml-3">Suspended Accounts</button>
+      <button routerLink="/deletedAccountbusiness" class="px-5 py-2 border-red-600 border text-red-600 rounded transition duration-300 hover:bg-red-600 hover:text-white focus:outline-none ml-3">Deleted Accounts</button>
+    </div>
+    <div class="align-middle rounded-tl-lg rounded-tr-lg inline-block w-full py-4 overflow-hidden bg-white shadow-lg px-12 mt-10">
+      <div class="flex justify-between ">
+
+
+        <form class="flex items-center w-1/2">
+          <label for="simple-search" class="sr-only">Search</label>
+          <div class="relative w-full">
+            <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
+              <svg class="w-4 h-4 text-gray-500 dark:text-gray-400" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 18 20">
+                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5v10M3 5a2 2 0 1 0 0-4 2 2 0 0 0 0 4Zm0 10a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm12 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4Zm0 0V6a3 3 0 0 0-3-3H9m1.5-2-2 2 2 2"/>
+              </svg>
+            </div>
+            <input type="text"  id="simple-search" class="bg-gray-50 border w-full  border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-100 ps-10 p-2.5  dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="Search branch name..." required />
+          </div>
+          <button type="submit" class="p-2.5 ms-2 text-sm font-medium text-white bg-blue-700 rounded-lg border border-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">
+            <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
+              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
+            </svg>
+
+            <span class="sr-only">Search</span>
+          </button>
+        </form>
+
+
+
+
+      </div>
+    </div>
+
+    <div class="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg">
+      <table class="min-w-full">
+        <thead>
+        <tr>
+
+          <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">FullName</th>
+          <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Commercial Name</th>
+          <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Tax Identification Number</th>
+          <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Business Registration</th>
+          <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Company Email</th>
+          <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">CNSS Number</th>
+          <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Type Account</th>
+          <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Status</th>
+          <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Actions</th>
+
+        </tr>
+        </thead>
+        <tbody class="bg-white">
+        <ng-container *ngFor="let business of allbusiness ">
+          <ng-container *ngFor="let bankAccount of business.businessBankAccountsDTO">
+        <tr *ngIf="bankAccount.status==='SUSPENDED'">
+
+          <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+            <div class="flex items-center">
+              <div>
+                <div class="text-sm leading-5 text-gray-800"><p>{{business. businessLegalResponsibleDTO.firstName}}{{business. businessLegalResponsibleDTO.lastName}}</p></div>
+              </div>
+            </div>
+          </td>
+          <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+            <div class="text-sm leading-5 text-blue-900">{{business.commercialName}}</div>
+          </td>
+          <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">{{business.taxIdentificationNumber}}</td>
+          <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">{{business.businessRegistration}}</td>
+          <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">{{business.companyEmail}}</td>
+          <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">{{business.cnssNumber}}</td>
+          <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">{{bankAccount.type}}</td>
+          <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
+            <span class="px-2 py-1 font-semibold leading-tight text-white bg-yellow-500 rounded-full dark:bg-yellow-500 "> {{bankAccount.status}} </span></td>
+
+          <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
+            <div class="flex">
+              <button (click)="ActiveAccount(bankAccount.id)"  class="bg-green-500 hover:bg-green-700 text-white font-bold py-1 px-2 border border-green-500 rounded">
+                Activate
+              </button>
+              <button (click)="DeletedAccount(bankAccount.id)" class="bg-red-600 hover:bg-red-500 text-white font-bold py-1 px-2 border border-red-600 rounded ml-1">
+                Delete
+              </button></div>
+          </td>
+        </tr>
+
+          </ng-container>
+        </ng-container>
+        </tbody>
+      </table>
+      <div class="sm:flex-1 sm:flex sm:items-center sm:justify-between mt-4 work-sans">
+        <div>
+          <p class="text-sm leading-5 text-blue-700">
+            Showing
+            <span class="font-medium">1</span>
+            to
+            <span class="font-medium">200</span>
+            of
+            <span class="font-medium">2000</span>
+            results
+          </p>
+        </div>
+        <div>
+          <nav class="relative z-0 inline-flex shadow-sm">
+            <div	>
+              <a href="#" class="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150" aria-label="Previous" v-on:click.prevent="changePage(pagination.current_page - 1)">
+                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clip-rule="evenodd" />
+                </svg>
+              </a>
+            </div>
+            <div>
+              <a href="#" class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-blue-700 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-tertiary active:text-gray-700 transition ease-in-out duration-150 hover:bg-tertiary">
+                1
+              </a>
+              <a href="#" class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-blue-600 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-tertiary active:text-gray-700 transition ease-in-out duration-150 hover:bg-tertiary">
+                2
+              </a>
+              <a href="#" class="-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-sm leading-5 font-medium text-blue-600 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-tertiary active:text-gray-700 transition ease-in-out duration-150 hover:bg-tertiary">
+                3
+              </a>
+            </div>
+            <div v-if="pagination.current_page < pagination.last_page">
+              <a href="#" class="-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm leading-5 font-medium text-gray-500 hover:text-gray-400 focus:z-10 focus:outline-none focus:border-blue-300 focus:shadow-outline-blue active:bg-gray-100 active:text-gray-500 transition ease-in-out duration-150" aria-label="Next">
+                <svg class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                  <path fill-rule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clip-rule="evenodd" />
+                </svg>
+              </a>
+            </div>
+          </nav>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+

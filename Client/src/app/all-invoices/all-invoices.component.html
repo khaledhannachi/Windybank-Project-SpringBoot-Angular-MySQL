@@ -1,0 +1,64 @@
+
+<div class="flex gap-10">
+  <app-SidebarBusinessTools></app-SidebarBusinessTools>
+<div  class="flex gap-6 my-24">
+
+<div class="align-middle inline-block min-w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg">
+  <h1 class="my-14 font-bold text-3xl text-center">Manage Invoices</h1>
+
+  <table class="min-w-full">
+    <thead>
+    <tr>
+
+      <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Invoice Number</th>
+      <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Beneficiary Name</th>
+      <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Beneficiary Phone</th>
+      <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Beneficiary Email</th>
+      <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Tax Number</th>
+      <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Created At</th>
+      <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">Actions</th>
+    </tr>
+    </thead>
+    <tbody class="bg-white">
+    <tr *ngFor="let invoice of invoices">
+      <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+        <div class="flex items-center">
+          <div>
+            <div class="text-sm no-underline hover:underline hover:text-blue-400 leading-5 text-gray-800"><a [routerLink]="'/invoicepage/' + invoice.id"><p>1000{{invoice.id}}</p></a></div>
+          </div>
+        </div>
+      </td>
+      <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+        <div class="text-sm leading-5 text-blue-900">{{invoice.beneficiary}}</div>
+      </td>
+      <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">{{invoice.phoneNumber}}</td>
+      <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">{{invoice.email}}</td>
+      <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
+        {{invoice.taxIdentificationNumber}}
+      </td>
+      <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
+
+        {{invoice.createdAt | date}}         </td>
+
+
+
+
+      <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">
+
+        <div class="flex justify-center">
+          <button (click)="onDeleteClick(invoice.id)"
+                  class="bg-red-500 hover:bg-red-300 text-white font-bold py-1 px-2 border border-yellow-500 rounded">
+          Delete
+        </button>
+        </div>
+
+      </td>
+
+    </tr>
+
+
+    </tbody>
+  </table>
+</div>
+</div>
+</div>

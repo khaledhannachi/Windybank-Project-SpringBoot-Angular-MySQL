@@ -1,0 +1,28 @@
+<div class="ml-6 w-full">
+  <div class="mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+    <div class="bg-gray-100 px-4 py-2">
+      <h2 class="font-bold text-2xl my-4">Accounts {{logdinUser.firstName}} {{logdinUser.lastName}}</h2>
+      <h2 class="font-bold text-2xl "></h2>
+    </div>
+    <div>
+      <table class="min-w-full">
+        <thead class="border-b">
+
+        <tr>
+          <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Account Type</th>
+          <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Account ID</th>
+          <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Balance</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="border-b">
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900" >
+            <a >{{account?.type}}</a></td>
+          <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap" >{{account?.id}}</td>
+          <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">{{account?.balance}}</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

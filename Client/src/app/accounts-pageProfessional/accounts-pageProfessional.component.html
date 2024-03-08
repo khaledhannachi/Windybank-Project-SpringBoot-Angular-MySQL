@@ -1,0 +1,23 @@
+
+
+<div class="flex ">
+  <app-sidebar-Professional></app-sidebar-Professional>
+
+  <div class="flex flex-col w-full mr-20 justify-between mt-24 mb-12">
+  <app-show-one-accountProfessional class="" ></app-show-one-accountProfessional>
+    <div class="flex justify-center gap-12 mt-8 mb-8">
+      <button (click)="callSharedFunction()" class="px-5 py-2   border-blue-300 border text-blue-500 rounded transition duration-300  focus:outline-none">Download PDF</button>
+      <button (click)="downloadHistoryPdf()" class="px-5 py-2   border-blue-300 border text-blue-500 rounded transition duration-300  focus:outline-none">Download History PDF</button>
+
+    </div>
+
+  <app-historyProfessional class=""></app-historyProfessional>
+  </div>
+</div>
+<div class="hidden">
+  <app-rib-pageProfessional></app-rib-pageProfessional>
+
+</div>
+<div class="hidden">
+  <app-history-pdfProfessional></app-history-pdfProfessional>
+</div>

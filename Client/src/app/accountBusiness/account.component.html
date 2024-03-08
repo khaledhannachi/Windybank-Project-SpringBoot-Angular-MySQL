@@ -1,0 +1,28 @@
+<div class="ml-6 w-full">
+  <div class="mx-auto bg-white rounded-lg shadow-md overflow-hidden">
+    <div class="bg-gray-100 px-4 py-2">
+      <h2 class="font-bold text-2xl my-4">Accounts {{ loggedInUser?.firstName}} {{ loggedInUser?.lastName}}</h2>
+      <h2 class="font-bold text-2xl "></h2>
+    </div>
+    <div>
+      <table class="min-w-full">
+        <thead class="border-b">
+
+        <tr>
+          <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Account Type</th>
+          <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Account ID</th>
+          <th scope="col" class="text-sm font-medium text-gray-900 px-6 py-4 text-left">Balance</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr class="border-b" *ngFor="let bankaccount of business?.businessBankAccountsDTO">
+          <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900" >
+            <a routerLink="/savingaccountBusiness" (click)="getBusinessBankAccount(bankaccount?.id)">{{bankaccount?.type}}</a></td>
+          <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap" >{{bankaccount?.id}}</td>
+          <td class="text-sm text-gray-900 px-6 py-4 whitespace-nowrap">{{bankaccount?.balance}} DT</td>
+        </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

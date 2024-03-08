@@ -1,0 +1,16 @@
+.hover\:bg-blue-400:hover{
+    --bg-opacity: 1;
+    background-color: #63b3ed;
+    background-color: rgba(99, 179, 237, var(--bg-opacity));
+  }
+  .lni-arrow-up-circle::before {
+    content: "\ea21";
+}
+
+.lni-arrow-up::before {
+    content: "\ea22";
+}
+
+.gradient {
+  background: linear-gradient(90deg, #59b78d 0%, #48b9ac 100%);
+}

@@ -1,0 +1,35 @@
+@media print {
+  /* Hide the print zone with time, date, and URL */
+  @page {
+    size: auto;
+    margin: 0mm; /* Set the margin to 0 */
+  }
+  body * {
+    visibility: hidden;
+  }
+
+  #invoicePrintSection,
+  #invoicePrintSection * {
+    visibility: visible;
+  }
+  table {
+    width: 100%;
+    margin: 0;
+    padding: 0;
+    border-collapse: collapse;
+  }
+
+  th, td {
+    padding: 0.5rem; /* Adjust as needed */
+  }
+  #invoicePrintSection {
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+
+  /* Optional: Hide print button when printing */
+  .print-button {
+    display: none;
+  }
+}

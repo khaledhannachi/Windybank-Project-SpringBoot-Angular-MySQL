@@ -1,0 +1,84 @@
+<div class="flex gap-6 my-24 flex-col">
+
+
+  <a *ngIf="invoice?.id"
+     class="py-3 px-4 inline-flex items-center w-52 gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none dark:focus:outline-none dark:focus:ring-1 dark:focus:ring-gray-600"
+     [routerLink]="'/invoicepage/' + invoice.id">
+    Continue to invoice
+    <svg class="flex-shrink-0 w-4 h-4" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m9 18 6-6-6-6"/></svg>
+  </a>
+
+  <div
+
+    class="align-middle inline-block w-full shadow overflow-hidden bg-white shadow-dashboard px-8 pt-3 rounded-bl-lg rounded-br-lg">
+    <table class="w-full">
+      <thead>
+      <tr>
+        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
+          Reference
+        </th>
+        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
+          Product
+        </th>
+        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
+          Category
+        </th>
+        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
+          Description
+        </th>
+        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
+          Price
+        </th>
+        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
+          Quantity
+        </th>
+        <th class="px-6 py-3 border-b-2 border-gray-300 text-left text-sm leading-4 text-blue-500 tracking-wider">
+          Actions
+        </th>
+      </tr>
+      </thead>
+      <tbody class="bg-white">
+      <tr *ngFor="let product of products">
+
+        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+          <div class="flex items-center">
+            <div>
+              <div class="text-sm leading-5 text-gray-800"><a [routerLink]="'/products/' + product?.id">
+                <p>{{product?.id}}</p></a></div>
+            </div>
+          </div>
+        </td>
+        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500">
+          <div class="text-sm leading-5 text-blue-900">{{product?.productName}}</div>
+        </td>
+        <td
+          class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">{{product?.productCategory}}</td>
+        <td
+          class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">{{product?.productDescription}}</td>
+        <td class="px-6 py-4 whitespace-no-wrap border-b text-blue-900 border-gray-500 text-sm leading-5">
+          {{product?.price}}
+        </td>
+
+        <td
+          class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5">{{product?.units}}</td>
+        <td class="px-6 py-4 whitespace-no-wrap border-b border-gray-500 text-blue-900 text-sm leading-5 flex justify-center">
+
+
+            <button (click)="addProductsToInvoice(product)"
+                    class="bg-red-500 hover:bg-red-300 text-white font-bold py-1 px-2 border border-yellow-500 rounded">
+             Add To Invoice
+            </button>
+
+
+        </td>
+
+      </tr>
+
+
+      </tbody>
+    </table>
+
+  </div>
+</div>
+
+

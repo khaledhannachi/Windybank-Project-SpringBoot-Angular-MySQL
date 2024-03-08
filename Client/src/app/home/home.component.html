@@ -1,0 +1,432 @@
+<!doctype html>
+<html class="no-js" lang="en">
+
+<head>
+    <meta charset="utf-8">
+
+    <!--====== Title ======-->
+    <title>Youth Bank</title>
+
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <header>
+      <nav id="header" class="fixed w-full z-30 top-0 text-white bg-gray-50">
+        <div class="w-full container mx-auto flex flex-wrap items-center justify-between mt-0 py-2">
+          <div class="flex items-center justify-start  ">
+            <button routerLink="/home"> <img src="assets/images/logo_gris.png" class="h-12  "></button>
+          </div>
+          <div class="block lg:hidden pr-4">
+            <button id="nav-toggle"
+                    class="flex items-center p-1 text-pink-800 hover:text-gray-900 focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+              <svg class="fill-current h-6 w-6" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
+                <title>Menu</title>
+                <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+              </svg>
+            </button>
+          </div>
+          <div class="w-full flex-grow lg:flex lg:items-center lg:w-auto hidden mt-2 lg:mt-0 bg-white lg:bg-transparent text-black p-4 lg:p-0 z-20"
+               id="nav-content">
+            <ul class="list-reset lg:flex justify-end flex-1 items-center">
+              <li class="mr-3">
+                <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="/personal">Personal</a>
+              </li>
+              <li class="mr-3">
+                <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="/professional">Professional</a>
+              </li>
+              <li class="mr-3">
+                <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="/business" >Business</a>
+              </li>
+              <li class="mr-3">
+                <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="/about" >About Us</a>
+              </li>
+              <li class="mr-3">
+                <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="/y" >Support</a>
+              </li>
+
+              <li class="mr-3">
+                <a class="inline-block py-2 px-4 text-black font-bold no-underline" href="/dashboardPersonal" >{{loggedInUser?.firstName}}</a>
+              </li>
+
+
+            </ul>
+          </div>
+        </div>
+        <hr class="border-b border-gray-100 opacity-25 my-0 py-0" />
+      </nav>
+    </header>
+
+    <!--[if IE]>
+    <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="https://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
+<![endif]-->
+
+    <!--====== PRELOADER PART START ======-->
+
+    <div class="hidden preloader">
+        <div class="loader">
+            <div class="ytp-spinner">
+                <div class="ytp-spinner-container">
+                    <div class="ytp-spinner-rotator">
+                        <div class="ytp-spinner-left">
+                            <div class="ytp-spinner-circle"></div>
+                        </div>
+                        <div class="ytp-spinner-right">
+                            <div class="ytp-spinner-circle"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <header class="header-area">
+
+
+        <div id="home" class="header-hero" style="background-image: url(assets/images/banner-bg.svg)">
+            <div class="container">
+                <div class="justify-center row">
+                    <div class="w-full lg:w-2/3">
+                        <div class="pt-32 mb-12 text-center lg:pt-48 header-hero-content">
+                            <h3 class="text-4xl font-light leading-tight text-white header-sub-title ">Online Bank</h3>
+                            <h2 class="mb-8 text-4xl font-bold text-white header-title ">This is where we help you reach
+                                your true potential!</h2>
+                            <a href="/register"
+                                class="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full mt-12-14 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
+                                Get Started
+                            </a>
+                        </div> <!-- header hero content -->
+                    </div>
+                </div> <!-- row -->
+                <div class="justify-center row">
+                    <div class="w-full lg:w-2/3">
+                        <div class="text-center header-hero-image wow fadeIn">
+                            <img src="assets/images/header-hero.png" alt="hero">
+                        </div> <!-- header hero image -->
+                    </div>
+                </div> <!-- row -->
+            </div> <!-- container -->
+            <div id="particles-1" class="particles"></div>
+        </div> <!-- header hero -->
+    </header>
+
+    <!--====== HEADER PART ENDS ======-->
+
+
+
+    <!--====== SERVICES PART START ======-->
+
+    <section id="features" class="services-area pt-120">
+        <div class="container">
+            <div class="justify-center row">
+                <div class="w-full lg:w-2/3">
+                    <div class="pb-10 text-center section-title">
+                        <div class="m-auto line"></div>
+                        <h3 class="title">At your service</h3>
+                        <h5>Get the banking services that are designed to grow your business . And our peaple can help
+                            every step of the way</h5>
+                    </div> <!-- section title -->
+                </div>
+            </div> <!-- row -->
+            <div class="justify-center row">
+                <div class="w-full sm:w-2/3 lg:w-1/3">
+                    <div class="single-services wow fadeIn" data-wow-duration="1s" data-wow-delay="0.2s">
+                        <div class="services-icon">
+                            <img class="shape rounded-md " src="assets/images/banks5.png.png" alt="shape">
+
+                        </div>
+                        <div class="mt-8 services-content">
+                            <h4 class="mb-8 text-xl font-bold text-gray-900">Personal</h4>
+                            <p class="mb-8">Take Flight with YouthBank
+                                We provide innovative solutions to support you throughout your studies and facilitate
+                                the
+                                start of your professional establishment.</p>
+                            <a class="duration-300 hover:text-theme-color" href="/personal">Learn More <i
+                                    class="ml-2 lni lni-chevron-right"></i></a>
+                        </div>
+                    </div> <!-- single services -->
+                </div>
+                <div class="w-full sm:w-2/3 lg:w-1/3">
+                    <div class="mt-8 text-center single-services wow fadeIn" data-wow-duration="1s"
+                        data-wow-delay="0.5s">
+                        <div class="services-icon">
+                            <img class="shape" src="assets/images/banks6.png" alt="shape">
+
+                        </div>
+                        <div class="mt-8 services-content">
+                            <h4 class="mb-8 text-xl font-bold text-gray-900">Professional</h4>
+                            <p class="mb-8">outh Bank: Balance personal and professional goals with our tailored
+                                products and services. Grow savings and expand your projects effortlessly.</p>
+                            <a class="duration-300 hover:text-theme-color" href="/professional">Learn More <i
+                                    class="ml-2 lni lni-chevron-right"></i></a>
+                        </div>
+                    </div> <!-- single services -->
+                </div>
+                <div class="w-full sm:w-2/3 lg:w-1/3">
+                    <div class="mt-8 text-center single-services wow fadeIn" data-wow-duration="1s"
+                        data-wow-delay="0.8s">
+                        <div class="services-icon">
+                            <img class="shape" src="assets/images/banks9.png" alt="shape">
+
+
+                        </div>
+                        <div class="  services-content">
+                            <h4 class="mt-5 text-xl font-bold text-gray-900">Business</h4>
+                            <p class="mb-8">Youth Bank offers investment and financing solutions for managing cash
+                                surpluses and supporting development projects.</p>
+                            <a class="duration-300 hover:text-theme-color" href="/business">Learn More <i
+                                    class="ml-2 lni lni-chevron-right"></i></a>
+                        </div>
+                    </div> <!-- single services -->
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </section>
+
+    <!--====== SERVICES PART ENDS ======-->
+
+    <!--====== ABOUT PART START ======-->
+
+    <section id="about" class="relative pt-20 about-area">
+        <div class="container">
+            <div class="row">
+
+                <div class="w-full lg:w-1/2 m-auto grid gap-8 grid-cols-1">
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
+                        <div class="about-content">
+                            <div class="section-title">
+                                <div class="bg-blue-500 h-1 w-10 mb-2"></div>
+                                <h3 class="text-lg font-semibold text-gray-800">ACCOUNT AND PACKAGE</h3>
+                            </div>
+                            <p class="text-gray-600">Open your deposit account with ease and access a wide range of
+                                products and services tailored to your needs.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
+                        <div class="about-content">
+                            <div class="section-title">
+                                <div class="bg-blue-500 h-1 w-10 mb-2"></div>
+                                <h3 class="text-lg font-semibold text-gray-800">BANK CARDS</h3>
+                            </div>
+                            <p class="text-gray-600">We offer a diverse range of bank cards; choose the ones that best
+                                suit your various needs.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
+                        <div class="about-content">
+                            <div class="section-title">
+                                <div class="bg-blue-500 h-1 w-10 mb-2"></div>
+                                <h3 class="text-lg font-semibold text-gray-800">SAVINGS AND LOANS</h3>
+                            </div>
+                            <p class="text-gray-600">We provide you with several advantageous and flexible offers to
+                                grow your savings and meet all your financing needs.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full lg:w-1/2">
+                    <div class="mx-4 mt-12 text-center about-image wow fadeInRightBig" data-wow-duration="1s"
+                        data-wow-delay="0.5s">
+                        <img class="rounded-md " src="assets/images/banks13.png" alt="about">
+                    </div> <!-- about image -->
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+        <div class="about-shape-1">
+            <img src="assets/images/about-shape-1.svg" alt="shape">
+        </div>
+    </section>
+
+    <!--====== ABOUT PART ENDS ======-->
+
+    <!--====== ABOUT PART START ======-->
+
+    <section class="relative pt-20 about-area">
+        <div class="about-shape-2">
+            <img src="assets/images/about-shape-2.svg" alt="shape">
+        </div>
+        <div class="container">
+            <div class="row">
+                <div class="w-full lg:w-1/2 m-auto grid gap-8 grid-cols-1">
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
+                        <div class="about-content">
+                            <div class="section-title">
+                                <div class="bg-blue-500 h-1 w-10 mb-2"></div>
+                                <h3 class="text-lg font-semibold text-gray-800">DIGITAL BANKING</h3>
+                            </div>
+                            <p class="text-gray-600">Through cutting-edge remote banking products, Youth Bank allows you
+                                to track the evolution of your account and all your transactions.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
+                        <div class="about-content">
+                            <div class="section-title">
+                                <div class="bg-blue-500 h-1 w-10 mb-2"></div>
+                                <h3 class="text-lg font-semibold text-gray-800">SAFETY DEPOSIT BOXES</h3>
+                            </div>
+                            <p class="text-gray-600">Protect your most valuable assets with Youth Bank's safety deposit
+                                boxes, equipped with a unique key.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
+                        <div class="about-content">
+                            <div class="section-title">
+                                <div class="bg-blue-500 h-1 w-10 mb-2"></div>
+                                <h3 class="text-lg font-semibold text-gray-800">INVESTMENT PRODUCTS</h3>
+                            </div>
+                            <p class="text-gray-600">Youth Bank offers a variety of investment options to help you
+                                manage your cash surpluses optimally.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full lg:w-1/2 lg:order-first">
+                    <div class="mx-4 mt-12 text-center about-image wow fadeInRightBig" data-wow-duration="1s"
+                        data-wow-delay="0.5s">
+                        <img class="w-full" src="assets/images/bank4.png" alt="about">
+                    </div> <!-- about image -->
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+    </section>
+
+
+    <!--====== ABOUT PART START ======-->
+
+    <section class="relative pt-20 about-area mb-12">
+        <div class="container">
+            <div class="row">
+                <div class="w-full lg:w-1/2 m-auto grid gap-8 grid-cols-1">
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
+                        <div class="about-content">
+                            <div class="section-title">
+                                <div class="bg-blue-500 h-1 w-10 mb-2"></div>
+                                <h3 class="text-lg font-semibold text-gray-800">Apply</h3>
+                            </div>
+                            <p class="text-gray-600">Open your new account online and with ease.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
+                        <div class="about-content">
+                            <div class="section-title">
+                                <div class="bg-blue-500 h-1 w-10 mb-2"></div>
+                                <h3 class="text-lg font-semibold text-gray-800">Fund account</h3>
+                            </div>
+                            <p class="text-gray-600">Send an opening deposit by online transfer or mobile deposit.</p>
+                        </div>
+                    </div>
+                    <div class="bg-white rounded-lg shadow-md p-6 hover:shadow-lg transition duration-300">
+                        <div class="about-content">
+                            <div class="section-title">
+                                <div class="bg-blue-500 h-1 w-10 mb-2"></div>
+                                <h3 class="text-lg font-semibold text-gray-800">Start banking</h3>
+                            </div>
+                            <p class="text-gray-600">Set up online banking and watch your money grow.
+
+                            </p>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="w-full lg:w-1/2">
+                    <div class="mx-4 mt-12 text-center about-image wow fadeInRightBig" data-wow-duration="1s"
+                        data-wow-delay="0.5s">
+                        <img src="assets/images/banks2.png" alt="about">
+                    </div> <!-- about image -->
+                </div>
+            </div> <!-- row -->
+        </div> <!-- container -->
+        <div class="about-shape-1">
+            <img src="assets/images/about-shape-1.svg" alt="shape">
+        </div>
+    </section>
+
+
+    <!--====== BACK TOP TOP PART START ======-->
+
+    <a href="#" class="back-to-top"><i class="lni lni-chevron-up"></i></a>
+
+    <!--====== BACK TOP TOP PART ENDS ======-->
+
+    <!--====== PART START ======-->
+
+    <!--
+    <section class="">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-"></div>
+            </div>
+        </div>
+    </section>
+-->
+
+    <!--====== PART ENDS ======-->
+
+
+
+
+
+    <footer class="bg-white border-gray-200 ">
+        <div class="mx-auto w-full max-w-screen-xl p-4 py-6 lg:py-8">
+            <div class="md:flex md:justify-between">
+              <div class="mb-6 md:mb-0">
+
+                <button routerLink="/home"> <img src="assets/images/logo_gris.png" class="h-12  "></button>
+
+              </div>
+                <div class="grid grid-cols-2 gap-8 sm:gap-6 sm:grid-cols-3">
+                    <div>
+
+                        <ul class="text-gray-500 dark:text-gray-400 font-medium">
+                            <li class="mb-4">
+                                <a href="/personal" class="hover:underline text-black">Personal</a>
+                            </li>
+                            <li class="mb-4">
+                                <a href="/professional" class="hover:underline text-black">Professional</a>
+                            </li>
+                            <li class="mb-4">
+                                <a href="/business" class="hover:underline text-black">Business</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+
+                        <ul class="text-black-500 dark:text-gray-400 font-medium">
+                            <li class="mb-4">
+                                <a href="/about" class="hover:underline text-black">About Us</a>
+                            </li  >
+                            <li class="mb-4">
+                                <a href="/support" class="hover:underline text-black">Support</a>
+                            </li>
+                            <li class="mb-4">
+                                <a href="#" class="hover:underline text-black">News</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div>
+
+                        <ul class="text-black-500 dark:text-gray-400 font-medium">
+                            <li class="mb-4">
+                                <a href="#" class="hover:underline text-black">Privacy Policy</a>
+                            </li>
+                            <li class="mb-4">
+                                <a href="#" class="hover:underline text-black">Terms &amp; Conditions</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <hr class="my-6 border-gray-200 sm:mx-auto dark:border-gray-700 lg:my-8" />
+            <div class="sm:flex sm:items-center sm:justify-between">
+                <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">© 2024, <a href="/home" class="hover:underline">Windy Bank</a>. All Rights Reserved.
+                </span>
+
+            </div>
+        </div>
+        </footer>
+
+
+</body>
+
+</html>

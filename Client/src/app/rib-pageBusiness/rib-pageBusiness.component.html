@@ -1,0 +1,63 @@
+<!--<button (click)="downloadPdf()">Download PDF</button>-->
+<div  id="pdf-content" class="flex flex-col">
+
+<div class="flex flex-col items-center justify-center p-8 border-2 border-black mt-32">
+  <!-- Author: FormBold Team -->
+  <h1 class="text-2xl text-bold text-center mb-10">Bank details</h1>
+  <div class="mx-auto w-full max-w-[550px] bg-white  ">
+
+    <div class="flex justify-between">
+    <div class="flex flex-col  text-center">
+      <h2 class="text-1xl text-bold ">Account Number</h2>
+      <div class="flex gap-10 ">
+      <div class="flex flex-col gap-2 text-center">
+        <p>Bank</p>
+        <p>014</p>
+      </div>
+        <div class="flex flex-col gap-2 text-center">
+          <p>Account</p>
+
+          <p>{{account?.id}}</p>
+        </div>
+        <div class="flex flex-col gap-2 text-center">
+          <p>Key</p>
+          <p>44</p>
+        </div>
+    </div>
+
+      <div class="flex justify-between mt-12">
+        <div class="flex flex-col text-center">
+          <h2 class="text-1xl text-bold">IBAN</h2>
+          <p>TN76 014{{account?.id}}44</p>
+        </div>
+
+    </div>
+      <div class="flex justify-between mt-8">
+        <div class="flex flex-col text-start gap-3">
+          <h2 class="text-1xl text-bold">Youth BANK</h2>
+          <p>Ariana, Tunisia</p>
+        </div>
+    </div>
+
+
+    </div>
+    <div class="">
+      <div  class="flex flex-col text-center">
+        <h2 class="text-1xl text-bold ">Domiciliation</h2>
+        <P>TUNISIA</P>
+      </div>
+      <div  class="flex flex-col text-center mt-20">
+        <h2 class="text-1xl text-bold ">BIC</h2>
+        <P>BSTUTNTT</P>
+      </div>
+      <div  class="flex flex-col gap-3 text-center mt-8">
+        <h2 class="text-1xl text-bold ">Beneficiary name</h2>
+        <P class="uppercase">{{business?.businessLegalResponsibleDTO.firstName}} {{business?.businessLegalResponsibleDTO.lastName}}</P>
+      </div>
+
+    </div>
+
+    </div>
+  </div>
+</div>
+</div>
